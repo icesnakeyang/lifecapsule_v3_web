@@ -217,7 +217,7 @@ const ContactEdit = (props: any) => {
                   padding: 10,
                 }}
               >
-                <MyEditor data={remark} />
+                <MyEditor type="NORMAL" />
               </div>
             </Form.Item>
           </Form>

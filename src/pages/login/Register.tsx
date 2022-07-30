@@ -21,7 +21,7 @@ import { clearTaskTodoState } from "../../store/taskTodoSlice";
 import { clearTaskQuadState } from "../../store/taskQuadSlic";
 import { clearRecipientState } from "../../store/recipinetSlice";
 import { clearCreativeNoteState } from "../../store/creativeNoteSlice";
-import { clearContactList } from "../../store/contactSlice";
+import { clearContactState} from "../../store/contactSlice";
 import { clearCommonState } from "../../store/commonSlice";
 
 const Register = () => {
@@ -51,7 +51,7 @@ const Register = () => {
           dispatch(clearRecipientState());
           dispatch(clearNoteState());
           dispatch(clearCreativeNoteState());
-          dispatch(clearContactList());
+          dispatch(clearContactState());
           dispatch(clearCommonState());
           dispatch(saveToken(res.data.token));
           dispatch(saveNoteCategoryCurrent(res.data.defaultCategoryId));
@@ -63,7 +63,7 @@ const Register = () => {
           localStorage.setItem("lifecapsule3_token", res.data.token);
           navigate("/");
         } else {
-          message.success(t("syserr." + res.code));
+          message.error(t("syserr." + res.code));
           setSaving(false);
         }
       })

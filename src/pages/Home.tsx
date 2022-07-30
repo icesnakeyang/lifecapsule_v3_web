@@ -57,7 +57,6 @@ const Home = () => {
         background: themeColor.background,
       }}
     >
-      <div>{themeColor.background}</div>
       <Typography.Title style={{ color: themeColor.textLight }}>
         {t("common.appTitle")}
       </Typography.Title>

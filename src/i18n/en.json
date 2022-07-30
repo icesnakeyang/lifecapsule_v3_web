@@ -55,6 +55,7 @@
     "btEditNote": "Edit note",
     "title": "Title",
     "titleHolder": "Please input title",
+    "content": "Content",
     "contentHolder": "Please input content here",
     "btSend": "Sent",
     "encrypt": "Encrypt",

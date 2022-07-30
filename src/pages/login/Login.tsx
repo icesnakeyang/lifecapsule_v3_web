@@ -22,7 +22,7 @@ import { clearTaskTodoState } from "../../store/taskTodoSlice";
 import { clearTaskQuadState } from "../../store/taskQuadSlic";
 import { clearRecipientState } from "../../store/recipinetSlice";
 import { clearCreativeNoteState } from "../../store/creativeNoteSlice";
-import { clearContactList } from "../../store/contactSlice";
+import { clearContactState} from "../../store/contactSlice";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -51,7 +51,7 @@ const Login = () => {
           dispatch(clearRecipientState());
           dispatch(clearNoteState());
           dispatch(clearCreativeNoteState());
-          dispatch(clearContactList());
+          dispatch(clearContactState());
           dispatch(clearCommonState());
           dispatch(saveToken(res.data.token));
           dispatch(saveNoteCategoryCurrent(res.data.defaultCategoryId));
@@ -63,10 +63,12 @@ const Login = () => {
           localStorage.setItem("lifecapsule3_token", res.data.token);
           navigate("/");
         } else {
+          message.error(t('syserr.'+res.code))
           setSaving(false);
         }
       })
       .catch(() => {
+        message.error(t('syserr.10001'))
         setSaving(false);
       });
   };

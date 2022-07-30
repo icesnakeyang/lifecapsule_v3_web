@@ -64,8 +64,8 @@ const NoteEdit = () => {
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
+    loadAllData();
     return () => {
-      loadAllData();
     };
   }, [noteId]);
 
@@ -311,6 +311,7 @@ const NoteEdit = () => {
                 </div>
               </Form.Item>
               <Form.Item>
+                <div style={{color:themeColor.textLight}}>{t('note.title')}</div>
                 <Input
                   style={{
                     background: themeColor.blockDark,
@@ -330,7 +331,7 @@ const NoteEdit = () => {
                 </div>
               </Form.Item>
               <Form.Item>
-                {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
+                <div style={{color:themeColor.textLight}}>{t('note.content')}</div>
                 <div
                   style={{
                     background: themeColor.blockDark,

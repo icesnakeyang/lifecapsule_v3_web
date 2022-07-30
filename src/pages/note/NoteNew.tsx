@@ -1,6 +1,5 @@
-import { useRef, useState } from "react";
+import {  useState } from "react";
 import { Breadcrumb, Button, Form, Input, message, Radio, Select } from "antd";
-import FormItem from "antd/lib/form/FormItem";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -136,8 +135,9 @@ const NoteNew = () => {
           navigate("/main/NoteCategoryEdit");
         }}
       ></Button>
-      <Form style={{ marginTop: 20 }}>
-        <FormItem>
+      <Form style={{ marginTop: 20 }} layout='vertical'>
+        <Form.Item>
+            <div style={{color:themeColor.textLight}}>{t('note.title')}</div>
           <Input
             style={{
               background: themeColor.blockDark,
@@ -148,8 +148,9 @@ const NoteNew = () => {
               setTitle(e.target.value);
             }}
           />
-        </FormItem>
-        <FormItem>
+        </Form.Item>
+        <Form.Item>
+            <div style={{color:themeColor.textLight}}>{t('note.content')}</div>
           <div
             style={{
               background: themeColor.blockDark,
@@ -160,7 +161,7 @@ const NoteNew = () => {
           >
             <MyEditor type="NORMAL" />
           </div>
-        </FormItem>
+        </Form.Item>
         <Form.Item>
           <Radio.Group
             onChange={() => {

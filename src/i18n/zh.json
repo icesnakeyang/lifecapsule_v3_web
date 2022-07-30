@@ -55,6 +55,7 @@
     "btEditNote": "编辑笔记",
     "title": "标题",
     "titleHolder": "笔记标题",
+    "content": "笔记内容",
     "contentHolder": "笔记内容",
     "btSend": "发送",
     "encrypt": "加密",

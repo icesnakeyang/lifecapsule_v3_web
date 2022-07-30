@@ -30,7 +30,7 @@ const NoteList = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const categoryList = useSelector(
-    (state: any) => state.noteDataSlice.categoryList
+    (state: any) => state.noteDataSlice.categoryList||[]
   );
   const currentCategoryId =
     useSelector((state: any) => state.noteDataSlice.currentCategoryId) || "";
@@ -47,6 +47,13 @@ const NoteList = () => {
     useSelector((state: any) => state.noteDataSlice.noteList) || [];
 
   useEffect(() => {
+    console.log(currentCategoryId)
+    console.log(categoryList)
+    if(currentCategoryId){
+      console.log('有')
+    }else{
+      console.log('没有')
+    }
     loadAllData();
     return () => {};
   }, [currentCategoryId]);
