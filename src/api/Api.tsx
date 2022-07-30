@@ -1,9 +1,10 @@
 import { Get, Post } from "./ApiBase";
 
 // const host = "http://localhost:8003/lifecapsule3_api";
-// const host = "http://192.168.1.5:8003/lifecapsule3_api";
-const host = "http://192.168.1.28:8003/lifecapsule3_api";
+const host = "http://192.168.1.3:8003/lifecapsule3_api";
+// const host = "http://192.168.1.28:8003/lifecapsule3_api";
 // const host = "http://192.168.43.97:8003/lifecapsule3_api";
+// const host = "https://gogorpg.com/lifecapsule3_api";
 
 export const apiLogin = (params: any) => {
   return Post(`${host}/web/user/login`, params);
@@ -98,4 +99,79 @@ export const apiGetNoteRecipientTrigger = (params: any) => {
 
 export const apiDeleteRecipient = (params: any) => {
   return Post(`${host}/web/recipient/delete_recipient`, params);
+};
+
+export const apiListMyTaskTodo = (params: any) => {
+  return Post(`${host}/web/task/todo/listMyTaskTodo`, params);
+};
+
+export const apiSaveMyTaskTodo = (params: any) => {
+  return Post(`${host}/web/task/todo/saveMyTaskTodo`, params);
+};
+
+export const apiGetMyTaskTodo = (params: any) => {
+  return Post(`${host}/web/task/todo/getMyTaskTodo`, params);
+};
+
+export const apiDeleteMyTaskTodo = (params: any) => {
+  return Post(`${host}/web/task/todo/deleteMyTaskTodo`, params);
+};
+
+export const apiSaveCreativeNote = (params: any) => {
+  return Post(`${host}/web/creativeNote/saveCreativeNote`, params);
+};
+
+export const apiListMyCreativeNote = (params: any) => {
+  return Post(`${host}/web/creativeNote/listMyCreativeNote`, params);
+};
+
+export const apiGetMyCreativeNote = (params: any) => {
+  return Post(`${host}/web/creativeNote/getMyCreativeNote`, params);
+};
+
+/**
+ * 读取四象限任务列表
+ */
+export const apiListMyQuadTask = (params: any) => {
+  return Post(`${host}/web/quadTask/listMyQuadTask`, params);
+};
+
+export const apiCreateMyQuadTask = (params: any) => {
+  return Post(`${host}/web/quadTask/createMyQuadTask`, params);
+};
+
+export const apiUpdateMyQuadTask = (params: any) => {
+  return Post(`${host}/web/quadTask/updateMyQuadTask`, params);
+};
+
+export const apiListTheme = (params: any) => {
+  return Post(`${host}/web/theme/listTheme`, params);
+};
+
+export const apiGetMyQuadTask = (params: any) => {
+  return Post(`${host}/web/quadTask/getMyQuadTask`, params);
+};
+
+export const apiSetMyTaskComplete = (params: any) => {
+  return Post(`${host}/web/quadTask/setMyTaskComplete`, params);
+};
+
+export const apiSetMyTaskProgress = (params: any) => {
+  return Post(`${host}/web/quadTask/setMyTaskProgress`, params);
+};
+
+export const apiIncreaseQuadTaskPriority = (params: any) => {
+  return Post(`${host}/web/quadTask/increaseQuadTaskPriority`, params);
+};
+
+export const apiDecreaseQuadTaskPriority = (params: any) => {
+  return Post(`${host}/web/quadTask/decreaseQuadTaskPriority`, params);
+};
+
+export const apiDeleteCreativeNote = (params: any) => {
+  return Post(`${host}/web/quadTask/deleteCreativeNote`, params);
+};
+
+export const apiDeleteQuadTask = (params: any) => {
+  return Post(`${host}/web/quadTask/deleteQuadTask`, params);
 };

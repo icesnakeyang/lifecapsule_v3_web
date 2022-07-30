@@ -2,7 +2,6 @@ import {
   Breadcrumb,
   Button,
   Card,
-  Divider,
   List,
   message,
   Pagination,
@@ -18,16 +17,15 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   saveNoteCategoryCurrent,
   saveNoteCategoryList,
+  saveNoteList,
+  saveNotePageIndex,
+  saveNotePageSize,
 } from "../../store/noteDataSlice";
-import Item from "antd/lib/list/Item";
 import { EditOutlined } from "@ant-design/icons";
-
-const { Option } = Select;
+import { clearRichContent } from "../../store/commonSlice";
+import NoteListRow from "./NoteListRow";
 
 const NoteList = () => {
-  const [thePageIndex, setThePageIndex] = useState(1);
-  const [thePageSize, setThePageSize] = useState(10);
-  const [noteList, setNoteList] = useState(null);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -36,8 +34,17 @@ const NoteList = () => {
   );
   const currentCategoryId =
     useSelector((state: any) => state.noteDataSlice.currentCategoryId) || "";
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [totalNote, setTotalNote] = useState(0);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+  const notePageIndex = useSelector(
+    (state: any) => state.noteDataSlice.notePageIndex
+  );
+  const notePageSize = useSelector(
+    (state: any) => state.noteDataSlice.notePageSize
+  );
+  const noteList =
+    useSelector((state: any) => state.noteDataSlice.noteList) || [];
 
   useEffect(() => {
     loadAllData();
@@ -47,78 +54,61 @@ const NoteList = () => {
   useEffect(() => {
     loadAllData();
     return () => {};
-  }, [thePageIndex]);
+  }, [notePageIndex]);
 
   const loadAllData = () => {
-    let params = {
-      pageIndex: thePageIndex,
-      pageSize: thePageSize,
-      categoryId: currentCategoryId,
-    };
-    setLoading(true);
-    apiListMyNote(params)
-      .then((res: any) => {
-        if (res.code === 0) {
-          setNoteList(res.data.noteList);
-          setTotalNote(res.data.totalNote);
-          setLoading(false);
-        } else {
-          message.error(t("syserr." + res.code));
-          if (res.code === 10003) {
-            navigate("/guest/login");
-          }
-        }
-      })
-      .catch((err) => {
-        message.error(t("syserr.10001"));
-        setLoading(false);
-      });
+    /**
+     * 如果当前没有categoryId，就读取默认的category
+     */
+    /**
+     * 读取category列表
+     */
+    apiListMyCategory({}).then((res: any) => {
+      if (res.code === 0) {
+        dispatch(saveNoteCategoryList(res.data.categoryList));
 
-    // apiListMyCategory({}).then((res: any) => {
-    //   if (res.code === 0) {
-    //     dispatch(saveNoteCategoryList(res.data.categoryList));
-    //     // if (!currentCategoryId) {
-    //     //   res.data.categoryList.map((item: any, index: number) => {
-    //     //     if (item.categoryName === "DEFAULT") {
-    //     //       dispatch(saveNoteCategoryCurrent(item.categoryId));
-    //     //     }
-    //     //   });
-    //     // }
-    //   }
-    // });
-  };
-
-  const _renderNote = (item: any) => {
-    return (
-      <List.Item
-        style={{ background: "#fff" }}
-        actions={[
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              navigate("/main/noteEdit", { state: { noteId: item.noteId } });
-            }}
-          >
-            {t("common.btDetail")}
-          </Button>,
-        ]}
-      >
-        <List.Item.Meta
-          title={item.title ? item.title : "no title"}
-          description={moment(item.createTime).format("LLL")}
-        />
-      </List.Item>
-    );
+        let params = {
+          pageIndex: notePageIndex,
+          pageSize: notePageSize,
+          categoryId: currentCategoryId,
+        };
+        setLoading(true);
+        apiListMyNote(params)
+          .then((res: any) => {
+            if (res.code === 0) {
+              dispatch(saveNoteList(res.data.noteList));
+              setTotalNote(res.data.totalNote);
+              setLoading(false);
+            } else {
+              message.error(t("syserr." + res.code));
+              if (res.code === 10003) {
+                navigate("/guest/login");
+              }
+            }
+          })
+          .catch((err) => {
+            message.error(t("syserr.10001"));
+            setLoading(false);
+          });
+      }
+    });
   };
 
   return (
     <div style={{}}>
       <Breadcrumb style={{ margin: "20px 0" }}>
         <Breadcrumb.Item>
-          <a href="/main/dashboard">{t("common.home")}</a>
+          <a href="/main/dashboard">
+            <span style={{ color: themeColor.textLight }}>
+              {t("common.home")}
+            </span>
+          </a>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{t("note.noteList")}</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <span style={{ color: themeColor.textLight }}>
+            {t("note.noteList")}
+          </span>
+        </Breadcrumb.Item>
       </Breadcrumb>
       {loading ? (
         <div
@@ -133,10 +123,11 @@ const NoteList = () => {
         </div>
       ) : (
         <div>
-          <Card style={{}}>
+          <Card style={{ background: themeColor.blockDark }}>
             <Button
               type="primary"
               onClick={() => {
+                dispatch(clearRichContent());
                 navigate("/main/noteNew");
               }}
             >
@@ -169,25 +160,23 @@ const NoteList = () => {
             ></Button>
 
             <div style={{ marginTop: 10 }}>
-              <List
-                size="small"
-                itemLayout="horizontal"
-                bordered={true}
-                dataSource={noteList || []}
-                renderItem={(item) => _renderNote(item)}
-              />
-              <Pagination
-                style={{ marginTop: 10 }}
-                total={totalNote}
-                current={thePageIndex}
-                showQuickJumper
-                showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
-                onChange={(page, pz) => {
-                  setThePageIndex(page);
-                  setThePageSize(pz);
-                }}
-              />
+              {noteList
+                ? noteList.map((item: any, index: any) => (
+                    <NoteListRow item={item} key={index} />
+                  ))
+                : null}
             </div>
+            <Pagination
+              style={{ marginTop: 10, color: themeColor.textLight }}
+              total={totalNote}
+              current={notePageIndex}
+              showQuickJumper
+              showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
+              onChange={(page, pz) => {
+                dispatch(saveNotePageIndex(page));
+                dispatch(saveNotePageSize(pz));
+              }}
+            />
           </div>
         </div>
       )}

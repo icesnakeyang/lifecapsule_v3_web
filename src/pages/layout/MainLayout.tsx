@@ -18,13 +18,14 @@ const MainLayout = () => {
   const navigate = useNavigate();
   const token = useSelector((state: any) => state.token);
   const userInfo = useSelector((state: any) => state.userInfo);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
     return () => {};
   }, [token]);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: "100vh", background: themeColor.background }}>
       <Header
         style={{
           position: "fixed",
@@ -32,6 +33,7 @@ const MainLayout = () => {
           justifyContent: "space-around",
           padding: 0,
           zIndex: 1000,
+          background: themeColor.background,
         }}
       >
         <Row
@@ -61,15 +63,25 @@ const MainLayout = () => {
                 onClick={() => {}}
               />
             ) : (
-              <Typography.Title
-                level={4}
-                style={{ margin: 0, color: "#eee", cursor: "pointer" }}
+              <div
+                style={{
+                  color: themeColor.textLight,
+                  cursor: "pointer",
+                }}
                 onClick={() => {
-                  navigate("/dashboard", { state: { pp: 1 } });
+                  navigate("/main/dashboard", { state: { pp: 1 } });
                 }}
               >
-                {t("common.appTitle")}
-              </Typography.Title>
+                <div
+                  style={{
+                    color: themeColor.textLight,
+                    fontSize: 24,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {t("common.appTitle")}
+                </div>
+              </div>
             )}
           </Col>
           <Col
@@ -92,14 +104,15 @@ const MainLayout = () => {
           height: "100%",
           display: "flex",
           flexDirection: "row",
+          background: themeColor.background,
         }}
       >
         <Sider
-          style={{}}
           breakpoint="md"
           onBreakpoint={(e) => {
             setCollapsed(e);
           }}
+          style={{ background: themeColor.background }}
         >
           <MainSider />
         </Sider>

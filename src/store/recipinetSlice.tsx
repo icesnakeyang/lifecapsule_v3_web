@@ -18,6 +18,10 @@ export const recipientSlice = createSlice({
     removeRecipientList: (state: any) => {
       state.recipientList = [];
     },
+    clearRecipientState: (state: any) => {
+      state.recipient = null;
+      state.recipientList = [];
+    },
   },
 });
 
@@ -26,5 +30,6 @@ export const {
   removeRecipient,
   saveRecipientList,
   removeRecipientList,
+  clearRecipientState,
 } = recipientSlice.actions;
 export default recipientSlice.reducer;

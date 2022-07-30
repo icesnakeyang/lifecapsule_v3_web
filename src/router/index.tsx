@@ -15,6 +15,14 @@ import ContactEdit from "../pages/contact/ContactEdit";
 import SendPage from "../pages/send";
 import SelectRecipient from "../pages/send/SelectRecipient";
 import SendDetail from "../pages/send/SendDetail";
+import TodoPage from "../pages/task/todolist/TodoPage";
+import TodoEdit from "../pages/task/todolist/TodoEdit";
+import CreativeNoteList from "../pages/creativeNote/CreativeNoteList";
+import CreativeNoteEdit from "../pages/creativeNote/CreativeNoteEdit";
+import QuadrantTaskList from "../pages/task/quadrant/QuadrantTaskList";
+import QuadrantTaskEdit from "../pages/task/quadrant/QuadrantTaskEdit";
+import QuadrantTaskNew from "../pages/task/quadrant/QuadrantTaskNew";
+import ThemeSetting from "../pages/setting/ThemeSetting";
 const ProtectRouter = ({ children }: any) => {
   const token = useSelector((state: any) => state.userDataSlice.token);
   return token ? children : <Navigate to="/guest/login" />;
@@ -102,6 +110,70 @@ const Routers = () => {
           element={
             <ProtectRouter>
               <SendDetail />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/TodoPage"
+          element={
+            <ProtectRouter>
+              <TodoPage />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/TodoEdit"
+          element={
+            <ProtectRouter>
+              <TodoEdit />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/CreativeNoteList"
+          element={
+            <ProtectRouter>
+              <CreativeNoteList />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/CreativeNoteEdit"
+          element={
+            <ProtectRouter>
+              <CreativeNoteEdit />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/QuadrantTaskList"
+          element={
+            <ProtectRouter>
+              <QuadrantTaskList />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/QuadrantTaskEdit"
+          element={
+            <ProtectRouter>
+              <QuadrantTaskEdit />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/QuadrantTaskNew"
+          element={
+            <ProtectRouter>
+              <QuadrantTaskNew />
+            </ProtectRouter>
+          }
+        />
+        <Route
+          path="/main/ThemeSetting"
+          element={
+            <ProtectRouter>
+              <ThemeSetting />
             </ProtectRouter>
           }
         />

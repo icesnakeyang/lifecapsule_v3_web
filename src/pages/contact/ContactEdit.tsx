@@ -9,7 +9,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
 import { useDispatch, useSelector } from "react-redux";
-import MyEditor from "../MyEditor";
+import MyEditor from "../components/MyEditor/MyEditor";
 import { saveEditing, saveRichContent } from "../../store/commonSlice";
 
 const ContactEdit = (props: any) => {
@@ -27,16 +27,11 @@ const ContactEdit = (props: any) => {
   const [canDelete, setCanDelete] = useState(false);
   const content = useSelector((state: any) => state.commonSlice.richContent);
   const editingRedux = useSelector((state: any) => state.commonSlice.editing);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
-    return () => {
-      if (contactId) {
-        loadAllData();
-      } else {
-        setLoading(false);
-      }
-    };
-  }, [contactId]);
+    loadAllData();
+  }, []);
 
   const loadAllData = () => {
     let params = {
@@ -56,7 +51,6 @@ const ContactEdit = (props: any) => {
         setLoading(false);
       })
       .catch(() => {
-        message.error(t("syserr.10001"));
         setLoading(false);
       });
   };
@@ -77,12 +71,10 @@ const ContactEdit = (props: any) => {
           setSaving(false);
           navigate(-1);
         } else {
-          message.error(t("syserr." + res.code));
           setSaving(false);
         }
       })
       .catch(() => {
-        message.error(t("syserr.10001"));
         setSaving(false);
       });
   };
@@ -97,24 +89,33 @@ const ContactEdit = (props: any) => {
           message.success(t("contact.tipDeleteSuccess"));
           navigate(-1);
         } else {
-          message.error(t("syserr." + res.code));
         }
       })
-      .catch(() => {
-        message.error(t("syserr.10001"));
-      });
+      .catch(() => {});
   };
 
   return (
     <div style={{ height: "100%" }}>
       <Breadcrumb style={{ margin: "20px 0" }}>
         <Breadcrumb.Item>
-          <a href="/main/dashboard">{t("common.home")}</a>
+          <a href="/main/dashboard">
+            <span style={{ color: themeColor.textLight }}>
+              {t("common.home")}
+            </span>
+          </a>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <a href="/main/contactList">{t("contact.contactList")}</a>
+          <a href="/main/contactList">
+            <span style={{ color: themeColor.textLight }}>
+              {t("contact.contactList")}
+            </span>
+          </a>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{t("contact.contactEdit")}</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <span style={{ color: themeColor.textLight }}>
+            {t("contact.contactEdit")}
+          </span>
+        </Breadcrumb.Item>
       </Breadcrumb>
 
       {loading ? (
@@ -153,8 +154,15 @@ const ContactEdit = (props: any) => {
             ) : null}
           </div>
           <Form style={{ marginTop: 20 }} layout="vertical">
-            <Form.Item label={t("contact.contactName")}>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight }}>
+                {t("contact.contactName")}
+              </div>
               <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
                 placeholder={t("contact.contactNameHolder")}
                 onChange={(e) => {
                   setContactName(e.target.value);
@@ -163,8 +171,15 @@ const ContactEdit = (props: any) => {
                 value={contactName}
               />
             </Form.Item>
-            <Form.Item label={t("contact.contactPhone")}>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight }}>
+                {t("contact.contactPhone")}
+              </div>
               <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
                 placeholder={t("contact.phoneHolder")}
                 onChange={(e) => {
                   setPhone(e.target.value);
@@ -173,8 +188,15 @@ const ContactEdit = (props: any) => {
                 value={phone}
               />
             </Form.Item>
-            <Form.Item label={t("contact.contactEmail")}>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight }}>
+                {t("contact.contactEmail")}
+              </div>
               <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
                 placeholder={t("contact.emailHolder")}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -183,13 +205,16 @@ const ContactEdit = (props: any) => {
                 value={email}
               />
             </Form.Item>
-            <Form.Item label={t("contact.contactRemark")}>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight }}>
+                {t("contact.contactRemark")}
+              </div>
               <div
                 style={{
-                  background: "#fff",
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
                   border: "1px solid #ccc",
                   padding: 10,
-                  minHeight: "100px",
                 }}
               >
                 <MyEditor data={remark} />

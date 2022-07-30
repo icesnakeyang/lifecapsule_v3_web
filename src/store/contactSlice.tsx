@@ -9,12 +9,12 @@ export const contactSlic = createSlice({
     saveContactList: (state: any, action: any) => {
       state.contactList = action.payload;
     },
-    clearContact: (state: any) => {
-      state.contactRemark = null;
+    clearContactList: (state: any) => {
+      state.contactList = [];
     },
   },
 });
 
-export const { saveContactList, clearContact } = contactSlic.actions;
+export const { saveContactList, clearContactList } = contactSlic.actions;
 
 export default contactSlic.reducer;

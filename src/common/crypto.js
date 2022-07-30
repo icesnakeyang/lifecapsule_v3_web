@@ -55,7 +55,8 @@ export function Decrypt2(word, keyStr) {
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7,
   });
-  return CryptoJS.enc.Utf8.stringify(decrypt).toString();
+  let ss = CryptoJS.enc.Utf8.stringify(decrypt).toString();
+  return ss;
 }
 
 export function Decrypt(cipherText, keyStr, ivStr) {

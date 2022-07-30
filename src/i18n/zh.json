@@ -8,14 +8,24 @@
     "btDeleting": "删除中...",
     "btEdit": "修改",
     "tipModalDelete": "确认要删除吗？",
-    "btDetail": "详情"
+    "btDetail": "详情",
+    "PROGRESS": "进行中",
+    "COMPLETE": "已完成"
   },
   "nav": {
+    "home": "首页",
     "language": "语言",
     "signOut": "退出登录",
     "dashboard": "控制台",
-    "note": "我的笔记",
-    "contact": "我的联系人"
+    "note": "笔记",
+    "myNote": "我的笔记",
+    "contact": "我的联系人",
+    "task": "任务",
+    "taskTodo": "待办任务",
+    "creativeNote": "防拖延笔记",
+    "myQuadTask": "四象限任务",
+    "myQuadTaskEdit": "编辑四象限任务",
+    "setting": "系统设置"
   },
   "login": {
     "greeting1": "欢迎登录时空笔记",
@@ -43,6 +53,7 @@
     "noteNew": "创建新笔记",
     "btNewNote": "创建新笔记",
     "btEditNote": "编辑笔记",
+    "title": "标题",
     "titleHolder": "笔记标题",
     "contentHolder": "笔记内容",
     "btSend": "发送",
@@ -59,7 +70,8 @@
     "tipNoteSaveSuccess": "保存笔记成功",
     "totalNotes": "笔记总数",
     "tipNoteDelete": "你确定要删除该笔记吗？删除后将不可恢复！",
-    "tipNoteDeleteSuccess": "删除笔记成功"
+    "tipNoteDeleteSuccess": "删除笔记成功",
+    "createTime": "创建时间"
   },
   "contact": {
     "contactList": "我的联系人",
@@ -77,11 +89,12 @@
     "contactName": "联系人姓名",
     "contactPhone": "联系电话",
     "contactEmail": "联系人Email",
-    "contactRemark": "联系人备注"
+    "contactRemark": "联系人备注",
+    "tipAddContact1": "你还没有设置联系人，请先设置联系人"
   },
   "recipient": {
     "recipientInfo": "接收人信息",
-    "btAddToRecipient": "添加接收人",
+    "btAddToRecipient": "添加为接收人",
     "tipAddSuccess": "已经把该联系人添加为接收人了",
     "tipDeleteRcipientSuccess": "删除了该接收人",
     "btDeleteRecipient": "删除该联系人",
@@ -89,7 +102,8 @@
     "tipRecipientTitle": "接收人信息",
     "recipientName": "接收人姓名",
     "recipientPhone": "发送到手机",
-    "recipientEmail": "发送到Email"
+    "recipientEmail": "发送到Email",
+    "editRecipient": "编辑接收人"
   },
   "trigger": {
     "TIMER_TYPE_DATETIME": "指定日期",
@@ -100,7 +114,69 @@
     "tipAddTrigger1": "你还没有添加发送条件，笔记不会被发送，请添加触发条件",
     "btAddTrigger": "添加发送条件",
     "sendCondition": "发送条件",
-    "sendTime": "发送时间"
+    "sendTime": "发送时间",
+    "editTrigger": "编辑发送条件",
+    "tipTrigger1": "设定一个发送条件，当条件触发时，笔记会自动发送给接收人"
+  },
+  "task": {
+    "task": "我的任务",
+    "myTodoList": "我的待办任务",
+    "btAddTodo": "添加待办任务",
+    "contentHolder": "请输入任务描述...",
+    "title": "任务标题",
+    "titleHolder": "请输入任务标题",
+    "btSave": "保存任务",
+    "btSaving": "保存任务中...",
+    "todoEdit": "编辑待办任务",
+    "content": "任务内容",
+    "tipSaveSuccess": "保存任务成功",
+    "complete": "完成",
+    "tipDelete1": "确定要删除该任务吗？",
+    "tipDelete2": "任务删除后将不可被恢复!",
+    "tipDeleteSuccess": "删除待办任务成功",
+    "btAddQuad": "创建四象限任务",
+    "tipMyQuadrantTask": "四象限任务",
+    "taskTitle": "任务标题",
+    "taskImportant": "任务权重",
+    "IMPORTANT_AND_URGENT": "重要且紧急",
+    "IMPORTANT_NOT_URGENT": "重要但不紧急",
+    "URGENT_NOT_IMPORTANT": "紧急但不重要",
+    "NOTHING": "不重要不紧急",
+    "tip1": "重要又紧急的事情立刻做",
+    "tip2": "重要不紧急的事情优先做",
+    "tip3": "紧急但不重要的事情让别人去做吧",
+    "tip4": "不重要又不紧急的事情就别浪费时间做了",
+    "setComplete": "设置为完成",
+    "setProgress": "设置为进行中",
+    "btDeleteTask": "删除任务",
+    "tipNoTaskTitle": "请输入任务标题",
+    "createTime": "任务创建时间",
+    "priority": "任务优先级",
+    "taskStatus": "当前状态"
+  },
+  "creativeNote": {
+    "creativeNote": "防拖延笔记",
+    "btAddNew": "创建方拖延笔记",
+    "myCreativeNoteList": "我的防拖延笔记",
+    "editCreativeNote": "编辑我的防拖延笔记",
+    "titleHolder": "笔记标题",
+    "title1": "昨天最高兴的三件事",
+    "tipTitle1": "回顾一天，写出三件让你觉得高兴、想要感谢和觉得特别好的事情。无论是多小、多细碎的事情，都不要紧，请开始尝试着唤起自己正能量的记忆。",
+    "title2": "我的感受",
+    "tipTitle2": "写出自己的想法或是感受，可以将头脑中的东西“可视化”。将想法写出来，实现与自我的对话，使自己可以冷静客观地分析自己的心情、想法和行动。",
+    "title3": "今天要做的事情",
+    "tipTitle3": "在这里，想要做什么不是需要你写必须做的事情和不得不做的事情，而是希望你想一想为了实现目标，你有哪些特别想做的事情，然后把它们写下来。",
+    "title4": "10秒行动任务",
+    "tipTitle4": "为了完成今天的任务，需要做哪些具体的事情。思考10秒钟，把任务列出来。",
+    "tipDelete1": "确定要删除该篇防拖延笔记吗？",
+    "tipDelete2": "删除后将不可被恢复!",
+    "tipDeleteSuccess": "删除防拖延笔记成功",
+    "tipSaveSuccess": "保存防拖延笔记成功",
+    "tipCreativeNote": "防拖延笔记可以让你及时了解自己的工作和生活情况，击退拖延症，调整状态去做自己真正想要做的事情。",
+    "tipNoTitle": "请输入标题"
+  },
+  "setting": {
+    "btSelect": "选择"
   },
   "syserr": {
     "10001": "系统错误",

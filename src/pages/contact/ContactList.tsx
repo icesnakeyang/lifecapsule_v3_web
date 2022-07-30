@@ -16,6 +16,7 @@ const ContactList = () => {
   const contactList = useSelector(
     (state: any) => state.contactSlice.contactList
   );
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
     return () => {
@@ -38,7 +39,7 @@ const ContactList = () => {
   const _renderContact = (item: any) => {
     return (
       <List.Item
-        style={{ background: "#fff" }}
+        style={{ background: themeColor.blockDark }}
         actions={[
           <Button
             type="primary"
@@ -58,11 +59,23 @@ const ContactList = () => {
             width: "100%",
           }}
         >
-          <Row style={{}}>
-            <Col offset="1">{item.contactName}</Col>
-            <Col offset="1">{item.phone}</Col>
-            <Col offset="1">{item.email}</Col>
-          </Row>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              paddingLeft: "20px",
+            }}
+          >
+            <div style={{ color: themeColor.textLight }}>
+              {item.contactName}
+            </div>
+            <div style={{ color: themeColor.textLight, marginLeft: "20px" }}>
+              {item.phone}
+            </div>
+            <div style={{ color: themeColor.textLight, marginLeft: "20px" }}>
+              {item.email}
+            </div>
+          </div>
         </div>
       </List.Item>
     );
@@ -70,14 +83,22 @@ const ContactList = () => {
 
   return (
     <div style={{}}>
-      <Breadcrumb style={{ margin: "20px 0" }}>
+      <Breadcrumb style={{}}>
         <Breadcrumb.Item>
-          <a href="/main/dashboard">{t("common.home")}</a>
+          <a href="/main/dashboard">
+            <span style={{ color: themeColor.textLight }}>
+              {t("common.home")}
+            </span>
+          </a>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{t("contact.contactList")}</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <span style={{ color: themeColor.textLight }}>
+            {t("contact.contactList")}
+          </span>
+        </Breadcrumb.Item>
       </Breadcrumb>
 
-      <Card>
+      <Card style={{ background: themeColor.blockDark }}>
         <Button
           type="primary"
           onClick={() => {

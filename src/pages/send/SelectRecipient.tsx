@@ -18,6 +18,7 @@ import {
 } from "../../api/Api";
 import { useTranslation } from "react-i18next";
 import moment from "moment";
+import { useSelector } from "react-redux";
 const SelectRecipient = () => {
   const { noteId }: any = useLocation().state;
   const [pageIndex, setPageIndex] = useState(1);
@@ -31,6 +32,7 @@ const SelectRecipient = () => {
   const [remark, setRemark] = useState("");
   const [email, setEmail] = useState("");
   const [contactList, setContactList] = useState([]);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
     return () => {
@@ -92,7 +94,7 @@ const SelectRecipient = () => {
   const _renderContact = (item: any) => {
     return (
       <List.Item
-        style={{ background: "#fff" }}
+        style={{ background: themeColor.blockDark }}
         actions={[
           <Button
             type="primary"
@@ -106,9 +108,17 @@ const SelectRecipient = () => {
         ]}
       >
         <Row style={{ width: "100%" }}>
-          <Col>{item.contactName}</Col>
-          <Col offset="1">{item.phone}</Col>
-          <Col offset="1">{item.email}</Col>
+          <Col>
+            <span style={{ color: themeColor.textLight }}>
+              {item.contactName}
+            </span>
+          </Col>
+          <Col offset="1">
+            <span style={{ color: themeColor.textLight }}>{item.phone}</span>
+          </Col>
+          <Col offset="1">
+            <span style={{ color: themeColor.textLight }}>{item.email}</span>
+          </Col>
           <Col
             style={{
               fontSize: "12px",
@@ -119,7 +129,7 @@ const SelectRecipient = () => {
             }}
             offset="1"
           >
-            {item.remark}
+            <span style={{ color: themeColor.textLight }}>{item.remark}</span>
           </Col>
         </Row>
       </List.Item>
@@ -128,9 +138,9 @@ const SelectRecipient = () => {
 
   return (
     <div>
-      <Card>
+      <Card style={{ background: themeColor.blockDark }}>
         {contactList.length === 0 ? (
-          <div>你还没有设置联系人，请先设置联系人</div>
+          <div>{t("contact.tipAddContact1")}</div>
         ) : null}
         <Button
           type="primary"
@@ -157,8 +167,9 @@ const SelectRecipient = () => {
         onOk={() => {
           onSaveContact();
         }}
+        bodyStyle={{ background: themeColor.blockDark }}
       >
-        <Form style={{ marginTop: 20 }}>
+        <Form style={{ marginTop: 20, background: themeColor.blockDark }}>
           <Form.Item>
             <Input
               placeholder={t("contact.contactNameHolder")}

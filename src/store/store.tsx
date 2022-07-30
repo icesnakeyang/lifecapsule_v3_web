@@ -9,6 +9,10 @@ import contactSlice from "./contactSlice";
 import recipientSlice from "./recipinetSlice";
 import triggerSlice from "./triggerSlice";
 import commonSlice from "./commonSlice";
+import taskTodoSlice from "./taskTodoSlice";
+import creativeNoteSlice from "./creativeNoteSlice";
+import themeSlice from "./themeSlice";
+import taskQuadSlice from "./taskQuadSlic";
 const persistConfig = {
   key: "root",
   storage,
@@ -21,6 +25,10 @@ const rootReducer = combineReducers({
   recipientSlice,
   triggerSlice,
   commonSlice,
+  taskTodoSlice,
+  creativeNoteSlice,
+  themeSlice,
+  taskQuadSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

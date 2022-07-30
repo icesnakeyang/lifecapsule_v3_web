@@ -26,6 +26,7 @@ const SendPage = () => {
   const recipientList = useSelector(
     (state: any) => state.recipientSlice.recipientList
   );
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
     loadAllData();
@@ -52,7 +53,7 @@ const SendPage = () => {
   const _renderRecipient = (item: any) => {
     return (
       <List.Item
-        style={{ background: "#fff" }}
+        style={{ background: themeColor.blockDark }}
         actions={[
           <Button
             type="primary"
@@ -69,7 +70,7 @@ const SendPage = () => {
           </Button>,
         ]}
       >
-        <div style={{ width: "100%" }}>
+        <div style={{ width: "100%", color: themeColor.textLight }}>
           <Row style={{}}>
             <Col offset="1">{item.recipientName}</Col>
             <Col offset="1">{item.phone}</Col>
@@ -116,16 +117,6 @@ const SendPage = () => {
           {t("recipient.btAddToRecipient")}
         </Button>
       </div>
-
-      <Modal
-        visible={modalRecipientDelete}
-        maskClosable={false}
-        closable={false}
-        onCancel={() => setModalRecipientDelete(false)}
-        onOk={() => setModalRecipientDelete(false)}
-      >
-        <p>确定要删除该接收人吗？删除后不可恢复！</p>
-      </Modal>
     </div>
   );
 };

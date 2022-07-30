@@ -4,6 +4,25 @@ import { useTranslation } from "react-i18next";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import { apiRegister } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+  clearUserInfo,
+  saveToken,
+  saveUserInfo,
+} from "../../store/userDataSlice";
+import {
+  clearNoteState,
+  saveNoteCategoryCurrent,
+  saveNoteCategoryList,
+} from "../../store/noteDataSlice";
+import { clearTriggerState } from "../../store/triggerSlice";
+import { clearThemeState } from "../../store/themeSlice";
+import { clearTaskTodoState } from "../../store/taskTodoSlice";
+import { clearTaskQuadState } from "../../store/taskQuadSlic";
+import { clearRecipientState } from "../../store/recipinetSlice";
+import { clearCreativeNoteState } from "../../store/creativeNoteSlice";
+import { clearContactList } from "../../store/contactSlice";
+import { clearCommonState } from "../../store/commonSlice";
 
 const Register = () => {
   const { t } = useTranslation();
@@ -12,6 +31,7 @@ const Register = () => {
   const [password2, setPassword2] = useState("");
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const onRegister = () => {
     let params = {
@@ -23,7 +43,25 @@ const Register = () => {
       .then((res: any) => {
         if (res.code === 0) {
           message.success(t("login.tipRegisterSuccess"));
-          navigate("/main/dashboard");
+          dispatch(clearUserInfo());
+          dispatch(clearTriggerState());
+          dispatch(clearThemeState());
+          dispatch(clearTaskTodoState());
+          dispatch(clearTaskQuadState());
+          dispatch(clearRecipientState());
+          dispatch(clearNoteState());
+          dispatch(clearCreativeNoteState());
+          dispatch(clearContactList());
+          dispatch(clearCommonState());
+          dispatch(saveToken(res.data.token));
+          dispatch(saveNoteCategoryCurrent(res.data.defaultCategoryId));
+          dispatch(saveNoteCategoryList(res.data.categoryList));
+          let userInfo = {
+            loginName: res.data.loginName,
+          };
+          dispatch(saveUserInfo(userInfo));
+          localStorage.setItem("lifecapsule3_token", res.data.token);
+          navigate("/");
         } else {
           message.success(t("syserr." + res.code));
           setSaving(false);

@@ -4,6 +4,7 @@ export const userDataSlice = createSlice({
   initialState: {
     token: "",
     userInfo: {},
+    userName: "",
   },
   reducers: {
     saveToken: (state: any, action: any) => {
@@ -14,9 +15,14 @@ export const userDataSlice = createSlice({
     },
     clearUserInfo: (state: any) => {
       state.userInfo = {};
+      state.userName = "";
+    },
+    saveUserName: (state: any, action: any) => {
+      state.userName = action.payload;
     },
   },
 });
 
-export const { saveToken, saveUserInfo, clearUserInfo } = userDataSlice.actions;
+export const { saveToken, saveUserInfo, clearUserInfo, saveUserName } =
+  userDataSlice.actions;
 export default userDataSlice.reducer;

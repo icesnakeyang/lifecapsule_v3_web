@@ -8,14 +8,24 @@
     "btDeleting": "Deleting",
     "btEdit": "Edit",
     "tipModalDelete": "Are you sure to delete?",
-    "btDetail": "Detail"
+    "btDetail": "Detail",
+    "PROGRESS": "Progress",
+    "COMPLETE": "Complete"
   },
   "nav": {
+    "home": "Home",
     "language": "Language",
     "signOut": "Sign out",
     "dashboard": "Dashboard",
     "note": "Note",
-    "contact": "Contact"
+    "myNote": "My notes",
+    "contact": "Contact",
+    "task": "Task",
+    "taskTodo": "Todo list",
+    "creativeNote": "Creative note",
+    "myQuadTask": "4 Quadrants Task",
+    "myQuadTaskEdit": "4 Quadrant Task Edit",
+    "setting": "Settings"
   },
   "login": {
     "greeting1": "Welcome Lifecapsule",
@@ -43,6 +53,7 @@
     "noteNew": "New note",
     "btNewNote": "Create note",
     "btEditNote": "Edit note",
+    "title": "Title",
     "titleHolder": "Please input title",
     "contentHolder": "Please input content here",
     "btSend": "Sent",
@@ -59,7 +70,8 @@
     "tipNoteSaveSuccess": "Save note success",
     "totalNotes": "Total notes",
     "tipNoteDelete": "Are you sure to delete this note? The note cannot be recovered after you delete it.",
-    "tipNoteDeleteSuccess": "Delete note success"
+    "tipNoteDeleteSuccess": "Delete note success",
+    "createTime": "Create time"
   },
   "contact": {
     "contactList": "My contacts",
@@ -77,11 +89,12 @@
     "contactName": "Contact name",
     "contactPhone": "Contact phone",
     "contactEmail": "Contact email",
-    "contactRemark": "Contact remark"
+    "contactRemark": "Contact remark",
+    "tipAddContact1": "You don't have contact person, please add one now"
   },
   "recipient": {
     "recipientInfo": "Recipient information",
-    "btAddToRecipient": "Add recipient",
+    "btAddToRecipient": "Add to recipient",
     "tipAddSuccess": "Add this contact to recipient already",
     "tipDeleteRcipientSuccess": "Delete recipient and trigger success",
     "btDeleteRecipient": "Delete recipient",
@@ -89,7 +102,8 @@
     "tipRecipientTitle": "Recipient information",
     "recipientName": "Recipient name",
     "recipientPhone": "Send to phone",
-    "recipientEmail": "Send to email"
+    "recipientEmail": "Send to email",
+    "editRecipient": "Edit recipient"
   },
   "trigger": {
     "TIMER_TYPE_PRIMARY": "Time up",
@@ -100,7 +114,68 @@
     "tipAddTrigger1": "You didn't add the send condition trigger, the note will not be sent. Please add a trigger to send",
     "btAddTrigger": "Add condition",
     "sendCondition": "Send condition",
-    "sendTime": "Send time"
+    "sendTime": "Send time",
+    "editTrigger": "Edit condition",
+    "tipTrigger1": "Set a condition to trigger the note to recipient"
+  },
+  "task": {
+    "task": "Task",
+    "myTodoList": "My todolist",
+    "btAddTodo": "Add todo",
+    "contentHolder": "Please input task content here",
+    "title": "Title",
+    "titleHolder": "Please input task title",
+    "btSave": "Save",
+    "btSaving": "Saving",
+    "todoEdit": "Edit todo task",
+    "content": "Content",
+    "tipSaveSuccess": "Save task success",
+    "complete": "Complete",
+    "tipDelete1": "Confirm to delete this task?",
+    "tipDelete2": "The task cannot be recovered after you delete it!",
+    "tipDeleteSuccess": "Delete success",
+    "btAddQuad": "Add quadrant task",
+    "tipMyQuadrantTask": "Quadrant Task",
+    "taskTitle": "Title",
+    "taskImportant": "Important",
+    "IMPORTANT_AND_URGENT": "Important And Urgent",
+    "IMPORTANT_NOT_URGENT": "Important But Not Urgent",
+    "URGENT_NOT_IMPORTANT": "Urgent But Not Important",
+    "NOTHING": "Forget It",
+    "tip1": "Important and urgent, do it now!",
+    "tip2": "Important but not urgent, do it whenever you have time",
+    "tip3": "Urgent but not important, let other people to handle",
+    "tip4": "Don't waste your time on it",
+    "setComplete": "Set To Complete",
+    "setProgress": "Set To Progress",
+    "btDeleteTask": "Delete",
+    "tipNoTaskTitle": "Please input task title",
+    "createTime": "Create time",
+    "priority": "Priority",
+    "taskStatus": "Current status"
+  },
+  "creativeNote": {
+    "creativeNote": "Creative note",
+    "btAddNew": "Create",
+    "myCreativeNoteList": "My creative notes",
+    "editCreativeNote": "Edit creative note",
+    "titleHolder": "Please input createive note title here",
+    "title1": "The best 3 things of yesterday",
+    "tipTitle1": "Review the best things, and write it down here, summon the positive energy to start a new day",
+    "title2": "My feeling",
+    "tipTitle2": "By writing out your thoughts or feelings, you can visualize what's going on in your head. Write down your thoughts to achieve a dialogue with yourself, so that you can calmly and objectively analyze your mood, thoughts and actions.",
+    "title3": "What's going to do today",
+    "tipTitle3": "What is the most important thing in your life and what specific things do you currently need to do to make it happen",
+    "title4": "Action in 10 seconds",
+    "tipDelete1": "Are you sure to delete this creative note?",
+    "tipDelete2": "The note cannot be recovered after deleted!",
+    "tipDeleteSuccess": "Creative note delete successful",
+    "tipSaveSuccess": "Save creative note success",
+    "tipCreativeNote": "Createive notes allow you to keep abreast of your work and life situations, fight off procrastination, and adjust your state to do what you really want to do.",
+    "tipNoTitle": "Please input title"
+  },
+  "setting": {
+    "btSelect": "Select"
   },
   "syserr": {
     "10001": "System or network error",

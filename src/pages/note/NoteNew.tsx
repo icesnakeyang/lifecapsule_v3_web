@@ -9,10 +9,10 @@ import { apiRequestRsaPublicKey, apiSaveMyNote } from "../../api/Api";
 import { Encrypt, GenerateKey, RSAencrypt } from "../../common/crypto";
 import CryptoJS from "crypto-js";
 import { EditOutlined } from "@ant-design/icons";
+import MyEditor from "../components/MyEditor/MyEditor";
 const NoteNew = () => {
   const { t } = useTranslation();
   const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
   const currentCategoryId = useSelector(
@@ -21,15 +21,18 @@ const NoteNew = () => {
   const categoryList = useSelector(
     (state: any) => state.noteDataSlice.categoryList
   );
+  const richContent =
+    useSelector((state: any) => state.commonSlice.richContent) || "";
   const dispatch = useDispatch();
   const [encrypt, setEncrypt] = useState(1);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   const onSaveNote = () => {
     let params = {
       title,
       categoryId: currentCategoryId,
       encrypt,
-      content,
+      content: "",
       encryptKey: "",
       keyToken: "",
     };
@@ -41,7 +44,7 @@ const NoteNew = () => {
       const uuid = GenerateKey();
       const keyAES = CryptoJS.SHA256(uuid);
       const keyAESBase64 = CryptoJS.enc.Base64.stringify(keyAES);
-      params.content = Encrypt(content, keyAESBase64, keyAESBase64);
+      params.content = Encrypt(richContent, keyAESBase64, keyAESBase64);
       params.encryptKey = keyAESBase64;
       apiRequestRsaPublicKey()
         .then((res: any) => {
@@ -53,7 +56,7 @@ const NoteNew = () => {
               .then((res: any) => {
                 if (res.code === 0) {
                   message.success(t("note.tipNoteSaveSuccess"));
-                  navigate(-1);
+                  navigate("/main/NoteList");
                 } else {
                   message.error(t("syserr." + res.code));
                   setSaving(false);
@@ -94,12 +97,24 @@ const NoteNew = () => {
     <div>
       <Breadcrumb style={{ margin: "20px 0" }}>
         <Breadcrumb.Item>
-          <a href="/main/dashboard">{t("common.home")}</a>
+          <a href="/main/dashboard">
+            <span style={{ color: themeColor.textLight }}>
+              {t("common.home")}
+            </span>
+          </a>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <a href="/main/noteList">{t("note.noteList")}</a>
+          <a href="/main/noteList">
+            <span style={{ color: themeColor.textLight }}>
+              {t("note.noteList")}
+            </span>
+          </a>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{t("note.noteNew")}</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <span style={{ color: themeColor.textLight }}>
+            {t("note.noteNew")}
+          </span>
+        </Breadcrumb.Item>
       </Breadcrumb>
       <Select
         style={{ width: "200px", marginTop: 10 }}
@@ -124,11 +139,27 @@ const NoteNew = () => {
       <Form style={{ marginTop: 20 }}>
         <FormItem>
           <Input
+            style={{
+              background: themeColor.blockDark,
+              color: themeColor.textLight,
+            }}
             placeholder={t("note.titleHolder")}
             onChange={(e) => {
               setTitle(e.target.value);
             }}
           />
+        </FormItem>
+        <FormItem>
+          <div
+            style={{
+              background: themeColor.blockDark,
+              color: themeColor.textLight,
+              border: "1px solid #ccc",
+              padding: 5,
+            }}
+          >
+            <MyEditor type="NORMAL" />
+          </div>
         </FormItem>
         <Form.Item>
           <Radio.Group
@@ -141,8 +172,16 @@ const NoteNew = () => {
             }}
             value={encrypt}
           >
-            <Radio value={1}>{t("note.encrypt")}</Radio>
-            <Radio value={0}>{t("note.noEncrypt")}</Radio>
+            <Radio value={1}>
+              <span style={{ color: themeColor.textLight }}>
+                {t("note.encrypt")}
+              </span>
+            </Radio>
+            <Radio value={0}>
+              <span style={{ color: themeColor.textLight }}>
+                {t("note.noEncrypt")}
+              </span>
+            </Radio>
           </Radio.Group>
         </Form.Item>
       </Form>

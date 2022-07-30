@@ -1,13 +1,37 @@
 import { Button, Typography } from "antd";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { apiSignToken } from "../api/Api";
+import { apiListTheme, apiSignToken } from "../api/Api";
+import { saveCurrentThemeId, saveThemeColor } from "../store/themeSlice";
 const Home = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const userData = useSelector((state: any) => state.userDataSlice);
+  const themeId = useSelector((state: any) => state.themeSlice.currentThemeId);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (themeId) {
+      apiListTheme({})
+        .then((res: any) => {
+          if (res.code === 0) {
+            dispatch(saveThemeColor(res.data.themeList[0]));
+            dispatch(saveCurrentThemeId(res.data.themeList[0].themeId));
+          }
+        })
+        .catch((e) => {});
+    } else {
+      apiListTheme({}).then((res: any) => {
+        if (res.code === 0) {
+          dispatch(saveThemeColor(res.data.themeList[1]));
+          dispatch(saveCurrentThemeId(res.data.themeList[1].themeId));
+        }
+      });
+    }
+  }, []);
 
   const onSignIn = () => {
     if (!userData.token) {
@@ -30,9 +54,13 @@ const Home = () => {
         display: "flex",
         flexDirection: "column",
         height: "100vh",
+        background: themeColor.background,
       }}
     >
-      <Typography.Title>{t("common.appTitle")}</Typography.Title>
+      <div>{themeColor.background}</div>
+      <Typography.Title style={{ color: themeColor.textLight }}>
+        {t("common.appTitle")}
+      </Typography.Title>
       <Button
         type="primary"
         onClick={() => {

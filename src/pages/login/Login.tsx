@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, Form, Input, message, Typography } from "antd";
 import { useTranslation } from "react-i18next";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import { apiListMyNote, apiLogin } from "../../api/Api";
+import { apiLogin } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import {
@@ -11,11 +11,18 @@ import {
   saveUserInfo,
 } from "../../store/userDataSlice";
 import {
-  clearNote,
+  clearNoteState,
   saveNoteCategoryCurrent,
   saveNoteCategoryList,
 } from "../../store/noteDataSlice";
-import { clearContact } from "../../store/contactSlice";
+import { clearCommonState } from "../../store/commonSlice";
+import { clearTriggerState } from "../../store/triggerSlice";
+import { clearThemeState } from "../../store/themeSlice";
+import { clearTaskTodoState } from "../../store/taskTodoSlice";
+import { clearTaskQuadState } from "../../store/taskQuadSlic";
+import { clearRecipientState } from "../../store/recipinetSlice";
+import { clearCreativeNoteState } from "../../store/creativeNoteSlice";
+import { clearContactList } from "../../store/contactSlice";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -35,9 +42,17 @@ const Login = () => {
       .then((res: any) => {
         if (res.code === 0) {
           message.success(t("login.tipLoginSuccess"));
+
           dispatch(clearUserInfo());
-          dispatch(clearNote());
-          dispatch(clearContact());
+          dispatch(clearTriggerState());
+          dispatch(clearThemeState());
+          dispatch(clearTaskTodoState());
+          dispatch(clearTaskQuadState());
+          dispatch(clearRecipientState());
+          dispatch(clearNoteState());
+          dispatch(clearCreativeNoteState());
+          dispatch(clearContactList());
+          dispatch(clearCommonState());
           dispatch(saveToken(res.data.token));
           dispatch(saveNoteCategoryCurrent(res.data.defaultCategoryId));
           dispatch(saveNoteCategoryList(res.data.categoryList));
@@ -46,14 +61,12 @@ const Login = () => {
           };
           dispatch(saveUserInfo(userInfo));
           localStorage.setItem("lifecapsule3_token", res.data.token);
-          navigate("/main/dashboard");
+          navigate("/");
         } else {
-          message.error(t("syserr." + res.code));
           setSaving(false);
         }
       })
       .catch(() => {
-        message.error(t("syserr.10001"));
         setSaving(false);
       });
   };

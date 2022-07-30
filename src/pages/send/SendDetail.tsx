@@ -23,6 +23,7 @@ import {
 import { saveRecipient } from "../../store/recipinetSlice";
 import { saveTrigger, saveTriggerTime } from "../../store/triggerSlice";
 import { useTranslation } from "react-i18next";
+import FormItem from "antd/lib/form/FormItem";
 
 const SendDetail = () => {
   const { recipientId }: any = useLocation().state;
@@ -40,22 +41,31 @@ const SendDetail = () => {
   const navigate = useNavigate();
   const [saving, setSaving] = useState(false);
   const [modalDeleteRecipient, setModalDeleteRecipient] = useState(false);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+  const [recipientPhone, setRecipientPhone] = useState("");
+  const [recipientEmail, setRecipientEmail] = useState("");
 
   useEffect(() => {
     loadAllData();
     return () => {};
   }, []);
 
+  useEffect(() => {}, [recipientName]);
+
   const loadAllData = () => {
     let params = {
       recipientId,
     };
-    apiGetRecipient(params).then((res: any) => {
-      if (res.code === 0) {
-        dispatch(saveRecipient(res.data.recipient));
-        setRecipientName(res.data.recipient.recipientName);
-      }
-    });
+    apiGetRecipient(params)
+      .then((res: any) => {
+        if (res.code === 0) {
+          dispatch(saveRecipient(res.data.recipient));
+          setRecipientName(res.data.recipient.recipientName);
+          setRecipientPhone(res.data.recipient.phone);
+          setRecipientEmail(res.data.recipient.email);
+        }
+      })
+      .catch((e) => {});
     apiGetNoteRecipientTrigger(params)
       .then((res: any) => {
         if (res.code === 0) {
@@ -125,6 +135,11 @@ const SendDetail = () => {
       {recipient ? (
         <>
           <Card
+            style={{
+              background: themeColor.blockDark,
+              color: themeColor.textLight,
+            }}
+            headStyle={{ color: themeColor.textLight }}
             title={t("recipient.recipientInfo")}
             extra={
               <Button
@@ -153,7 +168,12 @@ const SendDetail = () => {
       {trigger ? (
         <>
           <Card
-            style={{ marginTop: 10 }}
+            style={{
+              marginTop: 20,
+              background: themeColor.blockDark,
+              color: themeColor.textLight,
+            }}
+            headStyle={{ color: themeColor.textLight }}
             title={t("trigger.sendCondition")}
             extra={
               <Button
@@ -177,7 +197,7 @@ const SendDetail = () => {
                     alignItems: "center",
                   }}
                 >
-                  <Tag style={{ fontSize: 16 }} color="#f50">
+                  <Tag style={{ fontSize: 16 }} color={themeColor.blockLight}>
                     {t("trigger.TIMER_TYPE_PRIMARY")}
                   </Tag>
                   {t("trigger.tip5")}
@@ -193,7 +213,7 @@ const SendDetail = () => {
                     alignItems: "center",
                   }}
                 >
-                  <Tag style={{ fontSize: 16 }} color="#108ee9">
+                  <Tag style={{ fontSize: 16 }} color={themeColor.blockLight}>
                     {t("trigger.TIMER_TYPE_DATETIME")}
                   </Tag>
                   {t("trigger.tip6")}
@@ -209,9 +229,7 @@ const SendDetail = () => {
       ) : (
         <div style={{ marginTop: 10 }}>
           <Alert message={t("trigger.tipAddTrigger1")} type="warning" />
-          <div
-            style={{ display: "flex", justifyContent: "center", marginTop: 10 }}
-          >
+          <div style={{ display: "flex", marginTop: 20 }}>
             <Button
               type="primary"
               onClick={() => {
@@ -259,17 +277,59 @@ const SendDetail = () => {
           saveEditRecipient();
           setModalEditRecipient(false);
         }}
+        bodyStyle={{
+          background: themeColor.blockDark,
+          padding: 20,
+          color: "red",
+        }}
       >
-        <Form>
-          <Form.Item>
-            <Input
-              value={recipientName}
-              onChange={(e) => {
-                setRecipientName(e.target.value);
-              }}
-            />
-          </Form.Item>
-        </Form>
+        <Card
+          title={t("recipient.editRecipient")}
+          style={{ background: themeColor.blockDark }}
+          headStyle={{ color: themeColor.textLight }}
+        >
+          <Form>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight }}>
+                {t("recipient.recipientName")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockLight,
+                  color: themeColor.textDark,
+                }}
+                value={recipientName}
+                onChange={(e) => {
+                  setRecipientName(e.target.value);
+                }}
+              />
+            </Form.Item>
+            <FormItem>
+              <div style={{ color: themeColor.textLight }}>
+                {t("recipient.recipientPhone")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockLight,
+                  color: themeColor.textDark,
+                }}
+                value={recipientPhone}
+              />
+            </FormItem>
+            <FormItem>
+              <div style={{ color: themeColor.textLight }}>
+                {t("recipient.recipientEmail")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockLight,
+                  color: themeColor.textDark,
+                }}
+                value={recipientEmail}
+              />
+            </FormItem>
+          </Form>
+        </Card>
       </Modal>
 
       <Modal
@@ -280,49 +340,77 @@ const SendDetail = () => {
         onOk={() => {
           onSaveTrigger();
         }}
+        bodyStyle={{
+          background: themeColor.blockDark,
+          color: themeColor.textLight,
+        }}
       >
-        <div>设定一个发送条件，当条件触发时，笔记就会自动发送给接收人</div>
-        <div>设置触发条件</div>
-        <div>设置触发条件</div>
-        <Radio.Group
-          options={[
-            { label: "倒计时", value: "TIMER_TYPE_PRIMARY" },
-            { label: "指定时间", value: "TIMER_TYPE_DATETIME" },
-          ]}
-          onChange={(e) => {
-            setTriggerType(e.target.value);
+        <Card
+          title={t("trigger.editTrigger")}
+          style={{
+            background: themeColor.blockDark,
+            color: themeColor.textLight,
           }}
-          value={triggerType}
-          optionType="button"
-          buttonStyle="solid"
-        />
-        {triggerType === "TIMER_TYPE_PRIMARY" ? (
-          <div>倒计时：当主倒计时结束时，笔记将被发送给接收人</div>
-        ) : (
-          <>
-            <div>指定时间：设置时间把笔记发送给接收人</div>
-            <DatePicker
-              showTime
-              onChange={(e) => {
-                dispatch(saveTriggerTime(e));
-              }}
-              onOk={(e) => {
-                dispatch(saveTriggerTime(e));
-              }}
-            />
-            <div>发送时间：{moment(triggerTime).format("LLL")}</div>
-          </>
-        )}
+          headStyle={{ color: themeColor.textLight }}
+        >
+          <div style={{ marginTop: 10 }}>{t("trigger.tipTrigger1")}</div>
+          <br />
+          <Radio.Group
+            options={[
+              {
+                label: t("trigger.TIMER_TYPE_PRIMARY"),
+                value: "TIMER_TYPE_PRIMARY",
+              },
+              {
+                label: t("trigger.TIMER_TYPE_DATETIME"),
+                value: "TIMER_TYPE_DATETIME",
+              },
+            ]}
+            onChange={(e) => {
+              setTriggerType(e.target.value);
+            }}
+            value={triggerType}
+            optionType="button"
+            buttonStyle="solid"
+          />
+          {triggerType === "TIMER_TYPE_PRIMARY" ? (
+            <div style={{ marginTop: 10 }}>{t("trigger.tip5")}</div>
+          ) : (
+            <>
+              <div style={{ marginTop: 10 }}>{t("trigger.tip6")}</div>
+              <DatePicker
+                style={{ marginTop: 10 }}
+                showTime
+                onChange={(e) => {
+                  dispatch(saveTriggerTime(e));
+                }}
+                onOk={(e) => {
+                  dispatch(saveTriggerTime(e));
+                }}
+              />
+              <div>
+                {t("trigger.sendTime")}：{moment(triggerTime).format("LLL")}
+              </div>
+            </>
+          )}
+        </Card>
       </Modal>
 
       <Modal
+        bodyStyle={{
+          background: themeColor.blockDark,
+          padding: 20,
+          color: themeColor.textLight,
+        }}
         visible={modalDeleteRecipient}
         closable={false}
         maskClosable={false}
         onCancel={() => setModalDeleteRecipient(false)}
         onOk={() => onDeleteRecipient()}
       >
-        <p>{t("recipient.tipDeleteRecipient")}</p>
+        <div style={{}}>
+          <p>{t("recipient.tipDeleteRecipient")}</p>
+        </div>
       </Modal>
     </div>
   );

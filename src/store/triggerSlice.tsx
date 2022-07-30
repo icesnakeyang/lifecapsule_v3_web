@@ -15,9 +15,17 @@ export const triggerSlice = createSlice({
     removeTrigger: (state: any) => {
       state.trigger = null;
     },
+    clearTriggerState: (state: any) => {
+      state.triggerTime = null;
+      state.trigger = null;
+    },
   },
 });
 
-export const { saveTriggerTime, saveTrigger, removeTrigger } =
-  triggerSlice.actions;
+export const {
+  saveTriggerTime,
+  saveTrigger,
+  removeTrigger,
+  clearTriggerState,
+} = triggerSlice.actions;
 export default triggerSlice.reducer;

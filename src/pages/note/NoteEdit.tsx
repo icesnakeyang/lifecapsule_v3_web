@@ -32,14 +32,18 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SendOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CryptoJS from "crypto-js";
-import MyEditor from "../MyEditor";
-import { saveEditing, saveRichContent } from "../../store/commonSlice";
+import MyEditor from "../components/MyEditor/MyEditor";
+import {
+  clearRichContent,
+  saveEditing,
+  saveRichContent,
+} from "../../store/commonSlice";
+import moment from "moment";
 const NoteEdit = () => {
   const { noteId }: any = useLocation().state;
   const [title, setTitle] = useState("");
   const [encrypt, setEncrypt] = useState(1);
   const dispatch = useDispatch();
-  const [note, setNote] = useState({});
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const { t } = useTranslation();
@@ -53,8 +57,11 @@ const NoteEdit = () => {
   const [editing, setEditing] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const content = useSelector((state: any) => state.commonSlice.richContent);
+  const content =
+    useSelector((state: any) => state.commonSlice.richContent) || "";
   const editingRedux = useSelector((state: any) => state.commonSlice.editing);
+  const [createTime, setCreateTime] = useState(null);
+  const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
 
   useEffect(() => {
     return () => {
@@ -90,17 +97,24 @@ const NoteEdit = () => {
         apiGetMyNote(params).then((res: any) => {
           if (res.code === 0) {
             let note = res.data.note;
+            setCreateTime(note.createTime);
             setTitle(note.title);
             dispatch(saveNoteCategoryCurrent(note.categoryId));
-            if (note.encrypt === 1) {
-              let strKey = note.userEncodeKey;
-              strKey = Decrypt2(strKey, keyAES_1);
-              let content = Decrypt(note.content, strKey, strKey);
-              setEncrypt(1);
-              // note.content = content;
-              dispatch(saveRichContent(content));
-            } else {
+            if (!note.content) {
               setEncrypt(0);
+              dispatch(clearRichContent());
+            } else {
+              if (note.encrypt === 1) {
+                let strKey = note.userEncodeKey;
+                strKey = Decrypt2(strKey, keyAES_1);
+                let content = Decrypt(note.content, strKey, strKey);
+                setEncrypt(1);
+                // note.content = content;
+                dispatch(saveRichContent(content));
+              } else {
+                setEncrypt(0);
+                dispatch(saveRichContent(note.content));
+              }
             }
 
             setLoading(false);
@@ -195,14 +209,26 @@ const NoteEdit = () => {
         height: "100%",
       }}
     >
-      <Breadcrumb style={{ margin: "20px 0" }}>
+      <Breadcrumb style={{}}>
         <Breadcrumb.Item>
-          <a href="/main/dashboard">{t("common.home")}</a>
+          <a href="/main/dashboard">
+            <span style={{ color: themeColor.textLight }}>
+              {t("common.home")}
+            </span>
+          </a>
         </Breadcrumb.Item>
         <Breadcrumb.Item>
-          <a href="/main/noteList">{t("note.noteList")}</a>
+          <a href="/main/noteList">
+            <span style={{ color: themeColor.textLight }}>
+              {t("note.noteList")}
+            </span>
+          </a>
         </Breadcrumb.Item>
-        <Breadcrumb.Item>{t("note.noteEdit")}</Breadcrumb.Item>
+        <Breadcrumb.Item>
+          <span style={{ color: themeColor.textLight }}>
+            {t("note.noteEdit")}
+          </span>
+        </Breadcrumb.Item>
       </Breadcrumb>
       {loading || deleting ? (
         <div
@@ -226,6 +252,16 @@ const NoteEdit = () => {
           >
             <Button
               type="primary"
+              onClick={() => {
+                dispatch(clearRichContent());
+                navigate("/main/noteNew");
+              }}
+            >
+              {t("note.btNewNote")}
+            </Button>
+            <Button
+              type="primary"
+              style={{ marginLeft: "10px" }}
               icon={<SendOutlined />}
               onClick={() => {
                 navigate("/main/SendPage", { state: { noteId } });
@@ -276,6 +312,10 @@ const NoteEdit = () => {
               </Form.Item>
               <Form.Item>
                 <Input
+                  style={{
+                    background: themeColor.blockDark,
+                    color: themeColor.textLight,
+                  }}
                   value={title}
                   placeholder={t("note.titleHolder")}
                   onChange={(e) => {
@@ -285,15 +325,21 @@ const NoteEdit = () => {
                 />
               </Form.Item>
               <Form.Item>
+                <div style={{ color: themeColor.textLight }}>
+                  {t("note.createTime")}：{moment(createTime).format("LLL")}
+                </div>
+              </Form.Item>
+              <Form.Item>
                 {/* <div dangerouslySetInnerHTML={{ __html: content }} /> */}
                 <div
                   style={{
-                    background: "#fff",
+                    background: themeColor.blockDark,
+                    color: themeColor.textLight,
                     border: "1px solid #ccc",
                     padding: "5px",
                   }}
                 >
-                  <MyEditor data={content} />
+                  <MyEditor type="NORMAL" />
                 </div>
               </Form.Item>
               <Form.Item>
@@ -309,10 +355,19 @@ const NoteEdit = () => {
                   }}
                   value={encrypt}
                 >
-                  <Radio value={1}>{t("note.encrypt")}</Radio>
-                  <Radio value={0}>{t("note.noEncrypt")}</Radio>
+                  <Radio value={1}>
+                    <span style={{ color: themeColor.textLight }}>
+                      {t("note.encrypt")}
+                    </span>
+                  </Radio>
+                  <Radio value={0}>
+                    <span style={{ color: themeColor.textLight }}>
+                      {t("note.noEncrypt")}
+                    </span>
+                  </Radio>
                 </Radio.Group>
               </Form.Item>
+              <Form.Item></Form.Item>
               <div
                 style={{
                   width: "100%",
