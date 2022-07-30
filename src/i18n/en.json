@@ -180,6 +180,7 @@
   },
   "syserr": {
     "10001": "System or network error",
+    "10002":"Please login and try it again",
     "10003": "You have to login first",
     "10005": "Login name or password error",
     "10006": "This login name has been registerd already",

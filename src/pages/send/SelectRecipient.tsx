@@ -12,6 +12,7 @@ import RecipientRow from "./RecipientRow";
 import { saveContactList, saveTotalContact } from "../../store/contactSlice";
 import MyEditor from "../components/MyEditor/MyEditor";
 import { getTimeMeasureUtils } from "@reduxjs/toolkit/dist/utils";
+import {clearRichContent} from "../../store/commonSlice";
 
 const SelectRecipient = () => {
   const { noteId }: any = useLocation().state;
@@ -67,6 +68,7 @@ const SelectRecipient = () => {
       .then((res: any) => {
         if (res.code === 0) {
           message.success(t("contact.tipContactSaveSuccess"));
+          loadAllData()
           setModalEditRecipient(false);
         } else {
           message.error(t("syserr." + res.code));
@@ -106,6 +108,7 @@ const SelectRecipient = () => {
                   style={{ marginTop: 20 }}
                   type="primary"
                   onClick={() => {
+                    dispatch(clearRichContent())
                     setModalEditRecipient(true);
                   }}
                 >
@@ -139,6 +142,7 @@ const SelectRecipient = () => {
               {t("contact.contactName")}
             </div>
             <Input
+                style={{background:themeColor.blockDark,color:themeColor.textLight}}
               placeholder={t("contact.contactNameHolder")}
               onChange={(e) => {
                 setContactName(e.target.value);
@@ -152,6 +156,7 @@ const SelectRecipient = () => {
               {t("contact.contactPhone")}
             </div>
             <Input
+                style={{background:themeColor.blockDark,color:themeColor.textLight}}
               placeholder={t("contact.phoneHolder")}
               onChange={(e) => {
                 setPhone(e.target.value);
@@ -165,6 +170,7 @@ const SelectRecipient = () => {
               {t("contact.contactEmail")}
             </div>
             <Input
+                style={{background:themeColor.blockDark,color:themeColor.textLight}}
               placeholder={t("contact.emailHolder")}
               onChange={(e) => {
                 setEmail(e.target.value);
