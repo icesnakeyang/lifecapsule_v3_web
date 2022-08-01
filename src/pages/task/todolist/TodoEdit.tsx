@@ -42,8 +42,13 @@ const TodoEdit = () => {
       .then((res: any) => {
         if (res.code === 0) {
           setTodoTitle(res.data.taskTodo.title);
-          setTodoContent(res.data.taskTodo.content);
-          dispatch(saveRichContent(res.data.taskTodo.content));
+          let content=res.data.taskTodo.content
+          if(content) {
+            // content = content.replace(/[\n\r]/g, "<p>me</p>");
+            content = content.replace(/[\n\r]/g, "<br>");
+          }
+          setTodoContent(content);
+          dispatch(saveRichContent(content));
           setLoading(false);
         } else {
           message.error(t("syserr." + res.code));

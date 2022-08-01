@@ -104,7 +104,17 @@
     "recipientName": "Recipient name",
     "recipientPhone": "Send to phone",
     "recipientEmail": "Send to email",
-    "editRecipient": "Edit recipient"
+    "editRecipient": "Edit recipient",
+    "messageTitle": "Message title",
+    "tipMessageTitle": "Display for the message title you send to recipient",
+    "messageFromName": "From",
+    "tipMessageFromName": "Display who send this messge to recipient",
+    "messageTo": "To",
+    "tipMessageTo": "Recipient will see how do you call him/her",
+    "messageDescription": "Description",
+    "tipMessageDescription": "Description the message for recipient",
+    "editRecipientMessage": "Edit recipient receive message",
+    "recipientMessagePreview":"Preview of recipient"
   },
   "trigger": {
     "TIMER_TYPE_PRIMARY": "Time up",

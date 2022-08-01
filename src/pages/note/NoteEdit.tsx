@@ -65,8 +65,7 @@ const NoteEdit = () => {
 
   useEffect(() => {
     loadAllData();
-    return () => {
-    };
+    return () => {};
   }, [noteId]);
 
   useEffect(() => {
@@ -94,8 +93,10 @@ const NoteEdit = () => {
         params.encryptKey = RSAencrypt(keyAES_1, res.data.publicKey);
         params.keyToken = res.data.keyToken;
 
+        console.log("load all data");
         apiGetMyNote(params).then((res: any) => {
           if (res.code === 0) {
+            console.log(res);
             let note = res.data.note;
             setCreateTime(note.createTime);
             setTitle(note.title);
@@ -108,11 +109,16 @@ const NoteEdit = () => {
                 let strKey = note.userEncodeKey;
                 strKey = Decrypt2(strKey, keyAES_1);
                 let content = Decrypt(note.content, strKey, strKey);
+                console.log(content);
+                content = content.replace(/[\n\r]/g, "<br>");
+                // txts=txts.replace(/[\n\r]/g,'<br>')
                 setEncrypt(1);
                 // note.content = content;
                 dispatch(saveRichContent(content));
               } else {
                 setEncrypt(0);
+                console.log(note.content);
+                note.content = note.content.replace(/[\n\r]/g, "<br>");
                 dispatch(saveRichContent(note.content));
               }
             }
@@ -311,7 +317,9 @@ const NoteEdit = () => {
                 </div>
               </Form.Item>
               <Form.Item>
-                <div style={{color:themeColor.textLight}}>{t('note.title')}</div>
+                <div style={{ color: themeColor.textLight }}>
+                  {t("note.title")}
+                </div>
                 <Input
                   style={{
                     background: themeColor.blockDark,
@@ -331,7 +339,9 @@ const NoteEdit = () => {
                 </div>
               </Form.Item>
               <Form.Item>
-                <div style={{color:themeColor.textLight}}>{t('note.content')}</div>
+                <div style={{ color: themeColor.textLight }}>
+                  {t("note.content")}
+                </div>
                 <div
                   style={{
                     background: themeColor.blockDark,

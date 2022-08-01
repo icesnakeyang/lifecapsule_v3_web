@@ -3,6 +3,7 @@ import {
   Button,
   Card,
   DatePicker,
+  Divider,
   Form,
   Input,
   message,
@@ -19,6 +20,7 @@ import {
   apiGetNoteRecipientTrigger,
   apiGetRecipient,
   apiSaveNoteRecipientTrigger,
+  apiSaveRecipient,
 } from "../../api/Api";
 import { saveRecipient } from "../../store/recipinetSlice";
 import { saveTrigger, saveTriggerTime } from "../../store/triggerSlice";
@@ -44,6 +46,14 @@ const SendDetail = () => {
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
   const [recipientPhone, setRecipientPhone] = useState("");
   const [recipientEmail, setRecipientEmail] = useState("");
+  const [modalRecipientMessage, setModalRecipientMessage] = useState(false);
+  const [messageTitle, setMessageTitle] = useState("");
+  const [fromName, setFromName] = useState("");
+  const [toName, setToName] = useState("");
+  const [description, setDescription] = useState("");
+  const richContent = useSelector(
+    (state: any) => state.commonSlice.richContent
+  );
 
   useEffect(() => {
     loadAllData();
@@ -63,6 +73,10 @@ const SendDetail = () => {
           setRecipientName(res.data.recipient.recipientName);
           setRecipientPhone(res.data.recipient.phone);
           setRecipientEmail(res.data.recipient.email);
+          setMessageTitle(res.data.recipient.title);
+          setFromName(res.data.recipient.fromName);
+          setToName(res.data.recipient.toName);
+          setDescription(res.data.recipient.description);
         }
       })
       .catch((e) => {});
@@ -83,9 +97,48 @@ const SendDetail = () => {
 
   const saveEditRecipient = () => {
     let params = {
-      recipientName,
+      name: recipientName,
+      recipientId,
+      phone: recipientPhone,
+      email: recipientEmail,
+    };
+    console.log(params);
+    apiSaveRecipient(params)
+      .then((res: any) => {
+        if (res.code === 0) {
+          loadAllData();
+        } else {
+          message.error(t("syserr." + res.code));
+        }
+      })
+      .catch(() => {
+        message.error(t("syserr.10001"));
+      });
+  };
+
+  const onSaveRecipinet = () => {
+    let params = {
+      title: messageTitle,
+      fromName,
+      toName,
+      description,
       recipientId,
     };
+    console.log(params);
+    apiSaveRecipient(params)
+      .then((res: any) => {
+        if (res.code === 0) {
+          loadAllData();
+          setModalRecipientMessage(false);
+        } else {
+          message.error(t("syserr." + res.code));
+          setModalRecipientMessage(false);
+        }
+      })
+      .catch(() => {
+        message.error(t("syserr.10001"));
+        setModalRecipientMessage(false);
+      });
   };
 
   const onSaveTrigger = () => {
@@ -225,6 +278,53 @@ const SendDetail = () => {
               </>
             )}
           </Card>
+          <Card
+            title={t("recipient.recipientMessagePreview")}
+            style={{
+              marginTop: 20,
+              background: themeColor.blockDark,
+              color: themeColor.textLight,
+            }}
+            headStyle={{ color: themeColor.textLight }}
+            extra={
+              <Button
+                type="primary"
+                size="small"
+                onClick={() => {
+                  setModalRecipientMessage(true);
+                }}
+              >
+                {t("common.btEdit")}
+              </Button>
+            }
+          >
+            <div
+              style={{
+                fontSize: 24,
+                width: "100%",
+                textAlign: "center",
+              }}
+            >
+              {recipient.title}
+            </div>
+            <div
+              style={{
+                margin: "10px 0",
+                color: themeColor.textHolder,
+                textAlign: "center",
+              }}
+            >
+              {recipient.description}
+            </div>
+            <p>
+              {t("recipient.messageTo")}：{recipient.toName}
+            </p>
+            <p>
+              {t("recipient.messageFromName")}：{recipient.fromName}
+            </p>
+            <Divider style={{ background: themeColor.textLight }} />
+            <div dangerouslySetInnerHTML={{ __html: richContent }}></div>
+          </Card>
         </>
       ) : (
         <div style={{ marginTop: 10 }}>
@@ -314,6 +414,9 @@ const SendDetail = () => {
                   color: themeColor.textDark,
                 }}
                 value={recipientPhone}
+                onChange={(e) => {
+                  setRecipientPhone(e.target.value);
+                }}
               />
             </FormItem>
             <FormItem>
@@ -326,6 +429,9 @@ const SendDetail = () => {
                   color: themeColor.textDark,
                 }}
                 value={recipientEmail}
+                onChange={(e) => {
+                  setRecipientEmail(e.target.value);
+                }}
               />
             </FormItem>
           </Form>
@@ -411,6 +517,99 @@ const SendDetail = () => {
         <div style={{}}>
           <p>{t("recipient.tipDeleteRecipient")}</p>
         </div>
+      </Modal>
+
+      <Modal
+        visible={modalRecipientMessage}
+        onCancel={() => setModalRecipientMessage(false)}
+        bodyStyle={{ background: themeColor.blockDark }}
+        closable={false}
+        maskClosable={false}
+        onOk={() => {
+          onSaveRecipinet();
+        }}
+      >
+        <Card
+          title={t("recipient.editRecipientMessage")}
+          headStyle={{ color: themeColor.textLight }}
+          style={{ background: themeColor.blockDark }}
+        >
+          <Form>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight, fontSize: 16 }}>
+                {t("recipient.messageTitle")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                onChange={(e) => {
+                  setMessageTitle(e.target.value);
+                }}
+                value={messageTitle}
+              />
+              <div style={{ color: themeColor.textHolder }}>
+                {t("recipient.tipMessageTitle")}
+              </div>
+            </Form.Item>
+            <Form.Item>
+              {/* from name */}
+              <div style={{ color: themeColor.textLight, fontSize: 16 }}>
+                {t("recipient.messageFromName")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                onChange={(e) => {
+                  setFromName(e.target.value);
+                }}
+                value={fromName}
+              />
+              <div style={{ color: themeColor.textHolder }}>
+                {t("recipient.tipMessageFromName")}
+              </div>
+            </Form.Item>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight, fontSize: 16 }}>
+                {t("recipient.messageTo")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                onChange={(e) => {
+                  setToName(e.target.value);
+                }}
+                value={toName}
+              />
+              <div style={{ color: themeColor.textHolder }}>
+                {t("recipient.tipMessageTo")}
+              </div>
+            </Form.Item>
+            <Form.Item>
+              <div style={{ color: themeColor.textLight, fontSize: 16 }}>
+                {t("recipient.messageDescription")}
+              </div>
+              <Input
+                style={{
+                  background: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                value={description}
+              />
+              <div style={{ color: themeColor.textHolder }}>
+                {t("recipient.tipMessageDescription")}
+              </div>
+            </Form.Item>
+          </Form>
+        </Card>
       </Modal>
     </div>
   );

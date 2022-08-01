@@ -104,7 +104,17 @@
     "recipientName": "接收人姓名",
     "recipientPhone": "发送到手机",
     "recipientEmail": "发送到Email",
-    "editRecipient": "编辑接收人"
+    "editRecipient": "编辑接收人",
+    "messageTitle": "信息标题",
+    "tipMessageTitle": "发送信息给接收人时显示的信息标题",
+    "messageFromName": "来自",
+    "tipMessageFromName": "显示给接收人的发送人姓名",
+    "messageTo": "致",
+    "tipMessageTo": "显示给接收人的接收人姓名",
+    "messageDescription": "信息描述",
+    "tipMessageDescription": "显示给接收人的信息描述",
+    "editRecipientMessage": "编辑接收人接收到到的信息",
+    "recipientMessagePreview":"接收人预览信息"
   },
   "trigger": {
     "TIMER_TYPE_DATETIME": "指定日期",
