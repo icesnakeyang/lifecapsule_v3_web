@@ -48,7 +48,7 @@ const NoteNew = () => {
           if (res.code === 0) {
             params.encryptKey =
               RSAencrypt(params.encryptKey, res.data.publicKey) || "";
-            params.keyToken = res.data.keyTokens;
+            params.keyToken = res.data.keyToken;
             apiSaveMyNote(params)
               .then((res: any) => {
                 if (res.code === 0) {
