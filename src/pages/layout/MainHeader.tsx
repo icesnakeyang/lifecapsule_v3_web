@@ -10,6 +10,7 @@ const MainHeader = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userInfo = useSelector((state: any) => state.userDataSlice.userInfo);
+  console.log(userInfo);
   const { t } = useTranslation();
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
   const onMenu = (e: any) => {
@@ -42,7 +43,7 @@ const MainHeader = () => {
         {
           key: "2",
           icon: <UserOutlined />,
-          label: userInfo.loginName,
+          label: userInfo.nickname ? userInfo.nickname : userInfo.loginName,
           children: [
             {
               key: "menuSignOut",

@@ -22,7 +22,7 @@ import { clearTaskTodoState } from "../../store/taskTodoSlice";
 import { clearTaskQuadState } from "../../store/taskQuadSlic";
 import { clearRecipientState } from "../../store/recipinetSlice";
 import { clearCreativeNoteState } from "../../store/creativeNoteSlice";
-import { clearContactState} from "../../store/contactSlice";
+import { clearContactState } from "../../store/contactSlice";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -41,6 +41,7 @@ const Login = () => {
     apiLogin(params)
       .then((res: any) => {
         if (res.code === 0) {
+          console.log(res);
           message.success(t("login.tipLoginSuccess"));
 
           dispatch(clearUserInfo());
@@ -57,18 +58,19 @@ const Login = () => {
           dispatch(saveNoteCategoryCurrent(res.data.defaultCategoryId));
           dispatch(saveNoteCategoryList(res.data.categoryList));
           let userInfo = {
-            loginName: res.data.loginName,
+            loginName: res.data.user.loginName,
+            nickname: res.data.user.nickname,
           };
           dispatch(saveUserInfo(userInfo));
           localStorage.setItem("lifecapsule3_token", res.data.token);
           navigate("/");
         } else {
-          message.error(t('syserr.'+res.code))
+          message.error(t("syserr." + res.code));
           setSaving(false);
         }
       })
       .catch(() => {
-        message.error(t('syserr.10001'))
+        message.error(t("syserr.10001"));
         setSaving(false);
       });
   };
