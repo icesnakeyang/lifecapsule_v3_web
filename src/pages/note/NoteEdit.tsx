@@ -15,11 +15,10 @@ import {
   RSAencrypt,
 } from "../../common/crypto";
 import { useDispatch, useSelector } from "react-redux";
-import { saveNote, saveNoteCategoryCurrent } from "../../store/noteDataSlice";
+import { saveNoteCategoryCurrent } from "../../store/noteDataSlice";
 import {
   Breadcrumb,
   Button,
-  Card,
   Form,
   Input,
   message,
@@ -32,13 +31,10 @@ import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { SendOutlined, DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import CryptoJS from "crypto-js";
-import MyEditor from "../components/MyEditor/MyEditor";
-import {
-  clearRichContent,
-  saveEditing,
-  saveRichContent,
-} from "../../store/commonSlice";
+import { saveEditing } from "../../store/commonSlice";
 import moment from "moment";
+import { convertToObject } from "typescript";
+
 const NoteEdit = () => {
   const { noteId }: any = useLocation().state;
   const [title, setTitle] = useState("");
@@ -57,8 +53,7 @@ const NoteEdit = () => {
   const [editing, setEditing] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const content =
-    useSelector((state: any) => state.commonSlice.richContent) || "";
+  const [content, setContent] = useState("");
   const editingRedux = useSelector((state: any) => state.commonSlice.editing);
   const [createTime, setCreateTime] = useState(null);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
@@ -93,38 +88,27 @@ const NoteEdit = () => {
         params.encryptKey = RSAencrypt(keyAES_1, res.data.publicKey);
         params.keyToken = res.data.keyToken;
 
-        console.log("load all data");
         apiGetMyNote(params).then((res: any) => {
           if (res.code === 0) {
-            console.log(res);
             let note = res.data.note;
             setCreateTime(note.createTime);
             setTitle(note.title);
             dispatch(saveNoteCategoryCurrent(note.categoryId));
             if (!note.content) {
               setEncrypt(0);
-              dispatch(clearRichContent());
             } else {
               if (note.encrypt === 1) {
                 let strKey = note.userEncodeKey;
                 strKey = Decrypt2(strKey, keyAES_1);
                 let content = Decrypt(note.content, strKey, strKey);
-                console.log(content);
-                content = content.replace(/[\n\r]/g, "<br>");
-                // txts=txts.replace(/[\n\r]/g,'<br>')
                 setEncrypt(1);
-                // note.content = content;
-                dispatch(saveRichContent(content));
+                setContent(content);
               } else {
                 setEncrypt(0);
-                console.log(note.content);
-                note.content = note.content.replace(/[\n\r]/g, "<br>");
-                dispatch(saveRichContent(note.content));
+                setContent(note.content);
               }
             }
-
             setLoading(false);
-            // dispatch(saveNote(note));
           }
         });
       }
@@ -259,7 +243,6 @@ const NoteEdit = () => {
             <Button
               type="primary"
               onClick={() => {
-                dispatch(clearRichContent());
                 navigate("/main/noteNew");
               }}
             >
@@ -342,16 +325,19 @@ const NoteEdit = () => {
                 <div style={{ color: themeColor.textLight }}>
                   {t("note.content")}
                 </div>
-                <div
+                <Input.TextArea
+                  autoSize={{ minRows: 3 }}
                   style={{
-                    background: themeColor.blockDark,
                     color: themeColor.textLight,
-                    border: "1px solid #ccc",
-                    padding: "5px",
+                    backgroundColor: themeColor.blockDark,
                   }}
-                >
-                  <MyEditor type="NORMAL" />
-                </div>
+                  value={content}
+                  placeholder={t("note.titleHolder")}
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                    setEditing(true);
+                  }}
+                />
               </Form.Item>
               <Form.Item>
                 <Radio.Group

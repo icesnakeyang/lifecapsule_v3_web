@@ -8,7 +8,7 @@ export const taskQuadSlice = createSlice({
     totalTaskQuad: 0,
     pageIndexTaskQuad: 1,
     pageSizeTaskQuad: 10,
-    taskQuead: {},
+    taskQuad: {},
   },
   reducers: {
     saveTaskQuadList: (state: any, action: PayloadAction<number>) => {
@@ -24,14 +24,14 @@ export const taskQuadSlice = createSlice({
       state.pageSizeTaskQuad = action.payload;
     },
     saveTaskQuad: (state: any, action: any) => {
-      state.taskQuead = action.payload;
+      state.taskQuad = action.payload;
     },
     clearTaskQuadState: (state: any) => {
       state.taskQuadList = [];
       state.totalTaskQuad = 0;
       state.pageIndexTaskQuad = 1;
       state.pageSizeTaskQuad = 10;
-      state.taskQuead = {};
+      state.taskQuad = {};
     },
   },
 });

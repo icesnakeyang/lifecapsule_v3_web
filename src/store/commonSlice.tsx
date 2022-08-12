@@ -4,7 +4,6 @@ export const commonSlice = createSlice({
   name: "common",
   initialState: {
     editing: 0,
-    richContent: null,
     loadData: false,
     tempId: -1,
     refresh: 0,
@@ -12,12 +11,6 @@ export const commonSlice = createSlice({
   reducers: {
     saveEditing: (state: any, action: PayloadAction<number>) => {
       state.editing = action.payload;
-    },
-    saveRichContent: (state: any, action: any) => {
-      state.richContent = action.payload;
-    },
-    clearRichContent: (state: any) => {
-      state.richContent = null;
     },
     saveLoadData: (state: any, action: PayloadAction<boolean>) => {
       state.loadData = action.payload;
@@ -33,7 +26,6 @@ export const commonSlice = createSlice({
     },
     clearCommonState: (state: any) => {
       state.editing = 0;
-      state.richContent = null;
       state.loadData = false;
       state.tempId = -1;
       state.refresh = 0;
@@ -43,8 +35,6 @@ export const commonSlice = createSlice({
 
 export const {
   saveEditing,
-  saveRichContent,
-  clearRichContent,
   saveLoadData,
   loadRefresh,
   clearRefresh,

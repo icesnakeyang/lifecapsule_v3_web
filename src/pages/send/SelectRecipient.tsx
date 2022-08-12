@@ -1,28 +1,19 @@
-import { Button, Card, Form, Input, message, Modal, Spin } from "antd";
+import { Button, Form, Input, message, Modal, Spin } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  apiAddContactToRecipient,
-  apiListMyContact,
-  apiSaveMyContact,
-} from "../../api/Api";
+import { apiListMyContact, apiSaveMyContact } from "../../api/Api";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import RecipientRow from "./RecipientRow";
 import { saveContactList, saveTotalContact } from "../../store/contactSlice";
-import MyEditor from "../components/MyEditor/MyEditor";
-import { getTimeMeasureUtils } from "@reduxjs/toolkit/dist/utils";
-import {clearRichContent} from "../../store/commonSlice";
 
 const SelectRecipient = () => {
   const { noteId }: any = useLocation().state;
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [modalEditRecipient, setModalEditRecipient] = useState(false);
   const [contactName, setContactName] = useState("");
   const [phone, setPhone] = useState("");
   const [editing, setEditing] = useState(false);
-  const [remark, setRemark] = useState("");
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
   const contactPageIndex =
@@ -32,10 +23,9 @@ const SelectRecipient = () => {
   const contactList =
     useSelector((state: any) => state.contactSlice.contactList) || [];
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
-  const richContent = useSelector(
-    (state: any) => state.commonSlice.richContent
-  );
   const [loading, setLoading] = useState(true);
+  const [remark, setRemark] = useState("");
+
   useEffect(() => {
     return () => {
       loadAllData();
@@ -62,13 +52,13 @@ const SelectRecipient = () => {
       contactName,
       phone,
       email,
-      remark: richContent,
+      remark,
     };
     apiSaveMyContact(params)
       .then((res: any) => {
         if (res.code === 0) {
           message.success(t("contact.tipContactSaveSuccess"));
-          loadAllData()
+          loadAllData();
           setModalEditRecipient(false);
         } else {
           message.error(t("syserr." + res.code));
@@ -108,7 +98,6 @@ const SelectRecipient = () => {
                   style={{ marginTop: 20 }}
                   type="primary"
                   onClick={() => {
-                    dispatch(clearRichContent())
                     setModalEditRecipient(true);
                   }}
                 >
@@ -142,7 +131,10 @@ const SelectRecipient = () => {
               {t("contact.contactName")}
             </div>
             <Input
-                style={{background:themeColor.blockDark,color:themeColor.textLight}}
+              style={{
+                background: themeColor.blockDark,
+                color: themeColor.textLight,
+              }}
               placeholder={t("contact.contactNameHolder")}
               onChange={(e) => {
                 setContactName(e.target.value);
@@ -156,7 +148,10 @@ const SelectRecipient = () => {
               {t("contact.contactPhone")}
             </div>
             <Input
-                style={{background:themeColor.blockDark,color:themeColor.textLight}}
+              style={{
+                background: themeColor.blockDark,
+                color: themeColor.textLight,
+              }}
               placeholder={t("contact.phoneHolder")}
               onChange={(e) => {
                 setPhone(e.target.value);
@@ -170,7 +165,10 @@ const SelectRecipient = () => {
               {t("contact.contactEmail")}
             </div>
             <Input
-                style={{background:themeColor.blockDark,color:themeColor.textLight}}
+              style={{
+                background: themeColor.blockDark,
+                color: themeColor.textLight,
+              }}
               placeholder={t("contact.emailHolder")}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -183,16 +181,17 @@ const SelectRecipient = () => {
             <div style={{ color: themeColor.textLight }}>
               {t("contact.contactRemark")}
             </div>
-            <div
+            <Input.TextArea
               style={{
                 background: themeColor.blockDark,
                 color: themeColor.textLight,
-                border: "1px solid #ccc",
-                padding: 10,
               }}
-            >
-              <MyEditor type="NORMAL" />
-            </div>
+              autoSize={{ minRows: 3 }}
+              value={remark}
+              onChange={(e) => {
+                setRemark(e.target.value);
+              }}
+            />
           </Form.Item>
         </Form>
       </Modal>

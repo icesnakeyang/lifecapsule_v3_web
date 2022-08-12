@@ -33,31 +33,22 @@ import {
   GenerateRandomString16,
   RSAencrypt,
 } from "../../../common/crypto";
-import { saveRichContent } from "../../../store/commonSlice";
-import { saveTaskQuad } from "../../../store/taskQuadSlic";
-import MyEditor from "../../components/MyEditor/MyEditor";
 import CryptoJS from "crypto-js";
 
 const QuadrantTaskEdit = () => {
   const { t } = useTranslation();
   const [title, setTitle] = useState("");
-  const richContent = useSelector(
-    (state: any) => state.commonSlice.richContent
-  );
   const [saving, setSaving] = useState(false);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
   const [PROGRESS, setPROGRESS] = useState(false);
   const [COMPLETE, setCOMPLETE] = useState(false);
-  const [taskType, setTaskType] = useState("");
-  // const routeParams = useLocation() || null;
   const { taskId }: any = useLocation().state || null;
-  const dispatch = useDispatch();
-  const taskQuead = useSelector((state: any) => state.taskQuadSlice.taskQuead);
   const [loading, setLoading] = useState(false);
   const [taskImportant, setTaskImportant] = useState("");
   const [taskStatus, setTaskStatus] = useState("");
   const [modalDeleteTask, setModalDeleteTask] = useState(false);
   const navigate = useNavigate();
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     // if (routeParams) {
@@ -105,7 +96,7 @@ const QuadrantTaskEdit = () => {
                 if (strKey) {
                   strKey = Decrypt2(strKey, keyAES_1);
                   let ss = Decrypt(task.content, strKey, strKey);
-                  dispatch(saveRichContent(ss));
+                  setContent(ss);
                 }
                 setLoading(false);
               } else {
@@ -159,7 +150,7 @@ const QuadrantTaskEdit = () => {
     /**
      * 用这个key_UUID_256_base64作为秘钥和补码，用AES算法加密笔记内容
      */
-    let dd = Encrypt(richContent, key_UUID_256_base64, key_UUID_256_base64);
+    let dd = Encrypt(content, key_UUID_256_base64, key_UUID_256_base64);
     params.content = dd;
     /**
      * key_UUID_256_base64秘钥需要保存到服务器上
@@ -418,15 +409,17 @@ const QuadrantTaskEdit = () => {
                   {" "}
                   {t("task.content")}
                 </div>
-                <div
+                <Input.TextArea
                   style={{
-                    background: themeColor.blockLight,
-                    padding: 5,
-                    color: themeColor.textDark,
+                    background: themeColor.blockDark,
+                    color: themeColor.textLight,
                   }}
-                >
-                  <MyEditor type="NORMAL" />
-                </div>
+                  autoSize={{ minRows: 3 }}
+                  value={content}
+                  onChange={(e) => {
+                    setContent(e.target.value);
+                  }}
+                />
               </FormItem>
             </Form>
           </Card>

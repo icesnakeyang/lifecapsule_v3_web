@@ -2,14 +2,11 @@ import {
   Breadcrumb,
   Button,
   Card,
-  Col,
   Form,
   Input,
   message,
-  Modal,
   Radio,
   RadioChangeEvent,
-  Row,
   Space,
   Spin,
   Tag,
@@ -21,7 +18,6 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { apiCreateMyQuadTask, apiRequestRsaPublicKey } from "../../../api/Api";
 import { Encrypt, GenerateKey, RSAencrypt } from "../../../common/crypto";
-import MyEditor from "../../components/MyEditor/MyEditor";
 import CryptoJS from "crypto-js";
 const QuadrantTaskNew = () => {
   const [PROGRESS, setPROGRESS] = useState(false);
@@ -38,9 +34,7 @@ const QuadrantTaskNew = () => {
   const [taskType, setTaskType] = useState("IMPORTANT_AND_URGENT");
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
   const [saving, setSaving] = useState(false);
-  const richContent = useSelector(
-    (state: any) => state.commonSlice.richContent
-  );
+  const [content, setContent] = useState("");
   const navigate = useNavigate();
 
   const onSaveTask = () => {
@@ -59,11 +53,7 @@ const QuadrantTaskNew = () => {
     const key_UUID = GenerateKey();
     const key_UUID_256 = CryptoJS.SHA256(key_UUID);
     const key_UUID_256_base64 = CryptoJS.enc.Base64.stringify(key_UUID_256);
-    params.content = Encrypt(
-      richContent,
-      key_UUID_256_base64,
-      key_UUID_256_base64
-    );
+    params.content = Encrypt(content, key_UUID_256_base64, key_UUID_256_base64);
     params.encryptKey = key_UUID_256_base64;
 
     setSaving(true);
@@ -222,15 +212,17 @@ const QuadrantTaskNew = () => {
               {" "}
               {t("task.content")}
             </div>
-            <div
+            <Input.TextArea
               style={{
-                background: themeColor.blockLight,
-                padding: 5,
-                color: themeColor.textDark,
+                background: themeColor.blockDark,
+                color: themeColor.textLight,
               }}
-            >
-              <MyEditor type="NORMAL" />
-            </div>
+              autoSize={{ minRows: 3 }}
+              value={content}
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+            />
           </FormItem>
         </Form>
       </Card>

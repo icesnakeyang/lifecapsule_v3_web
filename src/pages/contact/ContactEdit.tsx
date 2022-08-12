@@ -8,13 +8,10 @@ import {
 } from "../../api/Api";
 import { useLocation, useNavigate } from "react-router-dom";
 import { DeleteOutlined } from "@ant-design/icons";
-import { useDispatch, useSelector } from "react-redux";
-import MyEditor from "../components/MyEditor/MyEditor";
-import { saveEditing, saveRichContent } from "../../store/commonSlice";
+import { useSelector } from "react-redux";
 
 const ContactEdit = (props: any) => {
   const { t } = useTranslation();
-  const dispatch = useDispatch();
   const [contactName, setContactName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -25,9 +22,8 @@ const ContactEdit = (props: any) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [canDelete, setCanDelete] = useState(false);
-  const content = useSelector((state: any) => state.commonSlice.richContent);
-  const editingRedux = useSelector((state: any) => state.commonSlice.editing);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+  const [editing, setEditing] = useState(false);
 
   useEffect(() => {
     loadAllData();
@@ -45,7 +41,7 @@ const ContactEdit = (props: any) => {
           setPhone(res.data.contact.phone);
           setEmail(res.data.contact.email);
           setRemark(res.data.contact.remark);
-          dispatch(saveRichContent(res.data.contact.remark));
+          setRemark(res.data.contact.remark);
           setCanDelete(true);
         }
         setLoading(false);
@@ -60,7 +56,7 @@ const ContactEdit = (props: any) => {
       contactName,
       phone,
       email,
-      remark: content,
+      remark,
       contactId,
     };
     setSaving(true);
@@ -166,7 +162,7 @@ const ContactEdit = (props: any) => {
                 placeholder={t("contact.contactNameHolder")}
                 onChange={(e) => {
                   setContactName(e.target.value);
-                  dispatch(saveEditing(editingRedux + 1));
+                  setEditing(true);
                 }}
                 value={contactName}
               />
@@ -183,7 +179,7 @@ const ContactEdit = (props: any) => {
                 placeholder={t("contact.phoneHolder")}
                 onChange={(e) => {
                   setPhone(e.target.value);
-                  dispatch(saveEditing(editingRedux + 1));
+                  setEditing(true);
                 }}
                 value={phone}
               />
@@ -200,7 +196,7 @@ const ContactEdit = (props: any) => {
                 placeholder={t("contact.emailHolder")}
                 onChange={(e) => {
                   setEmail(e.target.value);
-                  dispatch(saveEditing(editingRedux + 1));
+                  setEditing(true);
                 }}
                 value={email}
               />
@@ -209,16 +205,18 @@ const ContactEdit = (props: any) => {
               <div style={{ color: themeColor.textLight }}>
                 {t("contact.contactRemark")}
               </div>
-              <div
+              <Input.TextArea
                 style={{
                   background: themeColor.blockDark,
                   color: themeColor.textLight,
-                  border: "1px solid #ccc",
-                  padding: 10,
                 }}
-              >
-                <MyEditor type="NORMAL" />
-              </div>
+                autoSize={{ minRows: 3 }}
+                value={remark}
+                onChange={(e) => {
+                  setRemark(e.target.value);
+                  setEditing(true);
+                }}
+              />
             </Form.Item>
           </Form>
           <div
@@ -232,7 +230,7 @@ const ContactEdit = (props: any) => {
               <Button style={{ width: "140px" }} type="primary" loading>
                 {t("common.btSaving")}
               </Button>
-            ) : editingRedux > 0 ? (
+            ) : editing ? (
               <Button
                 style={{ width: "140px" }}
                 block

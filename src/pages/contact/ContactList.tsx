@@ -5,7 +5,6 @@ import { apiListMyContact } from "../../api/Api";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { saveContactList } from "../../store/contactSlice";
-import {clearRichContent} from "../../store/commonSlice";
 
 const ContactList = () => {
   const { t } = useTranslation();
@@ -102,7 +101,6 @@ const ContactList = () => {
         <Button
           type="primary"
           onClick={() => {
-              dispatch(clearRichContent())
             navigate("/main/ContactEdit");
           }}
         >

@@ -1,21 +1,16 @@
 import { Breadcrumb, Button, Form, Input, message, Modal, Spin } from "antd";
 import FormItem from "antd/lib/form/FormItem";
-import MyEditor from "../../components/MyEditor/MyEditor";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { apiGetMyTaskTodo, apiSaveMyTaskTodo } from "../../../api/Api";
 import { useNavigate, useLocation } from "react-router-dom";
-import { saveRichContent } from "../../../store/commonSlice";
 
 const TodoEdit = () => {
   const { taskId }: any = useLocation().state;
   const { t } = useTranslation();
   const [todoTitle, setTodoTitle] = useState("");
   const [todoContent, setTodoContent] = useState("");
-  const richContent = useSelector(
-    (state: any) => state.commonSlice.richContent
-  );
   const [modalDelete, setModalDelete] = useState(false);
   const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
@@ -42,13 +37,8 @@ const TodoEdit = () => {
       .then((res: any) => {
         if (res.code === 0) {
           setTodoTitle(res.data.taskTodo.title);
-          let content=res.data.taskTodo.content
-          if(content) {
-            // content = content.replace(/[\n\r]/g, "<p>me</p>");
-            content = content.replace(/[\n\r]/g, "<br>");
-          }
+          let content = res.data.taskTodo.content;
           setTodoContent(content);
-          dispatch(saveRichContent(content));
           setLoading(false);
         } else {
           message.error(t("syserr." + res.code));
@@ -62,7 +52,7 @@ const TodoEdit = () => {
   const saveTodo = () => {
     let params = {
       title: todoTitle,
-      content: richContent,
+      content: todoContent,
       taskId,
     };
 
@@ -134,16 +124,17 @@ const TodoEdit = () => {
               <div style={{ color: themeColor.textLight }}>
                 {t("task.content")}
               </div>
-              <div
+              <Input.TextArea
                 style={{
-                  border: "1px solid #ccc",
-                  padding: 5,
                   background: themeColor.blockDark,
                   color: themeColor.textLight,
                 }}
-              >
-                <MyEditor type="NORMAL" />
-              </div>
+                autoSize={{ minRows: 3 }}
+                value={todoContent}
+                onChange={(e) => {
+                  setTodoContent(e.target.value);
+                }}
+              />
             </FormItem>
           </Form>
           <div style={{ display: "flex", justifyContent: "center" }}>

@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 import { apiListMyCategory, apiListMyNote } from "../../api/Api";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import {
   saveNoteCategoryCurrent,
@@ -22,7 +21,6 @@ import {
   saveNotePageSize,
 } from "../../store/noteDataSlice";
 import { EditOutlined } from "@ant-design/icons";
-import { clearRichContent } from "../../store/commonSlice";
 import NoteListRow from "./NoteListRow";
 
 const NoteList = () => {
@@ -30,7 +28,7 @@ const NoteList = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const categoryList = useSelector(
-    (state: any) => state.noteDataSlice.categoryList||[]
+    (state: any) => state.noteDataSlice.categoryList || []
   );
   const currentCategoryId =
     useSelector((state: any) => state.noteDataSlice.currentCategoryId) || "";
@@ -47,12 +45,12 @@ const NoteList = () => {
     useSelector((state: any) => state.noteDataSlice.noteList) || [];
 
   useEffect(() => {
-    console.log(currentCategoryId)
-    console.log(categoryList)
-    if(currentCategoryId){
-      console.log('有')
-    }else{
-      console.log('没有')
+    console.log(currentCategoryId);
+    console.log(categoryList);
+    if (currentCategoryId) {
+      console.log("有");
+    } else {
+      console.log("没有");
     }
     loadAllData();
     return () => {};
@@ -134,7 +132,6 @@ const NoteList = () => {
             <Button
               type="primary"
               onClick={() => {
-                dispatch(clearRichContent());
                 navigate("/main/noteNew");
               }}
             >

@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import { Breadcrumb, Button, Form, Input, message, Radio, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -8,7 +8,6 @@ import { apiRequestRsaPublicKey, apiSaveMyNote } from "../../api/Api";
 import { Encrypt, GenerateKey, RSAencrypt } from "../../common/crypto";
 import CryptoJS from "crypto-js";
 import { EditOutlined } from "@ant-design/icons";
-import MyEditor from "../components/MyEditor/MyEditor";
 const NoteNew = () => {
   const { t } = useTranslation();
   const [title, setTitle] = useState("");
@@ -20,8 +19,7 @@ const NoteNew = () => {
   const categoryList = useSelector(
     (state: any) => state.noteDataSlice.categoryList
   );
-  const richContent =
-    useSelector((state: any) => state.commonSlice.richContent) || "";
+  const [content, setContent] = useState("");
   const dispatch = useDispatch();
   const [encrypt, setEncrypt] = useState(1);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
@@ -43,19 +41,20 @@ const NoteNew = () => {
       const uuid = GenerateKey();
       const keyAES = CryptoJS.SHA256(uuid);
       const keyAESBase64 = CryptoJS.enc.Base64.stringify(keyAES);
-      params.content = Encrypt(richContent, keyAESBase64, keyAESBase64);
+      params.content = Encrypt(content, keyAESBase64, keyAESBase64);
       params.encryptKey = keyAESBase64;
       apiRequestRsaPublicKey()
         .then((res: any) => {
           if (res.code === 0) {
             params.encryptKey =
               RSAencrypt(params.encryptKey, res.data.publicKey) || "";
-            params.keyToken = res.data.keyToken;
+            params.keyToken = res.data.keyTokens;
             apiSaveMyNote(params)
               .then((res: any) => {
                 if (res.code === 0) {
                   message.success(t("note.tipNoteSaveSuccess"));
-                  navigate("/main/NoteList");
+                  let noteId = res.data.noteId;
+                  navigate("/main/noteEdit", { state: { noteId } });
                 } else {
                   message.error(t("syserr." + res.code));
                   setSaving(false);
@@ -135,9 +134,9 @@ const NoteNew = () => {
           navigate("/main/NoteCategoryEdit");
         }}
       ></Button>
-      <Form style={{ marginTop: 20 }} layout='vertical'>
+      <Form style={{ marginTop: 20 }} layout="vertical">
         <Form.Item>
-            <div style={{color:themeColor.textLight}}>{t('note.title')}</div>
+          <div style={{ color: themeColor.textLight }}>{t("note.title")}</div>
           <Input
             style={{
               background: themeColor.blockDark,
@@ -150,17 +149,19 @@ const NoteNew = () => {
           />
         </Form.Item>
         <Form.Item>
-            <div style={{color:themeColor.textLight}}>{t('note.content')}</div>
-          <div
+          <div style={{ color: themeColor.textLight }}>{t("note.content")}</div>
+          <Input.TextArea
             style={{
               background: themeColor.blockDark,
               color: themeColor.textLight,
-              border: "1px solid #ccc",
-              padding: 5,
             }}
-          >
-            <MyEditor type="NORMAL" />
-          </div>
+            autoSize={{ minRows: 3 }}
+            value={content}
+            placeholder={t("note.titleHolder")}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          />
         </Form.Item>
         <Form.Item>
           <Radio.Group

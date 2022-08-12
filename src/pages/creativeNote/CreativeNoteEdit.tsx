@@ -4,12 +4,10 @@ import {
   Breadcrumb,
   Button,
   Card,
-  Col,
   Form,
   Input,
   message,
   Modal,
-  Row,
   Spin,
 } from "antd";
 import FormItem from "antd/lib/form/FormItem";
@@ -24,7 +22,6 @@ import {
   GenerateRandomString16,
   RSAencrypt,
 } from "../../common/crypto";
-import MyEditor from "../components/MyEditor/MyEditor";
 import CryptoJS from "crypto-js";
 import {
   apiDeleteMyNote,
@@ -40,7 +37,6 @@ import {
   saveDetail2,
   saveDetail3,
 } from "../../store/creativeNoteSlice";
-import { getAllJSDocTagsOfKind } from "typescript";
 const CreativeNoteEdit = () => {
   const [loading, setLoading] = useState(true);
   const [noteTitle, setNoteTitle] = useState("");
@@ -85,6 +81,7 @@ const CreativeNoteEdit = () => {
           params.keyToken = res1.data.keyToken;
           apiGetMyCreativeNote(params)
             .then((res2: any) => {
+              console.log(res2);
               if (res2.code === 0) {
                 setNote(res2.data.note);
                 let strKey = res2.data.note.userEncodeKey;
@@ -99,6 +96,7 @@ const CreativeNoteEdit = () => {
                         strKey,
                         strKey
                       );
+                      console.log(d1);
                       dispatch(saveDetail1(d1));
                     }
                   }
@@ -185,6 +183,7 @@ const CreativeNoteEdit = () => {
       noteTitle,
       keyToken: "",
     };
+    console.log(params);
 
     params.detail1 = Encrypt(detail1, key_UUID_256_base64, key_UUID_256_base64);
     params.detail2 = Encrypt(detail2, key_UUID_256_base64, key_UUID_256_base64);
@@ -290,7 +289,12 @@ const CreativeNoteEdit = () => {
               {t("creativeNote.tipTitle1")}
             </div>
             <div style={{ border: "1px solid #ccc", padding: 5 }}>
-              <MyEditor type="CREATIVE_NOTE1" />
+              <Input.TextArea
+                value={detail1}
+                onChange={(e) => {
+                  dispatch(saveDetail1(e.target.value));
+                }}
+              />
             </div>
           </Card>
           <Card
@@ -308,7 +312,12 @@ const CreativeNoteEdit = () => {
                 color: themeColor.textLight,
               }}
             >
-              <MyEditor type="CREATIVE_NOTE2" />
+              <Input.TextArea
+                value={detail2}
+                onChange={(e) => {
+                  dispatch(saveDetail2(e.target.value));
+                }}
+              />
             </div>
           </Card>
           <Card
@@ -326,7 +335,12 @@ const CreativeNoteEdit = () => {
                 color: themeColor.textLight,
               }}
             >
-              <MyEditor type="CREATIVE_NOTE3" />
+              <Input.TextArea
+                value={detail3}
+                onChange={(e) => {
+                  dispatch(saveDetail3(e.target.value));
+                }}
+              />
             </div>
           </Card>
 

@@ -10,7 +10,7 @@ import {
   saveTotalTodo,
 } from "../../../store/taskTodoSlice";
 import { useNavigate } from "react-router-dom";
-import { clearRichContent, saveLoadData } from "../../../store/commonSlice";
+import { saveLoadData } from "../../../store/commonSlice";
 import TodoRow from "./TodoRow";
 
 const TodoPage = () => {
@@ -74,7 +74,6 @@ const TodoPage = () => {
             type="primary"
             size="small"
             onClick={() => {
-              dispatch(clearRichContent());
               navigate("/main/TodoEdit", { state: { taskId: item.taskId } });
             }}
           >
@@ -108,7 +107,6 @@ const TodoPage = () => {
         <Button
           type="primary"
           onClick={() => {
-            dispatch(clearRichContent());
             navigate("/main/TodoEdit", { state: { taskId: null } });
           }}
         >
