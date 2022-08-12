@@ -1,4 +1,4 @@
-import { InfoCircleOutlined } from "@ant-design/icons";
+import { DeleteOutlined, InfoCircleOutlined } from "@ant-design/icons";
 import {
   Alert,
   Breadcrumb,
@@ -41,7 +41,6 @@ const CreativeNoteEdit = () => {
   const [loading, setLoading] = useState(true);
   const [noteTitle, setNoteTitle] = useState("");
   const [noteCreateTime, setNoteCreateTime] = useState(null);
-  const [taskTitle, setTaskTitle] = useState("");
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
   const [modalDeleteNote, setModalDeleteNote] = useState(false);
@@ -255,6 +254,23 @@ const CreativeNoteEdit = () => {
       ) : (
         <>
           <div style={{ marginTop: 20 }}>
+            <div
+              style={{
+                textAlign: "right",
+              }}
+            >
+              <div>
+                <Button
+                  style={{}}
+                  danger
+                  type="primary"
+                  onClick={() => setModalDeleteNote(true)}
+                >
+                  <DeleteOutlined />
+                  {t("common.btDelete")}
+                </Button>
+              </div>
+            </div>
             <Form>
               <FormItem>
                 <div style={{ color: themeColor.textLight }}>
@@ -267,7 +283,10 @@ const CreativeNoteEdit = () => {
                   }}
                   value={noteTitle}
                   placeholder={t("creativeNote.titleHolder")}
-                  onChange={(e) => setNoteTitle(e.target.value)}
+                  onChange={(e) => {
+                    setNoteTitle(e.target.value);
+                    setEditing(true);
+                  }}
                   autoSize={true}
                 />
               </FormItem>
@@ -288,11 +307,17 @@ const CreativeNoteEdit = () => {
             <div style={{ fontSize: 10, color: themeColor.textHolder }}>
               {t("creativeNote.tipTitle1")}
             </div>
-            <div style={{ border: "1px solid #ccc", padding: 5 }}>
+            <div style={{}}>
               <Input.TextArea
+                style={{
+                  backgroundColor: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                autoSize={true}
                 value={detail1}
                 onChange={(e) => {
                   dispatch(saveDetail1(e.target.value));
+                  setEditing(true);
                 }}
               />
             </div>
@@ -305,17 +330,17 @@ const CreativeNoteEdit = () => {
             <div style={{ fontSize: 10, color: themeColor.textHolder }}>
               {t("creativeNote.tipTitle2")}
             </div>
-            <div
-              style={{
-                border: "1px solid #ccc",
-                padding: 5,
-                color: themeColor.textLight,
-              }}
-            >
+            <div>
               <Input.TextArea
+                style={{
+                  backgroundColor: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                autoSize={true}
                 value={detail2}
                 onChange={(e) => {
                   dispatch(saveDetail2(e.target.value));
+                  setEditing(true);
                 }}
               />
             </div>
@@ -328,17 +353,17 @@ const CreativeNoteEdit = () => {
             <div style={{ fontSize: 10, color: themeColor.textHolder }}>
               {t("creativeNote.tipTitle3")}
             </div>
-            <div
-              style={{
-                border: "1px solid #ccc",
-                padding: 5,
-                color: themeColor.textLight,
-              }}
-            >
+            <div>
               <Input.TextArea
+                style={{
+                  backgroundColor: themeColor.blockDark,
+                  color: themeColor.textLight,
+                }}
+                autoSize={true}
                 value={detail3}
                 onChange={(e) => {
                   dispatch(saveDetail3(e.target.value));
+                  setEditing(true);
                 }}
               />
             </div>
@@ -356,7 +381,7 @@ const CreativeNoteEdit = () => {
                 <Button style={{ width: "140px" }} type="primary" loading>
                   {t("common.btSaving")}
                 </Button>
-              ) : (
+              ) : editing ? (
                 <Button
                   style={{ width: "140px" }}
                   type="primary"
@@ -364,17 +389,7 @@ const CreativeNoteEdit = () => {
                 >
                   {t("common.btSave")}
                 </Button>
-              )}
-            </div>
-            <div>
-              <Button
-                style={{ width: "140px", marginLeft: 60 }}
-                danger
-                type="primary"
-                onClick={() => setModalDeleteNote(true)}
-              >
-                {t("common.btDelete")}
-              </Button>
+              ) : null}
             </div>
           </div>
         </>

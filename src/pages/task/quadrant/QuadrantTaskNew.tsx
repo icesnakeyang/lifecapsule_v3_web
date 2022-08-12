@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { apiCreateMyQuadTask, apiRequestRsaPublicKey } from "../../../api/Api";
 import { Encrypt, GenerateKey, RSAencrypt } from "../../../common/crypto";
 import CryptoJS from "crypto-js";
+
 const QuadrantTaskNew = () => {
   const [PROGRESS, setPROGRESS] = useState(false);
   const [COMPLETE, setCOMPLETE] = useState(false);
@@ -118,13 +119,12 @@ const QuadrantTaskNew = () => {
         <Form>
           <FormItem>
             <div style={{ color: themeColor.textLight }}>
-              {" "}
               {t("task.taskTitle")}
             </div>
             <Input
               style={{
-                background: themeColor.blockLight,
-                color: themeColor.textDark,
+                background: themeColor.blockDark,
+                color: themeColor.textLight,
               }}
               value={title}
               onChange={(e) => setTitle(e.target.value)}
