@@ -10,7 +10,10 @@
     "tipModalDelete": "Are you sure to delete?",
     "btDetail": "Detail",
     "PROGRESS": "Progress",
-    "COMPLETE": "Complete"
+    "COMPLETE": "Complete",
+    "noData": "No data",
+    "noTitle": "No title",
+    "unRead": "Unread"
   },
   "nav": {
     "home": "Home",
@@ -25,7 +28,9 @@
     "creativeNote": "Creative note",
     "myQuadTask": "4 Quadrants Task",
     "myQuadTaskEdit": "4 Quadrant Task Edit",
-    "setting": "Settings"
+    "setting": "Settings",
+    "myProfile": "My profile",
+    "myReceiveNote": "My receive note"
   },
   "login": {
     "greeting1": "Welcome Lifecapsule",
@@ -57,7 +62,8 @@
     "titleHolder": "Please input title",
     "content": "Content",
     "contentHolder": "Please input content here",
-    "btSend": "Sent",
+    "btSend": "Send",
+    "btSending": "Sending",
     "encrypt": "Encrypt",
     "noEncrypt": "Not encrypt",
     "btNewCategory": "Add category",
@@ -114,7 +120,7 @@
     "messageDescription": "Description",
     "tipMessageDescription": "Description the message for recipient",
     "editRecipientMessage": "Edit recipient receive message",
-    "recipientMessagePreview":"Preview of recipient"
+    "recipientMessagePreview": "Preview of recipient"
   },
   "trigger": {
     "TIMER_TYPE_PRIMARY": "Time up",
@@ -127,7 +133,9 @@
     "sendCondition": "Send condition",
     "sendTime": "Send time",
     "editTrigger": "Edit condition",
-    "tipTrigger1": "Set a condition to trigger the note to recipient"
+    "tipTrigger1": "Set a condition to trigger the note to recipient",
+    "btTrigger": "Trigger",
+    "INSTANT_MESSAGE": "Instant message"
   },
   "task": {
     "task": "Task",
@@ -188,15 +196,55 @@
   "setting": {
     "btSelect": "Select"
   },
+  "dashboard": {
+    "tip1": "Hello，",
+    "tip2": "This is your time left",
+    "tip3": "After the timer up, your message will be sent out",
+    "tip4": "Click Snooze, you can reset the timer",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "tipSnoozeSuccess": "Reset primary timer success"
+  },
+  "myProfile": {
+    "bindEmail": "Bind email",
+    "tip1": "Bind an email, if this email already exist, switch to this email account",
+    "tipNoEmail": "You have not bind your email, for your data safety, please bind one.",
+    "email": "Email",
+    "nickname": "Nickname",
+    "btNickname": "Change nickname",
+    "modalNicknameTitle": "Edit nickname",
+    "tipSaveNicknameSuccess": "Save nickname success"
+  },
+  "noteSend": {
+    "tipSendSuccess": "Send success",
+    "tipNoEmail": "You must specify the receiver email",
+    "receiverEmail": "Receiver email",
+    "codecKey": "Set an encrypt codec key",
+    "tipCodecKey": "If you set this codec, that's means the note will be encrypted by this codec and receiver need to input this code to read the note",
+    "title": "Title",
+    "tipEncrypt": "This is HI-TOP-SECRET encrypt note, you must contact sender to obtain decrypt code to decipher the message",
+    "btDecode": "Decode",
+    "sendUser": "Send user",
+    "sendUserEmail": "Send user email",
+    "sendTime": "Send time",
+    "readTime": "Read time",
+    "decode": "Decrypt code",
+    "content": "Note content"
+  },
   "syserr": {
     "10001": "System or network error",
-    "10002":"Please login and try it again",
+    "10002": "Please login and try it again",
     "10003": "You have to login first",
     "10005": "Login name or password error",
     "10006": "This login name has been registerd already",
     "10017": "We didn't find this trigger",
     "10027": "Admin account error",
     "10028": "Cannot delete default category",
-    "10033": "This trigger exist already, cannot add"
+    "10033": "This trigger exist already, cannot add",
+    "10045": "Email verify code error",
+    "10046": "You have bound email already, please sign out first",
+    "10047": "No such user"
   }
 }

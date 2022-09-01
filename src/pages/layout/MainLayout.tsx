@@ -1,9 +1,9 @@
-import { Col, Layout, Menu, Row, Typography } from "antd";
+import { Badge, Col, Layout, Menu, Row, Typography } from "antd";
 import { Outlet } from "react-router-dom";
 import FooterBar from "./FooterBar";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
-import { WalletOutlined } from "@ant-design/icons";
+import { MailOutlined, WalletOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Sider from "antd/lib/layout/Sider";
 import MainSider from "./MainSider";
@@ -19,10 +19,9 @@ const MainLayout = () => {
   const token = useSelector((state: any) => state.token);
   const userInfo = useSelector((state: any) => state.userInfo);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
-
-  useEffect(() => {
-    return () => {};
-  }, [token]);
+  const totalReceiveNoteUnread = useSelector(
+    (state: any) => state.noteSendSlice.totalReceiveNoteUnread
+  );
 
   return (
     <Layout style={{ minHeight: "100vh", background: themeColor.background }}>
@@ -60,7 +59,9 @@ const MainLayout = () => {
             {collapsed ? (
               <WalletOutlined
                 style={{ fontSize: "28px", color: "#eee" }}
-                onClick={() => {}}
+                onClick={() => {
+                  navigate("/");
+                }}
               />
             ) : (
               <div
@@ -69,7 +70,7 @@ const MainLayout = () => {
                   cursor: "pointer",
                 }}
                 onClick={() => {
-                  navigate("/main/dashboard", { state: { pp: 1 } });
+                  navigate("/");
                 }}
               >
                 <div
@@ -84,17 +85,16 @@ const MainLayout = () => {
               </div>
             )}
           </Col>
-          <Col
-            xs={18}
-            sm={18}
-            md={18}
-            lg={20}
-            xl={20}
-            style={{
-              width: "100%",
-            }}
-          >
-            <MainHeader />
+          <Col xs={18} sm={18} md={18} lg={20} xl={20}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: "100%",
+              }}
+            >
+              <MainHeader />
+            </div>
           </Col>
         </Row>
       </Header>
@@ -116,7 +116,7 @@ const MainLayout = () => {
         >
           <MainSider />
         </Sider>
-        <Content style={{ margin: 10, padding: 20 }}>
+        <Content style={{ margin: 10, padding: 20, width: "60vw" }}>
           <Outlet />
         </Content>
       </Layout>

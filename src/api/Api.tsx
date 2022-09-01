@@ -1,10 +1,10 @@
 import { Get, Post } from "./ApiBase";
 
-// const host = "http://localhost:8003/lifecapsule3_api";
+const host = "http://localhost:8003/lifecapsule3_api";
 // const host = "http://192.168.1.5:8003/lifecapsule3_api";
-// const host = "http://192.168.1.28:8003/lifecapsule3_api";
+// const host = "http:yyy//192.168.1.28:8003/lifecapsule3_api";
 // const host = "http://192.168.43.97:8003/lifecapsule3_api";
-const host = "https://gogorpg.com/lifecapsule3_api";
+// const host = "https://gogorpg.com/lifecapsule3_api";
 
 export const apiLogin = (params: any) => {
   return Post(`${host}/web/user/login`, params);
@@ -178,4 +178,40 @@ export const apiDeleteQuadTask = (params: any) => {
 
 export const apiSaveRecipient = (params: any) => {
   return Post(`${host}/web/recipient/saveRecipient`, params);
+};
+
+export const apiSignInByNothing = () => {
+  return Get(`${host}/web/user/signInByNothing`);
+};
+
+export const apiSnooze = () => {
+  return Get(`${host}/web/timer/snooze`);
+};
+
+export const apiBindEmail = (params: any) => {
+  return Post(`${host}/web/user/bindEmail`, params);
+};
+
+export const apiWebSendNote = (params: any) => {
+  return Post(`${host}/web/noteSend/webSendNote`, params);
+};
+
+export const apiListMyNoteReceiveLog = (params: any) => {
+  return Post(`${host}/web/noteSend/listMyNoteReceiveLog`, params);
+};
+
+export const apiGetMyReceiveNote = (params: any) => {
+  return Post(`${host}/web/noteSend/getMyReceiveNote`, params);
+};
+
+export const apiSaveUserNickname = (params: any) => {
+  return Post(`${host}/web/user/saveUserNickname`, params);
+};
+
+export const apiLoadMyNoteSendStatistic = (params: any) => {
+  return Post(`${host}/web/note/loadMyNoteSendStatistic`, params);
+};
+
+export const apiListMyNoteTriggerLog = (params: any) => {
+  return Post(`${host}/web/noteTriggerLog/listMyNoteTriggerLog`, params);
 };

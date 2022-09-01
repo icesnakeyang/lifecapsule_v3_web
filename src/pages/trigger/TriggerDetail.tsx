@@ -27,7 +27,7 @@ import { saveTrigger, saveTriggerTime } from "../../store/triggerSlice";
 import { useTranslation } from "react-i18next";
 import FormItem from "antd/lib/form/FormItem";
 
-const SendDetail = () => {
+const TriggerDetail = () => {
   const { recipientId }: any = useLocation().state;
   const dispatch = useDispatch();
   const recipient = useSelector((state: any) => state.recipientSlice.recipient);
@@ -102,7 +102,6 @@ const SendDetail = () => {
       phone: recipientPhone,
       email: recipientEmail,
     };
-    console.log(params);
     apiSaveRecipient(params)
       .then((res: any) => {
         if (res.code === 0) {
@@ -124,7 +123,6 @@ const SendDetail = () => {
       description,
       recipientId,
     };
-    console.log(params);
     apiSaveRecipient(params)
       .then((res: any) => {
         if (res.code === 0) {
@@ -614,4 +612,4 @@ const SendDetail = () => {
     </div>
   );
 };
-export default SendDetail;
+export default TriggerDetail;

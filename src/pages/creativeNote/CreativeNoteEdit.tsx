@@ -80,7 +80,6 @@ const CreativeNoteEdit = () => {
           params.keyToken = res1.data.keyToken;
           apiGetMyCreativeNote(params)
             .then((res2: any) => {
-              console.log(res2);
               if (res2.code === 0) {
                 setNote(res2.data.note);
                 let strKey = res2.data.note.userEncodeKey;
@@ -95,7 +94,6 @@ const CreativeNoteEdit = () => {
                         strKey,
                         strKey
                       );
-                      console.log(d1);
                       dispatch(saveDetail1(d1));
                     }
                   }
@@ -182,7 +180,6 @@ const CreativeNoteEdit = () => {
       noteTitle,
       keyToken: "",
     };
-    console.log(params);
 
     params.detail1 = Encrypt(detail1, key_UUID_256_base64, key_UUID_256_base64);
     params.detail2 = Encrypt(detail2, key_UUID_256_base64, key_UUID_256_base64);

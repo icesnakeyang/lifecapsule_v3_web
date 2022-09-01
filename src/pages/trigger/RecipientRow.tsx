@@ -7,8 +7,6 @@ import { useNavigate } from "react-router-dom";
 const RecipientRow = (data: any) => {
   const { item } = data;
   const { noteId } = data;
-  console.log(item);
-  console.log(noteId);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -18,7 +16,6 @@ const RecipientRow = (data: any) => {
       noteId: noteId,
       contactId: item.contactId,
     };
-    console.log(params);
     apiAddContactToRecipient(params)
       .then((res: any) => {
         if (res.code === 0) {

@@ -10,7 +10,10 @@
     "tipModalDelete": "确认要删除吗？",
     "btDetail": "详情",
     "PROGRESS": "进行中",
-    "COMPLETE": "已完成"
+    "COMPLETE": "已完成",
+    "noData": "没有数据",
+    "noTitle": "无标题",
+    "unRead": "未读"
   },
   "nav": {
     "home": "首页",
@@ -25,7 +28,9 @@
     "creativeNote": "防拖延笔记",
     "myQuadTask": "四象限任务",
     "myQuadTaskEdit": "编辑四象限任务",
-    "setting": "系统设置"
+    "setting": "系统设置",
+    "myProfile": "我的信息",
+    "myReceiveNote": "我收到的笔记"
   },
   "login": {
     "greeting1": "欢迎登录时空笔记",
@@ -58,6 +63,7 @@
     "content": "笔记内容",
     "contentHolder": "笔记内容",
     "btSend": "发送",
+    "btSending": "发送中...",
     "encrypt": "加密",
     "noEncrypt": "不加密",
     "btNewCategory": "添加笔记分类",
@@ -114,7 +120,7 @@
     "messageDescription": "信息描述",
     "tipMessageDescription": "显示给接收人的信息描述",
     "editRecipientMessage": "编辑接收人接收到到的信息",
-    "recipientMessagePreview":"接收人预览信息"
+    "recipientMessagePreview": "接收人预览信息"
   },
   "trigger": {
     "TIMER_TYPE_DATETIME": "指定日期",
@@ -127,7 +133,9 @@
     "sendCondition": "发送条件",
     "sendTime": "发送时间",
     "editTrigger": "编辑发送条件",
-    "tipTrigger1": "设定一个发送条件，当条件触发时，笔记会自动发送给接收人"
+    "tipTrigger1": "设定一个发送条件，当条件触发时，笔记会自动发送给接收人",
+    "btTrigger": "触发器",
+    "INSTANT_MESSAGE": "即时信息"
   },
   "task": {
     "task": "我的任务",
@@ -189,15 +197,55 @@
   "setting": {
     "btSelect": "选择"
   },
+  "dashboard": {
+    "tip1": "你好，",
+    "tip2": "你的倒计时还有",
+    "tip3": "倒计时结束后，你的笔记将发送给你指定的接收人",
+    "tip4": "点击Snooze，可以重新开始倒计时",
+    "days": "天",
+    "hours": "小时",
+    "minutes": "分",
+    "seconds": "秒",
+    "tipSnoozeSuccess": "重置主倒计时成功"
+  },
+  "myProfile": {
+    "bindEmail": "绑定email",
+    "tip1": "绑定一个email，如果email已存在，就直接切换到该email账户",
+    "tipNoEmail": "您还没有绑定email，为了您的数据安全，请绑定email。",
+    "email": "Email",
+    "nickname": "昵称",
+    "btNickname": "修改昵称",
+    "modalNicknameTitle": "编辑昵称",
+    "tipSaveNicknameSuccess": "保存昵称成功"
+  },
+  "noteSend": {
+    "tipSendSuccess": "发送成功",
+    "tipNoEmail": "必须指定接收人的email",
+    "receiverEmail": "请输入发送人的Email",
+    "codecKey": "设置一个解密口令",
+    "tipCodecKey": "接收人必须输入该解密口令，才能阅读你发送的笔记",
+    "title": "标题",
+    "tipEncrypt": "该信息为加密信息，需要输入解密口令才能阅读，请联系发送人获取解密口令。",
+    "btDecode": "解密",
+    "sendUser": "发送人",
+    "sendUserEmail": "发送人Email",
+    "sendTime": "发送时间",
+    "readTime": "阅读时间",
+    "decode": "解密口令",
+    "content": "笔记内容"
+  },
   "syserr": {
     "10001": "系统错误",
-    "10002":"没有查询到用户信息，或者用户登录已过期",
+    "10002": "没有查询到用户信息，或者用户登录已过期",
     "10003": "没有查询该用户登录信息",
     "10005": "用户名或密码不正确",
     "10006": "该账号已经被注册了",
     "10017": "没有查询到对应的触发器",
     "10027": "没有查询到管理员账号",
     "10028": "不能删除默认笔记分类",
-    "10033": "触发器已经存在，不能新增"
+    "10033": "触发器已经存在，不能新增",
+    "10045": "email未认证成功",
+    "10046": "您已经绑定过email了，若要更换，请退出后再绑定",
+    "10047": "没有查询到用户信息"
   }
 }

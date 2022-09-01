@@ -17,7 +17,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { removeRecipient, saveRecipientList } from "../../store/recipinetSlice";
 import { removeTrigger } from "../../store/triggerSlice";
-const SendPage = () => {
+const TriggerPage = () => {
   const { noteId }: any = useLocation().state;
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -61,7 +61,7 @@ const SendPage = () => {
             onClick={() => {
               dispatch(removeRecipient());
               dispatch(removeTrigger());
-              navigate("/main/SendDetail", {
+              navigate("/main/TriggerDetail", {
                 state: { recipientId: item.recipientId },
               });
             }}
@@ -121,4 +121,4 @@ const SendPage = () => {
   );
 };
 
-export default SendPage;
+export default TriggerPage;
