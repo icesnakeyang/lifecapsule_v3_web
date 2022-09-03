@@ -114,7 +114,7 @@ const TriggerPage = () => {
             navigate("/main/SelectRecipient", { state: { noteId } });
           }}
         >
-          {t("recipient.btAddToRecipient")}
+          {t("recipient.btAddRecipient")}
         </Button>
       </div>
     </div>

@@ -10,6 +10,9 @@ export const noteSendSlice = createSlice({
     totalSendNoteUnread: 0,
     receivePageIndex: 1,
     receivePageSize: 10,
+    sendNoteList: [],
+    sendPageIndex: 1,
+    sendPageSize: 10,
   },
   reducers: {
     saveReceiveNoteList: (state: any, action: PayloadAction<number>) => {
@@ -33,6 +36,15 @@ export const noteSendSlice = createSlice({
     saveTotalSendNoteUnread: (state: any, action: any) => {
       state.totalSendNoteUnread = action.payload;
     },
+    saveSendNoteList: (state: any, action: any) => {
+      state.sendNoteList = action.payload;
+    },
+    saveSendPageIndex: (state: any, action: any) => {
+      state.sendPageIndex = action.payload;
+    },
+    saveSendPageSize: (state: any, action: any) => {
+      state.sendPageSize = action.payload;
+    },
   },
 });
 
@@ -44,6 +56,9 @@ export const {
   saveReceivePageSize,
   saveTotalSendNote,
   saveTotalSendNoteUnread,
+  saveSendNoteList,
+  saveSendPageIndex,
+  saveSendPageSize,
 } = noteSendSlice.actions;
 
 export default noteSendSlice.reducer;

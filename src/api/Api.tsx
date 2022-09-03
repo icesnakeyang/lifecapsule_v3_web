@@ -215,3 +215,15 @@ export const apiLoadMyNoteSendStatistic = (params: any) => {
 export const apiListMyNoteTriggerLog = (params: any) => {
   return Post(`${host}/web/noteTriggerLog/listMyNoteTriggerLog`, params);
 };
+
+export const apiListMyNoteSendOutLog = (params: any) => {
+  return Post(`${host}/web/noteSend/listMyNoteSendOutLog`, params);
+};
+
+export const apiGetMyNoteSendOutLog = (params: any) => {
+  return Post(`${host}/web/noteSend/getMyNoteSendOutLog`, params);
+};
+
+export const apiAddEmailToRecipient = (params: any) => {
+  return Post(`${host}/web/recipient/addEmailToRecipient`, params);
+};

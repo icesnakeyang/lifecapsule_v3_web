@@ -1,9 +1,9 @@
-import { Badge, Col, Layout, Menu, Row, Typography } from "antd";
+import { Col, Layout, Row } from "antd";
 import { Outlet } from "react-router-dom";
 import FooterBar from "./FooterBar";
 import { useTranslation } from "react-i18next";
-import { useEffect, useState } from "react";
-import { MailOutlined, WalletOutlined } from "@ant-design/icons";
+import { useState } from "react";
+import { WalletOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import Sider from "antd/lib/layout/Sider";
 import MainSider from "./MainSider";
@@ -16,12 +16,7 @@ const MainLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const token = useSelector((state: any) => state.token);
-  const userInfo = useSelector((state: any) => state.userInfo);
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
-  const totalReceiveNoteUnread = useSelector(
-    (state: any) => state.noteSendSlice.totalReceiveNoteUnread
-  );
 
   return (
     <Layout style={{ minHeight: "100vh", background: themeColor.background }}>
@@ -39,6 +34,7 @@ const MainLayout = () => {
           style={{
             width: "100%",
             alignItems: "center",
+            height: 10,
           }}
         >
           <Col

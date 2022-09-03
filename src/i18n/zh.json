@@ -30,7 +30,8 @@
     "myQuadTaskEdit": "编辑四象限任务",
     "setting": "系统设置",
     "myProfile": "我的信息",
-    "myReceiveNote": "我收到的笔记"
+    "myReceiveNote": "我收到的笔记",
+    "mySendNote": "我发送的笔记"
   },
   "login": {
     "greeting1": "欢迎登录时空笔记",
@@ -100,7 +101,9 @@
     "tipAddContact1": "你还没有设置联系人，请先设置联系人"
   },
   "recipient": {
+    "addRecipient": "添加接收人",
     "recipientInfo": "接收人信息",
+    "btAddRecipient": "添加接收人",
     "btAddToRecipient": "添加为接收人",
     "tipAddSuccess": "已经把该联系人添加为接收人了",
     "tipDeleteRcipientSuccess": "删除了该接收人",
@@ -120,7 +123,9 @@
     "messageDescription": "信息描述",
     "tipMessageDescription": "显示给接收人的信息描述",
     "editRecipientMessage": "编辑接收人接收到到的信息",
-    "recipientMessagePreview": "接收人预览信息"
+    "recipientMessagePreview": "接收人预览信息",
+    "recentRecipient": "最近发送的接收人",
+    "tipNoEmail": "请输入你要发送的email邮箱"
   },
   "trigger": {
     "TIMER_TYPE_DATETIME": "指定日期",
@@ -135,7 +140,8 @@
     "editTrigger": "编辑发送条件",
     "tipTrigger1": "设定一个发送条件，当条件触发时，笔记会自动发送给接收人",
     "btTrigger": "触发器",
-    "INSTANT_MESSAGE": "即时信息"
+    "INSTANT_MESSAGE": "即时信息",
+    "triggerType": "发送类型"
   },
   "task": {
     "task": "我的任务",
@@ -171,7 +177,8 @@
     "tipNoTaskTitle": "请输入任务标题",
     "createTime": "任务创建时间",
     "priority": "任务优先级",
-    "taskStatus": "当前状态"
+    "taskStatus": "当前状态",
+    "hideComplete": "隐藏已完成任务"
   },
   "creativeNote": {
     "creativeNote": "防拖延笔记",
@@ -246,6 +253,7 @@
     "10033": "触发器已经存在，不能新增",
     "10045": "email未认证成功",
     "10046": "您已经绑定过email了，若要更换，请退出后再绑定",
-    "10047": "没有查询到用户信息"
+    "10047": "没有查询到用户信息",
+    "10050": "该Email已经添加到接收人了"
   }
 }

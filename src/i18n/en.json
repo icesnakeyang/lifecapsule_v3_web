@@ -30,7 +30,8 @@
     "myQuadTaskEdit": "4 Quadrant Task Edit",
     "setting": "Settings",
     "myProfile": "My profile",
-    "myReceiveNote": "My receive note"
+    "myReceiveNote": "My receive note",
+    "mySendNote": "My Send out note"
   },
   "login": {
     "greeting1": "Welcome Lifecapsule",
@@ -100,7 +101,9 @@
     "tipAddContact1": "You don't have contact person, please add one now"
   },
   "recipient": {
+    "addRecipient": "Add recipient",
     "recipientInfo": "Recipient information",
+    "btAddRecipient": "Add recipient",
     "btAddToRecipient": "Add to recipient",
     "tipAddSuccess": "Add this contact to recipient already",
     "tipDeleteRcipientSuccess": "Delete recipient and trigger success",
@@ -120,7 +123,9 @@
     "messageDescription": "Description",
     "tipMessageDescription": "Description the message for recipient",
     "editRecipientMessage": "Edit recipient receive message",
-    "recipientMessagePreview": "Preview of recipient"
+    "recipientMessagePreview": "Preview of recipient",
+    "recentRecipient": "Recent recipient",
+    "tipNoEmail": "Please input email what you want to send"
   },
   "trigger": {
     "TIMER_TYPE_PRIMARY": "Time up",
@@ -135,7 +140,8 @@
     "editTrigger": "Edit condition",
     "tipTrigger1": "Set a condition to trigger the note to recipient",
     "btTrigger": "Trigger",
-    "INSTANT_MESSAGE": "Instant message"
+    "INSTANT_MESSAGE": "Instant message",
+    "triggerType": "Trigger type"
   },
   "task": {
     "task": "Task",
@@ -171,7 +177,8 @@
     "tipNoTaskTitle": "Please input task title",
     "createTime": "Create time",
     "priority": "Priority",
-    "taskStatus": "Current status"
+    "taskStatus": "Current status",
+    "hideComplete": "Hide complete"
   },
   "creativeNote": {
     "creativeNote": "Creative note",
@@ -245,6 +252,7 @@
     "10033": "This trigger exist already, cannot add",
     "10045": "Email verify code error",
     "10046": "You have bound email already, please sign out first",
-    "10047": "No such user"
+    "10047": "No such user",
+    "10050": "This email has been set to recipient already"
   }
 }

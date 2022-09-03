@@ -1,19 +1,19 @@
-import { useLocation } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-import { apiGetMyReceiveNote, apiRequestRsaPublicKey } from "../../api/Api";
-import { Button, Card, Input, message, Spin, Typography } from "antd";
-import { useTranslation } from "react-i18next";
+import { Button, Card, Input, message, Spin } from "antd";
+import Item from "antd/lib/list/Item";
 import moment from "moment";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import { apiGetMyNoteSendOutLog, apiRequestRsaPublicKey } from "../../api/Api";
 import {
   Decrypt,
   Decrypt2,
   GenerateRandomString16,
   RSAencrypt,
 } from "../../common/crypto";
-import CryptoJS from "crypto-js";
 
-const MyReceiveNoteDetail = () => {
+const MySendNoteDetail = () => {
   const { sendLogId }: any = useLocation().state;
   const { t } = useTranslation();
   const [loading, setLoading] = useState(true);
@@ -40,8 +40,9 @@ const MyReceiveNoteDetail = () => {
         params.encryptKey = RSAencrypt(keyAES_1, res.data.publicKey);
         params.keyToken = res.data.keyToken;
 
-        apiGetMyReceiveNote(params)
+        apiGetMyNoteSendOutLog(params)
           .then((res: any) => {
+            console.log(res);
             if (res.code === 0) {
               let data = res.data.noteSendLog;
               setTriggerType(data.triggerType);
@@ -98,8 +99,18 @@ const MyReceiveNoteDetail = () => {
       ) : (
         <div>
           <div style={{}}>
-            <Card style={{ background: themeColor.blockDark }}>
-              <div style={{ color: themeColor.textLight }}>{sendLog.title}</div>
+            <Card
+              style={{
+                background: themeColor.blockDark,
+                color: themeColor.textLight,
+              }}
+            >
+              <div style={{ fontSize: 20 }}>
+                {t("recipient.messageTitle")}：{sendLog.recipientTitle}
+              </div>
+              <div>
+                {t("trigger.triggerType")}：{t("trigger." + triggerType)}
+              </div>
               <div
                 style={{
                   color: themeColor.textLight,
@@ -117,19 +128,12 @@ const MyReceiveNoteDetail = () => {
                 {t("noteSend.sendTime")}：
                 {moment(sendLog.sendTime).format("LLL")}
               </div>
+              <div style={{ marginTop: 20, color: themeColor.textLight }}>
+                {sendLog.readTime ? <div>已读</div> : <div>未读</div>}
+              </div>
               <div style={{ color: themeColor.textLight, marginTop: 20 }}>
                 {t("noteSend.content")}
               </div>
-
-              {/* <Typography.Paragraph
-                style={{
-                  background: themeColor.blockLight,
-                  color: themeColor.textDark,
-                  padding: 10,
-                }}
-              >
-                {noteContent}
-              </Typography.Paragraph> */}
               <Input.TextArea
                 style={{
                   background: themeColor.blockDark,
@@ -181,4 +185,4 @@ const MyReceiveNoteDetail = () => {
     </div>
   );
 };
-export default MyReceiveNoteDetail;
+export default MySendNoteDetail;

@@ -1,4 +1,4 @@
-import { Avatar, Badge, Menu } from "antd";
+import { Badge, Menu } from "antd";
 import i18n from "i18next";
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +6,6 @@ import { UserOutlined, GlobalOutlined, MailOutlined } from "@ant-design/icons";
 import { clearUserData } from "../../store/userDataSlice";
 import { clearNote } from "../../store/noteDataSlice";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 const MainHeader = () => {
   const navigate = useNavigate();
@@ -14,17 +13,9 @@ const MainHeader = () => {
   const userData = useSelector((state: any) => state.userDataSlice) || null;
   const { t } = useTranslation();
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
-  const totalReceiveNote = useSelector(
-    (state: any) => state.noteSendSlice.totalReceiveNote
-  );
+
   const totalReceiveNoteUnread = useSelector(
     (state: any) => state.noteSendSlice.totalReceiveNoteUnread
-  );
-  const totalSendNote = useSelector(
-    (state: any) => state.noteSendSlice.totalSendNote
-  );
-  const totalSendNoteUnread = useSelector(
-    (state: any) => state.noteSendSlice.totalSendNoteUnread
   );
 
   const onMenu = (e: any) => {

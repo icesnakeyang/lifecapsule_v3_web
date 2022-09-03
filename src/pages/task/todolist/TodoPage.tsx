@@ -1,4 +1,14 @@
-import { Breadcrumb, Button, Card, List, message, Pagination } from "antd";
+import {
+  Breadcrumb,
+  Button,
+  Card,
+  Checkbox,
+  Col,
+  List,
+  message,
+  Pagination,
+  Row,
+} from "antd";
 import { useTranslation } from "react-i18next";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -28,6 +38,7 @@ const TodoPage = () => {
   const todoPageSize = useSelector(
     (state: any) => state.taskTodoSlice.todoPageSize || 10
   );
+  const [hideComplete, setHideComplete] = useState(false);
 
   useEffect(() => {
     loadAllData();
@@ -41,11 +52,17 @@ const TodoPage = () => {
     }
   }, [loadData]);
 
+  useEffect(() => {
+    loadAllData();
+  }, [hideComplete]);
+
   const loadAllData = () => {
     let params = {
       pageIndex: todoPageIndex,
       pageSize: todoPageSize,
+      hideComplete,
     };
+    console.log(params);
     apiListMyTaskTodo(params)
       .then((res: any) => {
         if (res.code === 0) {
@@ -93,6 +110,10 @@ const TodoPage = () => {
     );
   };
 
+  const onComplete = () => {
+    setHideComplete(!hideComplete);
+  };
+
   return (
     <div>
       <Breadcrumb style={{}}>
@@ -104,14 +125,26 @@ const TodoPage = () => {
       </Breadcrumb>
 
       <Card style={{ background: themeColor.blockDark }}>
-        <Button
-          type="primary"
-          onClick={() => {
-            navigate("/main/TodoEdit", { state: { taskId: null } });
-          }}
-        >
-          {t("task.btAddTodo")}
-        </Button>
+        <Row>
+          <Col>
+            <Button
+              type="primary"
+              onClick={() => {
+                navigate("/main/TodoEdit", { state: { taskId: null } });
+              }}
+            >
+              {t("task.btAddTodo")}
+            </Button>
+          </Col>
+          <Col offset="1" style={{ display: "flex", alignItems: "center" }}>
+            <Checkbox
+              style={{ color: themeColor.textLight }}
+              onChange={onComplete}
+            >
+              {t("task.hideComplete")}
+            </Checkbox>
+          </Col>
+        </Row>
       </Card>
 
       <div style={{ marginTop: 10 }}>
