@@ -70,6 +70,7 @@ const Home = () => {
       });
     } else {
       apiSignToken().then((res: any) => {
+        console.log(res)
         if (res.code === 0) {
           let data = {
             token: res.data.user.token,
@@ -96,6 +97,7 @@ const Home = () => {
           });
           navigate("/main/dashboard");
         } else {
+          navigate("/guest/LoginByEmail")
         }
       });
     }

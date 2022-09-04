@@ -51,7 +51,12 @@
     "register": "Register",
     "tipLoginSuccess": "Login success",
     "tipRegisterSuccess": "Register success",
-    "password2Holder": "Please confirm password"
+    "password2Holder": "Please confirm password",
+    "tipNoEmail": "Please input email",
+    "tipNoEmailCode": "Please input email verify code",
+    "email": "Email",
+    "emailCode": "Verify code",
+    "btGuestIn": "Sign in as guest"
   },
   "note": {
     "noteList": "Note list",

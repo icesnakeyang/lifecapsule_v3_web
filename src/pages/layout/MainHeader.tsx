@@ -29,7 +29,7 @@ const MainHeader = () => {
       localStorage.removeItem("lifecapsule3_token");
       dispatch(clearUserData());
       dispatch(clearNote());
-      navigate("/");
+      navigate("/guest/LoginByEmail");
     }
   };
 

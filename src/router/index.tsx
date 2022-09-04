@@ -27,6 +27,7 @@ import MyReceiveNote from "../pages/send/MyReceiveNote";
 import MyReceiveNoteDetail from "../pages/send/MyReceiveNoteDetail";
 import MySendNote from "../pages/send/MySendNote";
 import MySendNoteDetail from "../pages/send/MySendNoteDetail";
+import LoginByEmail from "../pages/login/LoginByEmail";
 
 const ProtectRouter = ({ children }: any) => {
   const token = useSelector((state: any) => state.userDataSlice.token);
@@ -232,10 +233,10 @@ const Routers = () => {
         />
       </Route>
 
-      {/*<Route path="/guest" element={<GuestLayout />}>*/}
-      {/*  <Route path="/guest/login" element={<Login />} />*/}
+      <Route path="/guest" element={<GuestLayout />}>
+        <Route path="/guest/LoginByEmail" element={<LoginByEmail />} />
       {/*  <Route path="/guest/register" element={<Register />} />*/}
-      {/*</Route>*/}
+      </Route>
     </Routes>
   );
 };

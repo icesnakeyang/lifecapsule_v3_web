@@ -227,3 +227,7 @@ export const apiGetMyNoteSendOutLog = (params: any) => {
 export const apiAddEmailToRecipient = (params: any) => {
   return Post(`${host}/web/recipient/addEmailToRecipient`, params);
 };
+
+export const apiSignByEmail = (params: any) => {
+  return Post(`${host}/web/user/signByEmail`, params);
+};

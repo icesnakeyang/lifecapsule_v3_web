@@ -51,7 +51,12 @@
     "register": "注册",
     "tipLoginSuccess": "登录成功",
     "tipRegisterSuccess": "注册成功",
-    "password2Holder": "请再次确认密码"
+    "password2Holder": "请再次确认密码",
+    "tipNoEmail": "请输入email",
+    "tipNoEmailCode": "请输入校验码",
+    "email": "Email",
+    "emailCode": "验证码",
+    "btGuestIn": "游客登录"
   },
   "note": {
     "noteList": "我的笔记",
