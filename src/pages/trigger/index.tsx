@@ -8,6 +8,7 @@ import {
   message,
   Modal,
   Row,
+  Spin,
 } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
@@ -27,6 +28,7 @@ const TriggerPage = () => {
     (state: any) => state.recipientSlice.recipientList
   );
   const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     loadAllData();
@@ -41,6 +43,7 @@ const TriggerPage = () => {
       .then((res: any) => {
         if (res.code === 0) {
           dispatch(saveRecipientList(res.data.recipientList));
+          setLoading(false);
         } else {
           message.error(t("syserr." + res.code));
         }
@@ -52,35 +55,36 @@ const TriggerPage = () => {
 
   const _renderRecipient = (item: any) => {
     return (
-      <List.Item
-        style={{ background: themeColor.blockDark }}
-        actions={[
-          <Button
-            type="primary"
-            size="small"
-            onClick={() => {
-              dispatch(removeRecipient());
-              dispatch(removeTrigger());
-              navigate("/main/TriggerDetail", {
-                state: { recipientId: item.recipientId },
-              });
-            }}
-          >
-            {t("common.btDetail")}
-          </Button>,
-        ]}
-      >
-        <div style={{ width: "100%", color: themeColor.textLight }}>
-          <Row style={{}}>
-            <Col offset="1">{item.recipientName}</Col>
-            <Col offset="1">{item.phone}</Col>
-            <Col offset="1">{item.email}</Col>
-          </Row>
-          <Row>
-            <Col offset="1">{item.remark}</Col>
-          </Row>
-        </div>
-      </List.Item>
+      <div style={{ marginTop: 10 }}>
+        <List.Item
+          style={{ background: themeColor.blockDark, padding: 10 }}
+          actions={[
+            <Button
+              type="primary"
+              size="small"
+              onClick={() => {
+                dispatch(removeRecipient());
+                dispatch(removeTrigger());
+                navigate("/main/TriggerDetail", {
+                  state: { recipientId: item.recipientId },
+                });
+              }}
+            >
+              {t("common.btDetail")}
+            </Button>,
+          ]}
+        >
+          <div style={{ width: "100%", color: themeColor.textLight }}>
+            <Row style={{}}>
+              <Col>{item.email}</Col>
+              <Col offset="1">{item.recipientName}</Col>
+            </Row>
+            <Row>
+              <Col offset="1">{item.remark}</Col>
+            </Row>
+          </div>
+        </List.Item>
+      </div>
     );
   };
   return (
@@ -94,29 +98,39 @@ const TriggerPage = () => {
           onClose={() => {}}
         />
       </div>
-      <div>
-        <List
-          style={{ marginTop: 10 }}
-          dataSource={recipientList}
-          renderItem={(item) => _renderRecipient(item)}
-        ></List>
-      </div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: 10,
-        }}
-      >
-        <Button
-          type="primary"
-          onClick={() => {
-            navigate("/main/SelectRecipient", { state: { noteId } });
-          }}
+      {loading ? (
+        <div
+          style={{ display: "flex", justifyContent: "center", marginTop: 200 }}
         >
-          {t("recipient.btAddRecipient")}
-        </Button>
-      </div>
+          <Spin />
+        </div>
+      ) : (
+        <div style={{}}>
+          <div>
+            <List
+              style={{ marginTop: 10 }}
+              dataSource={recipientList}
+              renderItem={(item) => _renderRecipient(item)}
+            ></List>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: 10,
+            }}
+          >
+            <Button
+              type="primary"
+              onClick={() => {
+                navigate("/main/SelectRecipient", { state: { noteId } });
+              }}
+            >
+              {t("recipient.btAddRecipient")}
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
