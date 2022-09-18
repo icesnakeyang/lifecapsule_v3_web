@@ -24,7 +24,7 @@ import {
 } from "../../common/crypto";
 import CryptoJS from "crypto-js";
 import {
-  apiDeleteMyNote,
+  apiDeleteCreativeNote,
   apiGetMyCreativeNote,
   apiRequestRsaPublicKey,
   apiSaveCreativeNote,
@@ -147,7 +147,7 @@ const CreativeNoteEdit = () => {
     };
     setDeleting(true);
 
-    apiDeleteMyNote(params)
+    apiDeleteCreativeNote(params)
       .then((res: any) => {
         if (res.code === 0) {
           message.success(t("creativeNote.tipDeleteSuccess"));

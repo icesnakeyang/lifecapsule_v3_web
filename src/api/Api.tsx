@@ -169,7 +169,7 @@ export const apiDecreaseQuadTaskPriority = (params: any) => {
 };
 
 export const apiDeleteCreativeNote = (params: any) => {
-  return Post(`${host}/web/quadTask/deleteCreativeNote`, params);
+  return Post(`${host}/web/creativeNote/deleteCreativeNote`, params);
 };
 
 export const apiDeleteQuadTask = (params: any) => {

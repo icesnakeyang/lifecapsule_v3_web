@@ -34,6 +34,8 @@ const LoginByEmail = () => {
                 dispatch(saveUserToken(res.data.token))
                 localStorage.setItem("lifecapsule3_token", res.data.token);
                 navigate("/", {replace:true})
+            }else{
+                message.error(t('syserr.'+res.code))
             }
         })
     }

@@ -258,6 +258,7 @@
     "10045": "Email verify code error",
     "10046": "You have bound email already, please sign out first",
     "10047": "No such user",
-    "10050": "This email has been set to recipient already"
+    "10050": "This email has been set to recipient already",
+    "10053": "Email have not been registered"
   }
 }

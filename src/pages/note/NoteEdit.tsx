@@ -94,6 +94,7 @@ const NoteEdit = () => {
 
                 apiGetMyNote(params).then((res: any) => {
                     if (res.code === 0) {
+                        console.log(res)
                         let note = res.data.note;
                         setCreateTime(note.createTime);
                         setTitle(note.title);
@@ -103,6 +104,8 @@ const NoteEdit = () => {
                             if (note.encrypt === 1) {
                                 let strKey = note.userEncodeKey;
                                 strKey = Decrypt2(strKey, keyAES_1);
+                                console.log(strKey)
+                                console.log(note.content)
                                 let content = Decrypt(note.content, strKey, strKey);
                                 setEncrypt(1);
                                 setContent(content);
