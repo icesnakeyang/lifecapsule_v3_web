@@ -12,16 +12,11 @@ const RecipientRow = (data: any) => {
     const {t} = useTranslation();
     const navigate = useNavigate();
     const [saving, setSaving]=useState(false)
-
-    console.log(item)
-
     const onAddContactToRecipient = () => {
         let params = {
             noteId: noteId,
             email: item.email
         };
-
-        console.log(params)
         setSaving(true)
         apiAddEmailToRecipient(params).then((res: any) => {
             if (res.code === 0) {

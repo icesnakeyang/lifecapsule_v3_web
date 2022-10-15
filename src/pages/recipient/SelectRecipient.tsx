@@ -58,7 +58,6 @@ const SelectRecipient = () => {
             email,
             noteId
         }
-        console.log(params)
         setSaving(true)
         apiAddEmailToRecipient(params).then((res: any) => {
             if (res.code === 0) {

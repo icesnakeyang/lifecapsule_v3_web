@@ -2,37 +2,32 @@ import {
     Breadcrumb,
     Button,
     Card,
-    List,
-    message,
+    Col,
+    Input,
+    message, Modal,
     Pagination,
-    Select,
+    Row,
     Spin,
 } from "antd";
 import {useState, useEffect} from "react";
-import {apiListMyCategory, apiListMyNote} from "../../api/Api";
+import {apiListMyNote, apiListUserNoteTag} from "../../api/Api";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {
-    saveNoteCategoryCurrent,
-    saveNoteCategoryList,
+    clearNoteState,
     saveNoteList,
     saveNotePageIndex,
     saveNotePageSize,
 } from "../../store/noteDataSlice";
-import {EditOutlined} from "@ant-design/icons";
 import NoteListRow from "./NoteListRow";
+import NotePageTagRow from "./NotePageTagRow";
+import NotePageModalTagRow from "./NotePageModalTagRow";
 
 const NoteList = () => {
     const navigate = useNavigate();
     const {t} = useTranslation();
     const dispatch = useDispatch();
-    const categoryList = useSelector(
-        (state: any) => state.noteDataSlice.categoryList || []
-    );
-    const currentCategoryId =
-        useSelector((state: any) => state.noteDataSlice.currentCategoryId) || "";
-    const currentCategoryName = useSelector((state: any) => state.noteDataSlice.currentCategoryName) || ""
     const [loading, setLoading] = useState(true);
     const [totalNote, setTotalNote] = useState(0);
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
@@ -44,60 +39,56 @@ const NoteList = () => {
     );
     const noteList =
         useSelector((state: any) => state.noteDataSlice.noteList) || [];
+    const refresh = useSelector((state: any) => state.commonSlice.refresh)
+    const [modalTag, setModalTag] = useState(false)
+    const noteListTags = useSelector((state: any) => state.noteDataSlice.noteListTags)
+    const [myNoteTags, setMyNoteTags] = useState([])
+    const [searchKey, setSearchKey] = useState('')
 
     useEffect(() => {
         loadAllData()
-    }, [])
+    }, [refresh])
 
     useEffect(() => {
-        loadAllData();
-        return () => {
-        };
-    }, [currentCategoryId]);
-
-    useEffect(() => {
-        loadAllData();
-        return () => {
-        };
-    }, [notePageIndex]);
+        loadAllData()
+    }, [searchKey])
 
     const loadAllData = () => {
-        /**
-         * 如果当前没有categoryId，就读取默认的category
-         */
-        /**
-         * 读取category列表
-         */
-        apiListMyCategory({}).then((res: any) => {
+        let params = {
+            pageIndex: notePageIndex,
+            pageSize: notePageSize,
+            tagList: noteListTags,
+            searchKey
+        };
+        setLoading(true);
+        apiListMyNote(params)
+            .then((res: any) => {
+                if (res.code === 0) {
+                    dispatch(saveNoteList(res.data.noteList));
+                    setTotalNote(res.data.totalNote);
+                    setLoading(false);
+                } else {
+                    message.error(t("syserr." + res.code));
+                    if (res.code === 10003) {
+                        navigate("/guest/login");
+                    }
+                }
+            })
+            .catch((err) => {
+                message.error(t("syserr.10001"));
+                setLoading(false);
+            });
+        apiListUserNoteTag().then((res: any) => {
             if (res.code === 0) {
-                dispatch(saveNoteCategoryList(res.data.categoryList));
-
-                let params = {
-                    pageIndex: notePageIndex,
-                    pageSize: notePageSize,
-                    categoryId: currentCategoryId,
-                };
-                setLoading(true);
-                apiListMyNote(params)
-                    .then((res: any) => {
-                        if (res.code === 0) {
-                            dispatch(saveNoteList(res.data.noteList));
-                            setTotalNote(res.data.totalNote);
-                            setLoading(false);
-                        } else {
-                            message.error(t("syserr." + res.code));
-                            if (res.code === 10003) {
-                                navigate("/guest/login");
-                            }
-                        }
-                    })
-                    .catch((err) => {
-                        message.error(t("syserr.10001"));
-                        setLoading(false);
-                    });
+                setMyNoteTags(res.data.tagList)
             }
-        });
+        }).catch(() => {
+        })
     };
+
+    const getFun = () => {
+        setModalTag(false)
+    }
 
     return (
         <div style={{}}>
@@ -129,45 +120,41 @@ const NoteList = () => {
             ) : (
                 <div>
                     <Card style={{background: themeColor.blockDark}}>
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                navigate("/main/noteNew");
+                        <Row>
+                            <Col>
+                                <Button
+                                    type="primary"
+                                    onClick={() => {
+                                        dispatch(clearNoteState())
+                                        navigate("/main/noteNew");
+                                    }}
+                                >
+                                    {t("note.btNewNote")}
+                                </Button>
+                            </Col>
+                            <Col offset={1}>
+                                <Input.Search placeholder={t('note.searchHolder')}
+                                              onSearch={(value: string) => {
+                                                  console.log(value)
+                                                  setSearchKey(value)
+                                              }} enterButton/>
+                            </Col>
+                        </Row>
+                        <div style={{marginTop: 10, display: 'flex', alignItems: 'center'}}>
+                            <Button type="primary" onClick={() => {
+                                setModalTag(true)
                             }}
-                        >
-                            {t("note.btNewNote")}
-                        </Button>
+                            >{t('tag.tags')}</Button>
+                            <div style={{marginLeft: 10}}>
+                                {noteListTags && noteListTags.length > 0 ?
+                                    noteListTags.map((item: any, index: any) => (
+                                        <NotePageTagRow item={item} key={index}/>
+                                    )) : null}
+                            </div>
+                        </div>
                     </Card>
 
                     <div style={{marginTop: 10}}>
-                        <Select
-                            // defaultValue={currentCategoryId}
-                            defaultValue={currentCategoryName}
-                            style={{width: "400px"}}
-                            onSelect={(e: any, item: any) => {
-                                let data = {
-                                    currentCategoryId: e,
-                                    currentCategoryName: item.children
-                                }
-                                dispatch(saveNoteCategoryCurrent(data));
-                            }}
-                        >
-                            {categoryList.map((item: any, index: number) => {
-                                return (
-                                    <Select.Option value={item.categoryId} key={item.ids}>
-                                        {item.categoryName}
-                                    </Select.Option>
-                                );
-                            })}
-                        </Select>
-                        <Button
-                            type="default"
-                            icon={<EditOutlined/>}
-                            onClick={() => {
-                                navigate("/main/NoteCategoryEdit");
-                            }}
-                        ></Button>
-
                         <div style={{marginTop: 10}}>
                             {noteList
                                 ? noteList.map((item: any, index: any) => (
@@ -189,6 +176,17 @@ const NoteList = () => {
                     </div>
                 </div>
             )}
+
+            <Modal visible={modalTag} onCancel={() => setModalTag(false)} onOk={() => {
+                setModalTag(false)
+            }}>
+                <div style={{marginLeft: 10}}>
+                    {myNoteTags && myNoteTags.length > 0 ?
+                        myNoteTags.map((item: any, index: any) => (
+                            <NotePageModalTagRow item={item} key={index} getFun={getFun}/>
+                        )) : null}
+                </div>
+            </Modal>
         </div>
     );
 };

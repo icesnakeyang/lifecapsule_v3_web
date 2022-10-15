@@ -50,7 +50,6 @@ const MySendNoteRow = (data: any) => {
               type="primary"
               size="small"
               onClick={() => {
-                console.log(item);
                 navigate("/main/MySendNoteDetail", {
                   state: { sendLogId: item.sendLogId },
                 });

@@ -62,7 +62,6 @@ const TodoPage = () => {
       pageSize: todoPageSize,
       hideComplete,
     };
-    console.log(params);
     apiListMyTaskTodo(params)
       .then((res: any) => {
         if (res.code === 0) {

@@ -3,7 +3,6 @@ import { Breadcrumb, Button, Form, Input, message, Radio, Select } from "antd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { saveNoteCategoryCurrent } from "../../store/noteDataSlice";
 import { apiRequestRsaPublicKey, apiSaveMyNote } from "../../api/Api";
 import { Encrypt, GenerateKey, RSAencrypt } from "../../common/crypto";
 import CryptoJS from "crypto-js";
@@ -114,26 +113,7 @@ const NoteNew = () => {
           </span>
         </Breadcrumb.Item>
       </Breadcrumb>
-      <Select
-        style={{ width: "200px", marginTop: 10 }}
-        defaultValue={currentCategoryId}
-        onSelect={(e: string) => {
-          dispatch(saveNoteCategoryCurrent(e));
-        }}
-      >
-        {categoryList.map((item: any) => (
-          <Select.Option value={item.categoryId} key={item.ids}>
-            {item.categoryName}
-          </Select.Option>
-        ))}
-      </Select>
-      <Button
-        type="default"
-        icon={<EditOutlined />}
-        onClick={() => {
-          navigate("/main/NoteCategoryEdit");
-        }}
-      ></Button>
+
       <Form style={{ marginTop: 20 }} layout="vertical">
         <Form.Item>
           <div style={{ color: themeColor.textLight }}>{t("note.title")}</div>

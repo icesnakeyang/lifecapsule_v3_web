@@ -13,7 +13,8 @@
     "COMPLETE": "已完成",
     "noData": "没有数据",
     "noTitle": "无标题",
-    "unRead": "未读"
+    "unRead": "未读",
+    "btAdd": "添加"
   },
   "nav": {
     "home": "首页",
@@ -84,7 +85,10 @@
     "totalNotes": "笔记总数",
     "tipNoteDelete": "你确定要删除该笔记吗？删除后将不可恢复！",
     "tipNoteDeleteSuccess": "删除笔记成功",
-    "createTime": "创建时间"
+    "createTime": "创建时间",
+    "addTag": "添加标签",
+    "editTag": "编辑标签",
+    "searchHolder": "搜索标题关键字"
   },
   "contact": {
     "contactList": "我的联系人",
@@ -245,6 +249,10 @@
     "readTime": "阅读时间",
     "decode": "解密口令",
     "content": "笔记内容"
+  },
+  "tag": {
+    "tags": "标签",
+    "hotTags": "热门标签"
   },
   "syserr": {
     "10001": "系统错误",

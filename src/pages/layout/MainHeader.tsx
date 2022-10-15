@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
 import { UserOutlined, GlobalOutlined, MailOutlined } from "@ant-design/icons";
 import { clearUserData } from "../../store/userDataSlice";
-import { clearNote } from "../../store/noteDataSlice";
+import { clearNoteState} from "../../store/noteDataSlice";
 import { useNavigate } from "react-router-dom";
 
 const MainHeader = () => {
@@ -28,7 +28,7 @@ const MainHeader = () => {
     if (e.key === "menuSignOut") {
       localStorage.removeItem("lifecapsule3_token");
       dispatch(clearUserData());
-      dispatch(clearNote());
+      dispatch(clearNoteState());
       navigate("/guest/LoginByEmail");
     }
   };

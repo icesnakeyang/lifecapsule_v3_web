@@ -42,7 +42,6 @@ const MySendNoteDetail = () => {
 
         apiGetMyNoteSendOutLog(params)
           .then((res: any) => {
-            console.log(res);
             if (res.code === 0) {
               let data = res.data.noteSendLog;
               setTriggerType(data.triggerType);

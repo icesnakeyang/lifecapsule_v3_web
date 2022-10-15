@@ -2,9 +2,9 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {
     apiDeleteMyNote,
-    apiGetMyNote,
+    apiGetMyNote, apiListHotNoteTags,
     apiRequestRsaPublicKey,
-    apiSaveMyNote,
+    apiSaveMyNote, apiSaveMyNoteTags,
 } from "../../api/Api";
 import {
     Decrypt,
@@ -15,25 +15,28 @@ import {
     RSAencrypt,
 } from "../../common/crypto";
 import {useDispatch, useSelector} from "react-redux";
-import {saveNoteCategoryCurrent} from "../../store/noteDataSlice";
+import {saveTagList} from "../../store/noteDataSlice";
 import {
     Breadcrumb,
-    Button,
+    Button, Divider,
     Form,
     Input,
     message,
     Modal,
     Radio,
-    Select,
     Spin,
+    Tooltip,
 } from "antd";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {SendOutlined, DeleteOutlined, EditOutlined,AimOutlined} from "@ant-design/icons";
+import {SendOutlined, DeleteOutlined, AimOutlined, CopyOutlined} from "@ant-design/icons";
 import CryptoJS from "crypto-js";
-import {saveEditing} from "../../store/commonSlice";
+import {loadRefresh, saveEditing} from "../../store/commonSlice";
 import moment from "moment";
-import {convertToObject} from "typescript";
+import HotTagRow from "./HotTagRow";
+import NoteEditTagRow from "./NoteEditTagRow";
+import NoteEditTagRowEdit from "./NoteEditTagRowEdit";
+import {saveEditTags} from "../../store/tagSlice";
 
 const NoteEdit = () => {
     const {noteId}: any = useLocation().state;
@@ -41,18 +44,8 @@ const NoteEdit = () => {
     const [encrypt, setEncrypt] = useState(1);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [loading, setLoading] = useState(true);
     const {t} = useTranslation();
     const [saving, setSaving] = useState(false);
-    const categoryList = useSelector(
-        (state: any) => state.noteDataSlice.categoryList
-    );
-    const currentCategoryId = useSelector(
-        (state: any) => state.noteDataSlice.currentCategoryId
-    );
-    const currentCategoryName = useSelector(
-        (state: any) => state.noteDataSlice.currentCategoryName
-    );
     const [editing, setEditing] = useState(false);
     const [modalDelete, setModalDelete] = useState(false);
     const [deleting, setDeleting] = useState(false);
@@ -60,12 +53,18 @@ const NoteEdit = () => {
     const editingRedux = useSelector((state: any) => state.commonSlice.editing);
     const [createTime, setCreateTime] = useState(null);
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+    const [modalTag, setModalTag] = useState(false)
+    const [tagEdit, setTagEdit] = useState('')
+    const tagList = useSelector((state: any) => state.noteDataSlice.tagList)
+    const [hotTags, setHotTags] = useState([])
+    const editTags = useSelector((state: any) => state.tagSlice.editTags)
+    const refresh = useSelector((state: any) => state.commonSlice.refresh)
 
     useEffect(() => {
         loadAllData();
         return () => {
         };
-    }, [noteId]);
+    }, [noteId, refresh]);
 
     useEffect(() => {
         dispatch(saveEditing(0));
@@ -85,7 +84,6 @@ const NoteEdit = () => {
             encryptKey: {},
             keyToken: "",
         };
-        setLoading(true);
         apiRequestRsaPublicKey().then((res: any) => {
             if (res.code === 0) {
                 const keyAES_1 = GenerateRandomString16();
@@ -94,7 +92,6 @@ const NoteEdit = () => {
 
                 apiGetMyNote(params).then((res: any) => {
                     if (res.code === 0) {
-                        console.log(res)
                         let note = res.data.note;
                         setCreateTime(note.createTime);
                         setTitle(note.title);
@@ -104,8 +101,6 @@ const NoteEdit = () => {
                             if (note.encrypt === 1) {
                                 let strKey = note.userEncodeKey;
                                 strKey = Decrypt2(strKey, keyAES_1);
-                                console.log(strKey)
-                                console.log(note.content)
                                 let content = Decrypt(note.content, strKey, strKey);
                                 setEncrypt(1);
                                 setContent(content);
@@ -114,18 +109,25 @@ const NoteEdit = () => {
                                 setContent(note.content);
                             }
                         }
-                        setLoading(false);
+
+                        dispatch(saveTagList(res.data.noteTagList))
+                        dispatch(saveEditTags(res.data.noteTagList))
                     }
                 });
             }
         });
+
+        apiListHotNoteTags().then((res: any) => {
+            if (res.code === 0) {
+                setHotTags(res.data.tagList)
+            }
+        })
     };
 
     const onSaveNote = () => {
         let params = {
             title,
             noteId,
-            categoryId: currentCategoryId,
             encrypt: 1,
             content: "",
             encryptKey: "",
@@ -199,6 +201,48 @@ const NoteEdit = () => {
         // apiSaveMyNote
     };
 
+    const onAddTag = () => {
+        if (!tagEdit) {
+            return
+        }
+        if (!editTags || editTags.length === 0) {
+            let list = [{tagName: tagEdit}]
+            dispatch(saveEditTags(list))
+        } else {
+            let cc = 0;
+            let tags = []
+            editTags.map((item: any) => {
+                tags.push(item)
+                if (item.tagName === tagEdit) {
+                    cc++
+                }
+            })
+            if (cc === 0) {
+                tags.push({tagName: tagEdit})
+            }
+            dispatch(saveEditTags(tags))
+        }
+    }
+
+    const onSaveTags = () => {
+        /**
+         * 保存tag到note
+         */
+        let params = {
+            tagList: editTags,
+            noteId
+        }
+        apiSaveMyNoteTags(params).then((res: any) => {
+            if (res.code === 0) {
+                dispatch(loadRefresh())
+            } else {
+                message.error(t('syserr.' + res.code))
+            }
+        }).catch(() => {
+            message.error(t('syserr.10001'))
+        })
+    }
+
     return (
         <div
             style={{
@@ -226,198 +270,176 @@ const NoteEdit = () => {
           </span>
                 </Breadcrumb.Item>
             </Breadcrumb>
-            {loading || deleting ? (
+            <div>
+                {/*toolbar*/}
                 <div
                     style={{
-                        height: "200px",
                         display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
+                        justifyContent: "flex-end",
+                        margin: "0 20px",
                     }}
                 >
-                    <Spin/>
-                </div>
-            ) : (
-                <div>
-                    <div
-                        style={{
-                            display: "flex",
-                            justifyContent: "flex-end",
-                            margin: "0 20px",
+                    <Button
+                        type="primary"
+                        onClick={() => {
+                            navigate("/main/noteNew");
                         }}
                     >
-                        <Button
-                            type="primary"
-                            onClick={() => {
-                                navigate("/main/noteNew");
-                            }}
-                        >
-                            {t("note.btNewNote")}
-                        </Button>
-                        <Button
-                            type="primary"
-                            style={{marginLeft: "10px"}}
-                            icon={<AimOutlined />}
-                            onClick={() => {
-                                navigate("/main/TriggerPage", {state: {noteId}});
-                            }}
-                        >
-                            {t("trigger.btTrigger")}
-                        </Button>
-                        <Button
-                            type="primary"
-                            style={{marginLeft: "10px"}}
-                            icon={<SendOutlined/>}
-                            onClick={() => {
-                                navigate("/main/SendPage", {state: {noteId}});
-                            }}
-                        >
-                            {t("note.btSend")}
-                        </Button>
-                        <Button
-                            type="primary"
-                            danger
-                            style={{marginLeft: "10px"}}
-                            icon={<DeleteOutlined/>}
-                            onClick={() => {
-                                setModalDelete(true);
-                            }}
-                        >
-                            {t("common.btDelete")}
-                        </Button>
-                    </div>
-                    <div>
-                        <Form style={{padding: 0, margin: 10, marginTop: 40}}>
-                            <Form.Item>
-                                <div style={{height: "100%", width: "100%"}}>
-                                    <Select
-                                        defaultValue={currentCategoryName}
-                                        style={{width: "200px"}}
-                                        onSelect={(e: any, item: any) => {
-                                            let data = {
-                                                currentCategoryId: e,
-                                                currentCategoryName: item.children
-                                            }
-                                            dispatch(saveNoteCategoryCurrent(data));
-                                            if (currentCategoryId !== e) {
-                                                setEditing(true);
-                                            }
-                                        }}
-                                    >
-                                        {categoryList.map((item: any) => (
-                                            <Select.Option value={item.categoryId} key={item.ids}>
-                                                {item.categoryName}
-                                            </Select.Option>
-                                        ))}
-                                    </Select>
-                                    <Button
-                                        type="default"
-                                        icon={<EditOutlined/>}
-                                        onClick={() => {
-                                            navigate("/main/NoteCategoryEdit");
-                                        }}
-                                    ></Button>
+                        {t("note.btNewNote")}
+                    </Button>
+                    <Button
+                        type="primary"
+                        style={{marginLeft: "10px"}}
+                        icon={<AimOutlined/>}
+                        onClick={() => {
+                            navigate("/main/TriggerPage", {state: {noteId}});
+                        }}
+                    >
+                        {t("trigger.btTrigger")}
+                    </Button>
+                    <Button
+                        type="primary"
+                        style={{marginLeft: "10px"}}
+                        icon={<SendOutlined/>}
+                        onClick={() => {
+                            navigate("/main/SendPage", {state: {noteId}});
+                        }}
+                    >
+                        {t("note.btSend")}
+                    </Button>
+                    <Button
+                        type="primary"
+                        danger
+                        style={{marginLeft: "10px"}}
+                        icon={<DeleteOutlined/>}
+                        onClick={() => {
+                            setModalDelete(true);
+                        }}
+                    >
+                        {t("common.btDelete")}
+                    </Button>
+                </div>
+
+                {/*笔记详情*/}
+                <div>
+                    <Form style={{padding: 0, margin: 10, marginTop: 40}}>
+                        {/*title*/}
+                        <Form.Item>
+                            <div style={{color: themeColor.textLight}}>
+                                {t("note.title")}
+                            </div>
+                            <Input
+                                style={{
+                                    background: themeColor.blockDark,
+                                    color: themeColor.textLight,
+                                }}
+                                value={title}
+                                placeholder={t("note.titleHolder")}
+                                onChange={(e) => {
+                                    setTitle(e.target.value);
+                                    setEditing(true);
+                                }}
+                            />
+                        </Form.Item>
+
+                        {/*tags*/}
+                        <Form.Item>
+                            <div style={{display: "flex", alignItems: 'center'}}>
+                                <div style={{}}>
+                                    <Button type='primary' onClick={() => {
+                                        setModalTag(true)
+                                    }}>
+                                        {t('note.editTag')}
+                                    </Button>
                                 </div>
-                            </Form.Item>
-                            <Form.Item>
-                                <div style={{color: themeColor.textLight}}>
-                                    {t("note.title")}
+                                <div style={{marginLeft: 10}}>
+                                    {tagList.length > 0 ? tagList.map((item: any, index: any) => (
+                                        <NoteEditTagRow item={item} key={index}/>
+                                    )) : null}
                                 </div>
-                                <Input
-                                    style={{
-                                        background: themeColor.blockDark,
-                                        color: themeColor.textLight,
-                                    }}
-                                    value={title}
-                                    placeholder={t("note.titleHolder")}
-                                    onChange={(e) => {
-                                        setTitle(e.target.value);
+                            </div>
+                        </Form.Item>
+
+                        <Form.Item>
+                            <div style={{color: themeColor.textLight}}>
+                                {t("note.createTime")}：{moment(createTime).format("LLL")}
+                            </div>
+                        </Form.Item>
+                        <Form.Item>
+                            <div style={{color: themeColor.textLight}}>
+                                {t("note.content")}
+                            </div>
+                            <Input.TextArea
+                                autoSize={{minRows: 3}}
+                                style={{
+                                    color: themeColor.textLight,
+                                    backgroundColor: themeColor.blockDark,
+                                }}
+                                value={content}
+                                placeholder={t("note.titleHolder")}
+                                onChange={(e) => {
+                                    setContent(e.target.value);
+                                    setEditing(true);
+                                }}
+                            />
+                        </Form.Item>
+                        <Form.Item>
+                            <Radio.Group
+                                onChange={() => {
+                                    if (encrypt === 1) {
+                                        setEncrypt(0);
                                         setEditing(true);
-                                    }}
-                                />
-                            </Form.Item>
-                            <Form.Item>
-                                <div style={{color: themeColor.textLight}}>
-                                    {t("note.createTime")}：{moment(createTime).format("LLL")}
-                                </div>
-                            </Form.Item>
-                            <Form.Item>
-                                <div style={{color: themeColor.textLight}}>
-                                    {t("note.content")}
-                                </div>
-                                <Input.TextArea
-                                    autoSize={{minRows: 3}}
-                                    style={{
-                                        color: themeColor.textLight,
-                                        backgroundColor: themeColor.blockDark,
-                                    }}
-                                    value={content}
-                                    placeholder={t("note.titleHolder")}
-                                    onChange={(e) => {
-                                        setContent(e.target.value);
+                                    } else {
+                                        setEncrypt(1);
                                         setEditing(true);
-                                    }}
-                                />
-                            </Form.Item>
-                            <Form.Item>
-                                <Radio.Group
-                                    onChange={() => {
-                                        if (encrypt === 1) {
-                                            setEncrypt(0);
-                                            setEditing(true);
-                                        } else {
-                                            setEncrypt(1);
-                                            setEditing(true);
-                                        }
-                                    }}
-                                    value={encrypt}
-                                >
-                                    <Radio value={1}>
+                                    }
+                                }}
+                                value={encrypt}
+                            >
+                                <Radio value={1}>
                     <span style={{color: themeColor.textLight}}>
                       {t("note.encrypt")}
                     </span>
-                                    </Radio>
-                                    <Radio value={0}>
+                                </Radio>
+                                <Radio value={0}>
                     <span style={{color: themeColor.textLight}}>
                       {t("note.noEncrypt")}
                     </span>
-                                    </Radio>
-                                </Radio.Group>
-                            </Form.Item>
-                            <Form.Item></Form.Item>
-                            <div
-                                style={{
-                                    width: "100%",
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    display: "flex",
-                                }}
-                            >
-                                {saving ? (
-                                    <Button type="primary" style={{width: "100px"}} loading>
-                                        {t("common.btSaving")}
-                                    </Button>
-                                ) : (
-                                    <>
-                                        {editing ? (
-                                            <Button
-                                                style={{width: "100px"}}
-                                                type="primary"
-                                                onClick={() => {
-                                                    onSaveNote();
-                                                }}
-                                            >
-                                                {t("common.btSave")}
-                                            </Button>
-                                        ) : null}
-                                    </>
-                                )}
-                            </div>
-                        </Form>
-                    </div>
+                                </Radio>
+                            </Radio.Group>
+                        </Form.Item>
+                        <Form.Item></Form.Item>
+                        <div
+                            style={{
+                                width: "100%",
+                                justifyContent: "center",
+                                alignItems: "center",
+                                display: "flex",
+                            }}
+                        >
+                            {saving ? (
+                                <Button type="primary" style={{width: "100px"}} loading>
+                                    {t("common.btSaving")}
+                                </Button>
+                            ) : (
+                                <>
+                                    {editing ? (
+                                        <Button
+                                            style={{width: "100px"}}
+                                            type="primary"
+                                            onClick={() => {
+                                                onSaveNote();
+                                            }}
+                                        >
+                                            {t("common.btSave")}
+                                        </Button>
+                                    ) : null}
+                                </>
+                            )}
+                        </div>
+                    </Form>
                 </div>
-            )}
-
+            </div>
             <Modal
                 visible={modalDelete}
                 closable={false}
@@ -445,6 +467,62 @@ const NoteEdit = () => {
                 onCancel={() => setModalDelete(false)}
             >
                 <p>{t("note.tipNoteDelete")}</p>
+            </Modal>
+
+            <Modal
+                visible={modalTag}
+                closable={false}
+                onOk={() => {
+                    onSaveTags()
+                    setModalTag(false)
+                }}
+                onCancel={() => setModalTag(false)}
+            >
+                <Form>
+                    <Form.Item>
+                        <div>{t('note.addTag')}</div>
+                        <Input.Group compact>
+                            <Input style={{width: 'calc(100% - 100px)'}} value={tagEdit} onChange={(e) => {
+                                setTagEdit(e.target.value)
+                            }}/>
+                            <Button type='primary' onClick={() => onAddTag()}>{t('common.btAdd')}</Button>
+                        </Input.Group>
+
+                    </Form.Item>
+                </Form>
+                <div>
+                    {editTags.length > 0 ? editTags.map((item: any, index: any) => (
+                        <NoteEditTagRowEdit item={item} key={index}/>
+                    )) : null}
+                </div>
+                <Divider/>
+                <div>
+                    <div>{t('tag.hotTags')}</div>
+                    <div style={{marginTop:10}}>
+                        {hotTags && hotTags.length > 0 ? hotTags.map((item, index) => (
+                            <HotTagRow item={item} key={index} onSelectTag={(data: any) => {
+                                if (editTags.length === 0) {
+                                    let tags = [{tagName: data.tagName}]
+                                    dispatch(saveEditTags(tags))
+                                } else {
+                                    let tags: any = []
+                                    let cc = 0;
+                                    editTags.map((item2: any) => {
+                                        if (data.tagName === item2.tagName) {
+                                            cc++
+                                        } else {
+                                            tags.push(item2)
+                                        }
+                                    })
+                                    if (cc === 0) {
+                                        tags.push(data)
+                                        dispatch(saveEditTags(tags))
+                                    }
+                                }
+                            }}/>
+                        )) : null}
+                    </div>
+                </div>
             </Modal>
         </div>
     );

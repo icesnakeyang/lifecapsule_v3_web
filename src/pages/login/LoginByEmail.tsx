@@ -27,9 +27,7 @@ const LoginByEmail = () => {
             email,
             emailCode
         }
-        console.log(params)
         apiSignByEmail(params).then((res:any)=>{
-            console.log(res)
             if(res.code===0){
                 dispatch(saveUserToken(res.data.token))
                 localStorage.setItem("lifecapsule3_token", res.data.token);
@@ -57,7 +55,6 @@ const LoginByEmail = () => {
                         <div style={{color: themeColor.textLight}}>{t('login.email')}</div>
                         <Input value={email} style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                onChange={(e) => {
-                                   console.log(e.target.value)
                                    setEmail(e.target.value)
                                }}/>
                     </Form.Item>
@@ -65,7 +62,6 @@ const LoginByEmail = () => {
                         <div style={{color: themeColor.textLight}}>{t('login.emailCode')}</div>
                         <Input value={emailCode} style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                onChange={(e) => {
-                                   console.log(e.target.value)
                                    setEmailCode(e.target.value)
                                }}/>
                     </Form.Item>

@@ -13,7 +13,8 @@
     "COMPLETE": "Complete",
     "noData": "No data",
     "noTitle": "No title",
-    "unRead": "Unread"
+    "unRead": "Unread",
+    "btAdd": "Add"
   },
   "nav": {
     "home": "Home",
@@ -84,7 +85,10 @@
     "totalNotes": "Total notes",
     "tipNoteDelete": "Are you sure to delete this note? The note cannot be recovered after you delete it.",
     "tipNoteDeleteSuccess": "Delete note success",
-    "createTime": "Create time"
+    "createTime": "Create time",
+    "addTag": "Add tag",
+    "editTag": "Edit tag",
+    "searchHolder": "Search title"
   },
   "contact": {
     "contactList": "My contacts",
@@ -244,6 +248,21 @@
     "readTime": "Read time",
     "decode": "Decrypt code",
     "content": "Note content"
+  },
+  "webSite": {
+    "home": {
+      "tip1": "What Is Life Capsule",
+      "tip2": "An encrypted note can record your memory and send to others by trigger or time countdown",
+      "tip3": "Write note for memories",
+      "tip4": "Write letter to the future",
+      "tip5": "write story share to someone",
+      "tip6": "Make friends with deep mind",
+      "tip7": "What you can do"
+    }
+  },
+  "tag": {
+    "tags": "Tags",
+    "hotTags": "Hot tags"
   },
   "syserr": {
     "10001": "System or network error",

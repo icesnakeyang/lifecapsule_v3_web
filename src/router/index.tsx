@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 import NoteList from "../pages/note/NoteList";
 import NoteNew from "../pages/note/NoteNew";
 import NoteEdit from "../pages/note/NoteEdit";
-import NoteCategoryEdit from "../pages/note/NoteCategoryEdit";
 import ContactList from "../pages/contact/ContactList";
 import ContactEdit from "../pages/contact/ContactEdit";
 import TriggerPage from "../pages/trigger";
@@ -68,14 +67,6 @@ const Routers = () => {
           element={
             <ProtectRouter>
               <NoteEdit />
-            </ProtectRouter>
-          }
-        />
-        <Route
-          path="/main/NoteCategoryEdit"
-          element={
-            <ProtectRouter>
-              <NoteCategoryEdit />
             </ProtectRouter>
           }
         />
