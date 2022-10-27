@@ -17,12 +17,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {
     clearNoteState,
     saveNoteList,
+    saveNoteListSearchKey,
     saveNotePageIndex,
     saveNotePageSize,
 } from "../../store/noteDataSlice";
 import NoteListRow from "./NoteListRow";
 import NotePageTagRow from "./NotePageTagRow";
 import NotePageModalTagRow from "./NotePageModalTagRow";
+import {loadRefresh} from "../../store/commonSlice";
 
 const NoteList = () => {
     const navigate = useNavigate();
@@ -43,17 +45,14 @@ const NoteList = () => {
     const [modalTag, setModalTag] = useState(false)
     const noteListTags = useSelector((state: any) => state.noteDataSlice.noteListTags)
     const [myNoteTags, setMyNoteTags] = useState([])
-    const [searchKey, setSearchKey] = useState('')
+    const searchKey = useSelector((state: any) => state.noteDataSlice.noteListSearchKey)
 
     useEffect(() => {
         loadAllData()
     }, [refresh])
 
-    useEffect(() => {
-        loadAllData()
-    }, [searchKey])
-
     const loadAllData = () => {
+        console.log('load all data')
         let params = {
             pageIndex: notePageIndex,
             pageSize: notePageSize,
@@ -133,11 +132,15 @@ const NoteList = () => {
                                 </Button>
                             </Col>
                             <Col offset={1}>
-                                <Input.Search placeholder={t('note.searchHolder')}
-                                              onSearch={(value: string) => {
-                                                  console.log(value)
-                                                  setSearchKey(value)
-                                              }} enterButton/>
+                                <div style={{display: 'flex'}}>
+                                    <Input placeholder={t('note.searchHolder')}
+                                           onChange={e => dispatch(saveNoteListSearchKey(e.target.value))}
+                                           value={searchKey}
+                                    />
+                                    <Button type='primary' onClick={() => {
+                                        dispatch(loadRefresh())
+                                    }}>Search</Button>
+                                </div>
                             </Col>
                         </Row>
                         <div style={{marginTop: 10, display: 'flex', alignItems: 'center'}}>

@@ -9,7 +9,8 @@ export const noteDataSlice = createSlice({
         noteList: [],
         tagList: [],
         noteListTags: [],
-        noteId: null
+        noteId: null,
+        noteListSearchKey: null
     },
     reducers: {
         saveTotalNote: (state: any, action: any) => {
@@ -41,6 +42,12 @@ export const noteDataSlice = createSlice({
         },
         saveNoteId: (state: any, action: any) => {
             state.noteId = action.payload
+        },
+        saveNoteListSearchKey: (state: any, action: any) => {
+            state.noteListSearchKey = action.payload
+        },
+        clearNoteListSearchKey: (state: any) => {
+            state.noteListSearchKey = null
         }
     },
 });
@@ -53,6 +60,8 @@ export const {
     clearNoteState,
     saveTagList,
     saveNoteListTags,
-    saveNoteId
+    saveNoteId,
+    clearNoteListSearchKey,
+    saveNoteListSearchKey
 } = noteDataSlice.actions;
 export default noteDataSlice.reducer;
