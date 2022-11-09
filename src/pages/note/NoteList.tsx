@@ -49,7 +49,7 @@ const NoteList = () => {
 
     useEffect(() => {
         loadAllData()
-    }, [refresh])
+    }, [refresh, notePageIndex])
 
     const loadAllData = () => {
         console.log('load all data')
@@ -63,6 +63,7 @@ const NoteList = () => {
         apiListMyNote(params)
             .then((res: any) => {
                 if (res.code === 0) {
+                    console.log('save note list')
                     dispatch(saveNoteList(res.data.noteList));
                     setTotalNote(res.data.totalNote);
                     setLoading(false);
@@ -172,6 +173,7 @@ const NoteList = () => {
                             showQuickJumper
                             showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
                             onChange={(page, pz) => {
+                                console.log('page:'+page)
                                 dispatch(saveNotePageIndex(page));
                                 dispatch(saveNotePageSize(pz));
                             }}

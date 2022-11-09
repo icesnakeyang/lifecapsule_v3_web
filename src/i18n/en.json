@@ -251,13 +251,14 @@
   },
   "webSite": {
     "home": {
-      "tip1": "What Is Life Capsule",
-      "tip2": "An encrypted note can record your memory and send to others by trigger or time countdown",
-      "tip3": "Write note for memories",
-      "tip4": "Write letter to the future",
-      "tip5": "write story share to someone",
-      "tip6": "Make friends with deep mind",
-      "tip7": "What you can do"
+      "tip1": "What Is LifeCapsule",
+      "tip2": "LifeCapsule is a tool for you to record your life and share with others",
+      "tip3": "Record deep mind thoughts",
+      "tip4": "Write private information saftly",
+      "tip5": "Securely send your important information to others",
+      "tip6": "Discuss in-depth topics of interest with others",
+      "tip7": "Make friends from deep mind conversation",
+      "tip8": "When Do You Need LifeCapsule"
     }
   },
   "tag": {
