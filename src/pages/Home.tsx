@@ -17,7 +17,7 @@ import {
     saveTotalSendNote,
     saveTotalSendNoteUnread,
 } from "../store/noteSendSlice";
-import banner1 from "../resources/aser-min.jpg"
+import banner1 from "../resources/bg2.jpg"
 
 const contentStyle: React.CSSProperties = {
     color: '#912929',
@@ -97,63 +97,76 @@ const Home = () => {
     return (
         <div>
             <div
-                style={{height: '80vh', background: 'red'}}
+                style={{height: '80vh'}}
             >
-                <div style={{height:'50vh'}}>
-                    <Carousel autoplay style={{height: '50vh', background: 'green', padding: 20}}>
-                        {/*<div style={{height:'50vh',background:'yellowgreen', padding:20}}>*/}
-                        {/*    <div style={{background:'green', padding:20}}>*/}
-                        {/*        <img src={banner1} width="100%" height='50vh'/>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                    </Carousel>
+                <div style={{}}>
+                    <img src={banner1} width="100%"/>
                 </div>
 
-                <div>
-                    <div
-                        style={{
-                            width: 340,
-                            padding: 20,
-                            background: '#333675'
-                        }}>
-                        <div style={{}}>
-                            <div style={{color: '#fff', fontSize: 24}}>
-                                {t("webSite.home.tip1")}
-                            </div>
-                            <div style={{color: '#fff', fontSize: 14, marginTop: 20}}>
-                                {t("webSite.home.tip2")}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div style={{padding: 20, background: '#333675'}}>
-                        <div>
+                <Row style={{marginTop: 20}}>
+                    <Col span={12} style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        display: 'flex'
+                    }}>
+                        <div
+                            style={{
+                                width: 450,
+                                padding: 20,
+                                background: '#333675',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                display: 'flex'
+                            }}>
                             <div style={{}}>
                                 <div style={{color: '#fff', fontSize: 24}}>
-                                    {t("webSite.home.tip8")}
+                                    {t("webSite.home.tip1")}
                                 </div>
                                 <div style={{color: '#fff', fontSize: 14, marginTop: 20}}>
-                                    {t("webSite.home.tip3")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 14}}>
-                                    {t("webSite.home.tip4")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 14}}>
-                                    {t("webSite.home.tip5")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 14}}>
-                                    {t("webSite.home.tip6")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 14}}>
-                                    {t("webSite.home.tip7")}
+                                    {t("webSite.home.tip2")}
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div style={{marginTop: 50, marginLeft: 220}}>
+                    </Col>
+                    <Col span={12} style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        display: 'flex'
+                    }}>
+                        <div style={{width: 450, padding: 20, background: '#333675'}}>
+                            <div>
+                                <div style={{}}>
+                                    <div style={{color: '#fff', fontSize: 24}}>
+                                        {t("webSite.home.tip8")}
+                                    </div>
+                                    <div style={{color: '#fff', fontSize: 14, marginTop: 20}}>
+                                        {t("webSite.home.tip3")}
+                                    </div>
+                                    <div style={{color: '#fff', fontSize: 14}}>
+                                        {t("webSite.home.tip4")}
+                                    </div>
+                                    <div style={{color: '#fff', fontSize: 14}}>
+                                        {t("webSite.home.tip5")}
+                                    </div>
+                                    <div style={{color: '#fff', fontSize: 14}}>
+                                        {t("webSite.home.tip6")}
+                                    </div>
+                                    <div style={{color: '#fff', fontSize: 14}}>
+                                        {t("webSite.home.tip7")}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </Col>
+                </Row>
+
+                <div style={{
+                    marginTop: 50, alignItems: 'center',
+                    justifyContent: 'center',
+                    display: 'flex'
+                }}>
                     <Button
-                        style={{background: '#333675', borderColor: '#333333'}}
+                        style={{background: '#333675', borderColor: '#333333',fontSize:18}}
                         type="primary"
                         onClick={() => {
                             onSignIn();
@@ -166,17 +179,16 @@ const Home = () => {
             </div>
             <div style={{
                 height: '20vh',
-                background: '#ddd',
-                marginTop: 100,
+                background: '#ccc',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: "center"
             }}>
                 <div style={{}}>
-                    <a href="/user_privacy">User Private Policy</a>
+                    <a href="/user_privacy" style={{fontSize:20}}>User Private Policy</a>
                 </div>
                 <div style={{marginLeft: 100}}>
-                    <a href="">Copyright © GOGOYANG DATATECH LIMIT</a>
+                    <a href="" style={{fontSize:20}}>Copyright © GOGOYANG DATATECH LIMIT</a>
                 </div>
             </div>
         </div>
