@@ -66,11 +66,11 @@ const MainSider = () => {
           icon: <ReadOutlined />,
           label: t("nav.myNote"),
         },
-        {
-          key: "menuCreativeNote",
-          icon: <ReadOutlined />,
-          label: t("nav.creativeNote"),
-        },
+        // {
+        //   key: "menuCreativeNote",
+        //   icon: <ReadOutlined />,
+        //   label: t("nav.creativeNote"),
+        // },
         {
           key: "menuContact",
           icon: <TeamOutlined />,
@@ -81,16 +81,16 @@ const MainSider = () => {
           icon: <CheckSquareOutlined />,
           label: t("nav.taskTodo"),
         },
-        {
-          key: "menuQuadrantTaskList",
-          icon: <AppstoreOutlined />,
-          label: t("nav.myQuadTask"),
-        },
-        {
-          key: "menuThemeSetting",
-          icon: <SettingOutlined />,
-          label: t("nav.setting"),
-        },
+        // {
+        //   key: "menuQuadrantTaskList",
+        //   icon: <AppstoreOutlined />,
+        //   label: t("nav.myQuadTask"),
+        // },
+        // {
+        //   key: "menuThemeSetting",
+        //   icon: <SettingOutlined />,
+        //   label: t("nav.setting"),
+        // },
         {
           key: "menuMyProfilePage",
           icon: <UserOutlined />,
