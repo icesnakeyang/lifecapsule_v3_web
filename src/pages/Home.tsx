@@ -187,6 +187,9 @@ const Home = () => {
                     <a href="/user_privacy">User Private Policy</a>
                 </div>
                 <div style={{margin: 50, fontSize: 20}}>
+                    Contact us: support@tellmeafter.com
+                </div>
+                <div style={{margin: 50, fontSize: 20}}>
                     <a href="">Copyright © GOGOYANG DATATECH LIMIT</a>
                 </div>
             </div>
