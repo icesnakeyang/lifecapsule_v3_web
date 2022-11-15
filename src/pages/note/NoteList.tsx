@@ -48,6 +48,9 @@ const NoteList = () => {
     const searchKey = useSelector((state: any) => state.noteDataSlice.noteListSearchKey)
 
     useEffect(() => {
+        dispatch(saveNotePageIndex(1))
+    }, [])
+    useEffect(() => {
         loadAllData()
     }, [refresh, notePageIndex])
 
@@ -173,7 +176,7 @@ const NoteList = () => {
                             showQuickJumper
                             showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
                             onChange={(page, pz) => {
-                                console.log('page:'+page)
+                                console.log('page:' + page)
                                 dispatch(saveNotePageIndex(page));
                                 dispatch(saveNotePageSize(pz));
                             }}
