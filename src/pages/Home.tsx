@@ -17,9 +17,11 @@ import {
     saveTotalSendNote,
     saveTotalSendNoteUnread,
 } from "../store/noteSendSlice";
-import banner1 from "../resources/bg2.jpg"
+import banner1 from "../resources/aser-min.jpg"
 
 const contentStyle: React.CSSProperties = {
+    // height: '360px',
+    height: '550px',
     color: '#912929',
     lineHeight: '360px',
     textAlign: 'center',
@@ -95,104 +97,102 @@ const Home = () => {
     };
 
     return (
-        <div>
-            <div
-                style={{height: '80vh'}}
-            >
-                <div style={{}}>
-                    <img src={banner1} width="100%"/>
-                </div>
+        <div
+            style={{height: '100vh'}}
+        >
+            <div style={{}}>
+                <Carousel autoplay>
+                    <div>
+                        <h3 style={contentStyle}>
+                            <img src={banner1} width="100%"/>
+                        </h3>
+                    </div>
+                </Carousel>
+            </div>
 
-                <Row style={{marginTop: 20}}>
-                    <Col span={12} style={{
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        display: 'flex'
+            <div style={{
+                position: "absolute",
+                top: '20%',
+                left: '10%'
+            }}>
+                <div
+                    style={{
+                        width: 500,
+                        padding: 20,
+                        background: '#333675'
                     }}>
-                        <div
-                            style={{
-                                width: 450,
-                                padding: 20,
-                                background: '#333675',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                display: 'flex'
-                            }}>
-                            <div style={{}}>
-                                <div style={{color: '#fff', fontSize: 24}}>
-                                    {t("webSite.home.tip1")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 14, marginTop: 20}}>
-                                    {t("webSite.home.tip2")}
-                                </div>
-                            </div>
+                    <div style={{}}>
+                        <div style={{color: '#fff', fontSize: 42}}>
+                            {t("webSite.home.tip1")}
                         </div>
-                    </Col>
-                    <Col span={12} style={{
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        display: 'flex'
-                    }}>
-                        <div style={{width: 450, padding: 20, background: '#333675'}}>
-                            <div>
-                                <div style={{}}>
-                                    <div style={{color: '#fff', fontSize: 24}}>
-                                        {t("webSite.home.tip8")}
-                                    </div>
-                                    <div style={{color: '#fff', fontSize: 14, marginTop: 20}}>
-                                        {t("webSite.home.tip3")}
-                                    </div>
-                                    <div style={{color: '#fff', fontSize: 14}}>
-                                        {t("webSite.home.tip4")}
-                                    </div>
-                                    <div style={{color: '#fff', fontSize: 14}}>
-                                        {t("webSite.home.tip5")}
-                                    </div>
-                                    <div style={{color: '#fff', fontSize: 14}}>
-                                        {t("webSite.home.tip6")}
-                                    </div>
-                                    <div style={{color: '#fff', fontSize: 14}}>
-                                        {t("webSite.home.tip7")}
-                                    </div>
-                                </div>
-                            </div>
+                        <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                            {t("webSite.home.tip2")}
                         </div>
-                    </Col>
-                </Row>
-
-                <div style={{
-                    marginTop: 50, alignItems: 'center',
-                    justifyContent: 'center',
-                    display: 'flex'
-                }}>
-                    <Button
-                        style={{background: '#333675', borderColor: '#333333',fontSize:18}}
-                        type="primary"
-                        onClick={() => {
-                            onSignIn();
-                        }}
-                        size='large'
-                    >
-                        Free To Try
-                    </Button>
+                    </div>
                 </div>
             </div>
-            <div style={{
-                height: '20vh',
-                background: '#ccc',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: "center"
-            }}>
-                <div style={{}}>
-                    <a href="/user_privacy" style={{fontSize:20}}>User Private Policy</a>
+
+            <div style={{position: 'absolute', top: '30%', left: '50%', padding: 20, background: '#333675'}}>
+                <div style={{width: 600}}>
+                    <div style={{color: '#fff', fontSize: 42}}>
+                        {t("webSite.home.tip8")}
+                    </div>
+                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                        {t("webSite.home.tip3")}
+                    </div>
+                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                        {t("webSite.home.tip4")}
+                    </div>
+                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                        {t("webSite.home.tip5")}
+                    </div>
+                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                        {t("webSite.home.tip6")}
+                    </div>
+                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                        {t("webSite.home.tip7")}
+                    </div>
                 </div>
-                <div style={{marginLeft: 100}}>
-                    <a href="" style={{fontSize:20}}>Copyright © GOGOYANG DATATECH LIMIT</a>
+            </div>
+
+            <div style={{marginTop: 50, marginLeft: 400}}>
+                <Button
+                    style={{background: '#333675', borderColor: '#333333', width: 200, height: 60, fontSize: 24}}
+                    type="primary"
+                    onClick={() => {
+                        onSignIn();
+                    }}
+                    size='large'
+                >
+                    Free To Try
+                </Button>
+            </div>
+
+            <div>
+                {/*<h3>Embed YouTube video - <a href="https://www.cluemediator.com">Clue Mediator</a></h3>*/}
+                {/*<ReactPlayer*/}
+                {/*    url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"*/}
+                {/*/>*/}
+            </div>
+
+            <div style={{
+                position: "fixed",
+                bottom: 0,
+                background: '#ccc',
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'space-around'
+            }}>
+                <div style={{margin: 50, fontSize: 20}}>
+                    <a href="/user_privacy">User Private Policy</a>
+                </div>
+                <div style={{margin: 50, fontSize: 20}}>
+                    <a href="">Copyright © GOGOYANG DATATECH LIMIT</a>
                 </div>
             </div>
         </div>
-    );
+    )
+        ;
 };
 
 export default Home;
