@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { apiRequestRsaPublicKey, apiSaveMyNote } from "../../api/Api";
 import { Encrypt, GenerateKey, RSAencrypt } from "../../common/crypto";
 import CryptoJS from "crypto-js";
-import { EditOutlined } from "@ant-design/icons";
 const NoteNew = () => {
   const { t } = useTranslation();
   const [title, setTitle] = useState("");
@@ -142,29 +141,6 @@ const NoteNew = () => {
               setContent(e.target.value);
             }}
           />
-        </Form.Item>
-        <Form.Item>
-          <Radio.Group
-            onChange={() => {
-              if (encrypt === 1) {
-                setEncrypt(0);
-              } else {
-                setEncrypt(1);
-              }
-            }}
-            value={encrypt}
-          >
-            <Radio value={1}>
-              <span style={{ color: themeColor.textLight }}>
-                {t("note.encrypt")}
-              </span>
-            </Radio>
-            <Radio value={0}>
-              <span style={{ color: themeColor.textLight }}>
-                {t("note.noEncrypt")}
-              </span>
-            </Radio>
-          </Radio.Group>
         </Form.Item>
       </Form>
       <div

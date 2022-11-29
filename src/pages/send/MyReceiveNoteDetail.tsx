@@ -43,7 +43,8 @@ const MyReceiveNoteDetail = () => {
         apiGetMyReceiveNote(params)
           .then((res: any) => {
             if (res.code === 0) {
-              let data = res.data.noteSendLog;
+              let data = res.data;
+              console.log(data)
               setTriggerType(data.triggerType);
               if (data.userEncodeKey) {
                 // setEncrypt(0);
@@ -58,7 +59,7 @@ const MyReceiveNoteDetail = () => {
                 setNoteContent(data.content);
               }
 
-              setSendLog(res.data.noteSendLog);
+              setSendLog(res.data);
               setLoading(false);
             } else {
               message.error(t("syserr." + res.code));

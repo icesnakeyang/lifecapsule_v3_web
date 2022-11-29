@@ -1,48 +1,38 @@
-import {Breadcrumb, Button, Pagination, Spin, Tabs, Tag} from "antd";
-import {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
-import {useDispatch, useSelector} from "react-redux";
-import {apiListMyNoteSendOutLog, apiListMyTriggerQue} from "../../api/Api";
+import {Breadcrumb, Button, message, Pagination, Spin} from "antd";
+import TriggerRow from "./TriggerRow";
+import MySendNoteRow from "../send/MysendNoteRow";
 import {
     saveSendNoteList,
     saveSendPageIndex,
     saveSendPageSize,
     saveTotalSendNote,
-    saveTotalSendNoteUnread,
+    saveTotalSendNoteUnread
 } from "../../store/noteSendSlice";
-import MySendNoteRow from "./MysendNoteRow";
-import TriggerRow from "../mySendOutNote/TriggerRow";
+import {useTranslation} from "react-i18next";
+import {useSelector} from "react-redux";
+import {useEffect, useState} from "react";
+import {apiListMyNoteSendOutLog, apiListMyTriggerQue} from "../../api/Api";
 
-const MySendNote = () => {
+const MyTriggerListPage = () => {
     const {t} = useTranslation();
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
     const [loading, setLoading] = useState(true);
-    const dispatch = useDispatch();
-    const sendNoteList = useSelector(
-        (state: any) => state.noteSendSlice.sendNoteList
-    );
-    const totalSendNote = useSelector(
-        (state: any) => state.noteSendSlice.totalSendNote
-    );
-    const totalSendNoteUnread = useSelector(
-        (state: any) => state.noteSendSlice.totalSendNoteUnread
-    );
-    const sendPageIndex = useSelector(
-        (state: any) => state.noteSendSlice.sendPageIndex
-    );
-    const sendPageSize = useSelector(
-        (state: any) => state.noteSendSlice.sendPageSize
-    );
-
+    const [tabTriggerType, setTabTriggerType] = useState('QUE')
     const [triggerQueIndex, setTriggerQueIndex] = useState(1)
     const [triggerQueSize, setTriggerQueSize] = useState(10)
     const [triggerQueList, setTriggerQueList] = useState([])
+    const [sendOutPageIndex, setSendOutPageIndex] = useState(1)
+    const [sendOutPageSize, setSendOutPageSize] = useState(10)
     const [totalTriggerQue, setTotalTriggerQue] = useState([])
-    const [tabTriggerType, setTabTriggerType] = useState('QUE')
+    const [sendPageIndex, setSendPageIndex] = useState(1)
+    const [sendPageSize, setSendPageSize] = useState(10)
+    const [sendNoteList, setSendNoteList] = useState([])
+    const [totalSendNote, setTotalSendNote] = useState([])
+    const [totalSendNoteUnread, setTotalSendNoteUnread] = useState([])
 
     useEffect(() => {
         loadAllData();
-    }, [sendPageIndex]);
+    }, [triggerQueIndex]);
 
     const loadAllData = () => {
         let params = {
@@ -51,9 +41,9 @@ const MySendNote = () => {
         };
         apiListMyNoteSendOutLog(params).then((res: any) => {
             if (res.code === 0) {
-                dispatch(saveSendNoteList(res.data.sendNoteList));
-                dispatch(saveTotalSendNote(res.data.totalSendNote));
-                dispatch(saveTotalSendNoteUnread(res.data.totalSendNoteUnread));
+                setSendNoteList(res.data.sendNoteList)
+                setTotalSendNote(res.data.totalSendNote)
+                setTotalSendNoteUnread(res.data.totalSendNoteUnread)
                 setLoading(false);
             }
         });
@@ -66,9 +56,15 @@ const MySendNote = () => {
             if (res.code === 0) {
                 setTriggerQueList(res.data.triggerList)
                 setTotalTriggerQue(res.data.totalTrigger)
+                setLoading(false)
+            } else {
+                message.error(t('syserr.' + res.code))
+                setLoading(false)
             }
+        }).catch(() => {
+            message.error(t('syserr.10001'))
+            setLoading(false)
         })
-
     };
 
     return (
@@ -107,15 +103,15 @@ const MySendNote = () => {
                                                     width: 120
                                                 }}>{t('myTrigger.que')}</Button>
                                         <Button
-                                                style={{background: themeColor.color2, width: 120, marginLeft: 10}}
-                                                onClick={() => {
-                                                    setTabTriggerType('SEND_OUT')
-                                                }}>{t('myTrigger.sendOut')}</Button>
+                                            style={{background: themeColor.color2, width: 120, marginLeft: 10}}
+                                            onClick={() => {
+                                                setTabTriggerType('SEND_OUT')
+                                            }}>{t('myTrigger.sendOut')}</Button>
                                     </> :
                                     tabTriggerType === 'SEND_OUT' ?
                                         <>
                                             <Button
-                                                    style={{ width: 120}} onClick={() => {
+                                                style={{width: 120}} onClick={() => {
                                                 setTabTriggerType('QUE')
                                             }
                                             }>{t('myTrigger.que')}</Button>
@@ -136,42 +132,11 @@ const MySendNote = () => {
                                     ))
                                     : null : null
                         }
-                        {sendNoteList.length > 0 ? (
-                            <>
-                                <div style={{marginTop: 20}}>
-                                    {sendNoteList.map((item: any, index: any) => (
-                                        <MySendNoteRow item={item} key={index}/>
-                                    ))}
-                                </div>
-                                <Pagination
-                                    style={{marginTop: 10, color: themeColor.textLight}}
-                                    total={totalSendNote}
-                                    current={sendPageIndex}
-                                    //   showQuickJumper
-                                    showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
-                                    onChange={(page, pz) => {
-                                        dispatch(saveSendPageIndex(page));
-                                        dispatch(saveSendPageSize(pz));
-                                    }}
-                                />
-                            </>
-                        ) : (
-                            <div
-                                style={{
-                                    display: "flex",
-                                    justifyContent: "center",
-                                    marginTop: 200,
-                                    color: themeColor.textLight,
-                                    fontSize: 20,
-                                }}
-                            >
-                                {t("common.noData")}
-                            </div>
-                        )}
+
                     </div>
                 )}
             </div>
         </div>
-    );
-};
-export default MySendNote;
+    )
+}
+export default MyTriggerListPage

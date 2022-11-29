@@ -14,7 +14,8 @@
     "noData": "No data",
     "noTitle": "No title",
     "unRead": "Unread",
-    "btAdd": "Add"
+    "btAdd": "Add",
+    "btSelect": "Select"
   },
   "nav": {
     "home": "Home",
@@ -233,7 +234,24 @@
     "modalNicknameTitle": "Edit nickname",
     "tipSaveNicknameSuccess": "Save nickname success"
   },
-  "noteSend": {
+  "noteSent": {
+    "tipNoteSend": "Send method description",
+    "tipNoteSend2": "You can set a email who you want to send, The system will send to the email directly",
+    "tipNoteSend3": "For the security and privacy, you need to set a encode key, we will encrypt note use this encode key. And you also need to tell this encode key to recipient, because she/he need input this key to decrypt the note.",
+    "tipTitle": "The note title will display to recipient",
+    "recipientEmail": "Send to email",
+    "tipRecipientEmail": "Email of who you want to send",
+    "fromName": "From",
+    "tipFromName": "This name will display to receive user",
+    "toName": "To",
+    "tipToName": "The name of person who you want to send",
+    "encryptSend": "Encrypt",
+    "tip2": "For your private safe, please set a code to encrypt the note. No one can read this note except you give them this code",
+    "encode": "Encrypt code",
+    "tip1": "e.g: I will be back",
+    "tipEncodeWarn1": "Warning! Please remember this code, if you fotget it, there will be no way to find it back!",
+    "tipEncode2": "If you don't wanna set encrypt key, just leave it empty",
+    "btSend": "Send",
     "tipSendSuccess": "Send success",
     "tipNoEmail": "You must specify the receiver email",
     "receiverEmail": "Receiver email",
@@ -247,7 +265,15 @@
     "sendTime": "Send time",
     "readTime": "Read time",
     "decode": "Decrypt code",
-    "content": "Note content"
+    "sendContent": "Send content",
+    "tipSendContent": "This content will be send to recipient",
+    "tipNoTitle": "Please input title",
+    "tipNoToName": "Please input the name who you want to send",
+    "tipNoFromName": "Please input from name",
+    "tipNoContent": "You cannot send an empty note",
+    "preview": "Recipient preview",
+    "recentContact": "My recent contact",
+    "toEmail": "To email"
   },
   "webSite": {
     "home": {
@@ -264,6 +290,19 @@
   "tag": {
     "tags": "Tags",
     "hotTags": "Hot tags"
+  },
+  "email": {
+    "tipValidateEmailErr": "Please input validate email"
+  },
+  "myTrigger": {
+    "que": "Send que",
+    "sendOut": "Send already"
+  },
+  "triggerQue": {
+    "status": "Current status",
+    "ACTIVE": "Waiting to send",
+    "notSend": "Not send",
+    "sendAlready": "Send already"
   },
   "syserr": {
     "10001": "System or network error",

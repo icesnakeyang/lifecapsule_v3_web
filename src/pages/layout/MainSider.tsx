@@ -47,7 +47,7 @@ const MainSider = () => {
       navigate("/main/MyReceiveNote");
     }
     if (e.key === "menuMySendNote") {
-      navigate("/main/MySendNote");
+      navigate("/main/MyTriggerListPage");
     }
   };
   return (

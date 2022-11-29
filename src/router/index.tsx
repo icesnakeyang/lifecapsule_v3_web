@@ -29,6 +29,13 @@ import MySendNoteDetail from "../pages/send/MySendNoteDetail";
 import LoginByEmail from "../pages/login/LoginByEmail";
 import Testpage from "../pages/testpage";
 import UserPrivacy from "../pages/UserPrivacy";
+import TodoNew from "../pages/task/todolist/TodoNew";
+import NoteSendMethod from "../pages/noteSend/NoteSendMehtod";
+import InstantSend from "../pages/noteSend/InstantSend";
+import PrimarySend from "../pages/noteSend/PrimarySend";
+import SendDatetime from "../pages/noteSend/SendDatetime";
+import MyTriggerListPage from "../pages/mySendOutNote/MyTriggerListPage";
+import MyTriggerEdit from "../pages/mySendOutNote/MyTriggerEdit";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -223,6 +230,62 @@ const Routers = () => {
                     element={
                         <ProtectRouter>
                             <MySendNoteDetail/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/TodoNew"
+                    element={
+                        <ProtectRouter>
+                            <TodoNew/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/NoteSendMethod"
+                    element={
+                        <ProtectRouter>
+                            <NoteSendMethod/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/InstantSend"
+                    element={
+                        <ProtectRouter>
+                            <InstantSend/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/PrimarySend"
+                    element={
+                        <ProtectRouter>
+                            <PrimarySend/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/SendDatetime"
+                    element={
+                        <ProtectRouter>
+                            <SendDatetime/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/MyTriggerListPage"
+                    element={
+                        <ProtectRouter>
+                            <MyTriggerListPage/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/MyTriggerEdit"
+                    element={
+                        <ProtectRouter>
+                            <MyTriggerEdit/>
                         </ProtectRouter>
                     }
                 />

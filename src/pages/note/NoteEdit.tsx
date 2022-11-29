@@ -37,6 +37,7 @@ import HotTagRow from "./HotTagRow";
 import NoteEditTagRow from "./NoteEditTagRow";
 import NoteEditTagRowEdit from "./NoteEditTagRowEdit";
 import {saveEditTags} from "../../store/tagSlice";
+import {saveSendNote} from "../../store/noteSendSlice";
 
 const NoteEdit = () => {
     const {noteId}: any = useLocation().state;
@@ -292,7 +293,12 @@ const NoteEdit = () => {
                         style={{marginLeft: "10px"}}
                         icon={<AimOutlined/>}
                         onClick={() => {
-                            navigate("/main/TriggerPage", {state: {noteId}});
+                            let data={
+                                content,
+                                title
+                            }
+                            dispatch(saveSendNote(data))
+                            navigate("/main/NoteSendMethod", {state: {noteId}});
                         }}
                     >
                         {t("trigger.btTrigger")}
@@ -370,7 +376,7 @@ const NoteEdit = () => {
                                 {t("note.content")}
                             </div>
                             <Input.TextArea
-                                autoSize={{minRows: 3}}
+                                autoSize={true}
                                 style={{
                                     color: themeColor.textLight,
                                     backgroundColor: themeColor.blockDark,
@@ -383,31 +389,7 @@ const NoteEdit = () => {
                                 }}
                             />
                         </Form.Item>
-                        <Form.Item>
-                            <Radio.Group
-                                onChange={() => {
-                                    if (encrypt === 1) {
-                                        setEncrypt(0);
-                                        setEditing(true);
-                                    } else {
-                                        setEncrypt(1);
-                                        setEditing(true);
-                                    }
-                                }}
-                                value={encrypt}
-                            >
-                                <Radio value={1}>
-                    <span style={{color: themeColor.textLight}}>
-                      {t("note.encrypt")}
-                    </span>
-                                </Radio>
-                                <Radio value={0}>
-                    <span style={{color: themeColor.textLight}}>
-                      {t("note.noEncrypt")}
-                    </span>
-                                </Radio>
-                            </Radio.Group>
-                        </Form.Item>
+
                         <Form.Item></Form.Item>
                         <div
                             style={{
@@ -498,7 +480,7 @@ const NoteEdit = () => {
                 <Divider/>
                 <div>
                     <div>{t('tag.hotTags')}</div>
-                    <div style={{marginTop:10}}>
+                    <div style={{marginTop: 10}}>
                         {hotTags && hotTags.length > 0 ? hotTags.map((item, index) => (
                             <HotTagRow item={item} key={index} onSelectTag={(data: any) => {
                                 if (editTags.length === 0) {

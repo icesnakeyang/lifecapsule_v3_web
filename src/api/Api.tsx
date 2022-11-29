@@ -106,8 +106,12 @@ export const apiListMyTaskTodo = (params: any) => {
     return Post(`${host}/web/task/todo/listMyTaskTodo`, params);
 };
 
-export const apiSaveMyTaskTodo = (params: any) => {
-    return Post(`${host}/web/task/todo/saveMyTaskTodo`, params);
+export const apiCreateMyTaskTodo = (params: any) => {
+    return Post(`${host}/web/task/todo/createMyTaskTodo`, params);
+};
+
+export const apiUpdateMyTaskTodo = (params: any) => {
+    return Post(`${host}/web/task/todo/updateMyTaskTodo`, params);
 };
 
 export const apiGetMyTaskTodo = (params: any) => {
@@ -221,6 +225,10 @@ export const apiListMyNoteSendOutLog = (params: any) => {
     return Post(`${host}/web/noteSend/listMyNoteSendOutLog`, params);
 };
 
+export const apiListMyTriggerQue = (params: any) => {
+    return Post(`${host}/web/trigger/listMyTriggerQue`, params);
+};
+
 export const apiGetMyNoteSendOutLog = (params: any) => {
     return Post(`${host}/web/noteSend/getMyNoteSendOutLog`, params);
 };
@@ -243,4 +251,16 @@ export const apiListUserNoteTag = () => {
 
 export const apiListHotNoteTags = () => {
     return Get(`${host}/web/tag/listHotNoteTags`);
+};
+
+export const apiSendVerifyCodeToEmail = (params: any) => {
+    return Post(`${host}/web/user/sendVerifyCodeToEmail`, params);
+};
+
+export const apiUpdateMyTaskTodoCompleteStatus = (params: any) => {
+    return Post(`${host}/web/task/todo/updateMyTaskTodoCompleteStatus`, params);
+};
+
+export const apiCreateTriggerInstant = (params: any) => {
+    return Post(`${host}/web/trigger/createTriggerInstant`, params);
 };
