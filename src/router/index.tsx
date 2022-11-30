@@ -36,6 +36,8 @@ import PrimarySend from "../pages/noteSend/PrimarySend";
 import SendDatetime from "../pages/noteSend/SendDatetime";
 import MyTriggerListPage from "../pages/mySendOutNote/MyTriggerListPage";
 import MyTriggerEdit from "../pages/mySendOutNote/MyTriggerEdit";
+import LoginPage from "../pages/login/LoginPage";
+import SetLoginName from "../pages/login/SetLoginName";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -289,10 +291,19 @@ const Routers = () => {
                         </ProtectRouter>
                     }
                 />
+                <Route
+                    path="/main/SetLoginName"
+                    element={
+                        <ProtectRouter>
+                            <SetLoginName/>
+                        </ProtectRouter>
+                    }
+                />
             </Route>
 
             <Route path="/guest" element={<GuestLayout/>}>
                 <Route path="/guest/LoginByEmail" element={<LoginByEmail/>}/>
+                <Route path="/guest/LoginPage" element={<LoginPage/>}/>
                 {/*  <Route path="/guest/register" element={<Register />} />*/}
             </Route>
         </Routes>

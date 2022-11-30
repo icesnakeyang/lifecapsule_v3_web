@@ -58,6 +58,7 @@ const Home = () => {
 
     const onSignIn = () => {
         if (!userData.token) {
+            console.log('no token')
             /**
              * 如果没有token，就注册一个新用户
              */
@@ -70,6 +71,7 @@ const Home = () => {
                 }
             });
         } else {
+            console.log('has token')
             apiSignToken().then((res: any) => {
                 if (res.code === 0) {
                     let data = {

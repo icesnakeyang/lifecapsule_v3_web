@@ -15,7 +15,8 @@
     "noTitle": "No title",
     "unRead": "Unread",
     "btAdd": "Add",
-    "btSelect": "Select"
+    "btSelect": "Select",
+    "constructing": "Constructing, will be online soon"
   },
   "nav": {
     "home": "Home",
@@ -36,8 +37,12 @@
     "mySendNote": "My Send out note"
   },
   "login": {
+    "tabEmail": "Email",
+    "titleEmail": "Sign by email",
+    "emailHolder": "Email",
+    "tabLoginName": "Username & password",
     "greeting1": "Welcome Lifecapsule",
-    "greeting2": "Write letter send to future",
+    "greeting2": "Write letter and send to future",
     "greeting3": "Welcome to register Lifecapsule",
     "btSignIn": "Sign in",
     "btSignIning": "Sign in",
@@ -48,7 +53,7 @@
     "tipNoLoginName": "Please input login name",
     "tipNoPassword": "Please input login password",
     "tipNoPassword2": "Please input confirm password",
-    "tipNoPassword3": "The two password you inputed is not same",
+    "tipNoPassword3": "The two password you input is not same",
     "login": "Login",
     "register": "Register",
     "tipLoginSuccess": "Login success",
@@ -58,7 +63,8 @@
     "tipNoEmailCode": "Please input email verify code",
     "email": "Email",
     "emailCode": "Verify code",
-    "btGuestIn": "Sign in as guest"
+    "btGuestIn": "Sign in as guest",
+    "titleLoginName": "Sign by login name and password"
   },
   "note": {
     "noteList": "Note list",
@@ -232,7 +238,15 @@
     "nickname": "Nickname",
     "btNickname": "Change nickname",
     "modalNicknameTitle": "Edit nickname",
-    "tipSaveNicknameSuccess": "Save nickname success"
+    "tipSaveNicknameSuccess": "Save nickname success",
+    "titleLoginName": "Set login name and password",
+    "tipTitleLoginName": "You can sign in account by login name and password",
+    "loginName": "Login name",
+    "tipNoLoginName": "You have not set your login name and password yet.",
+    "btSetLoginName": "Set login name",
+    "tipSetLoginNameSuccess": "Set login name and password success",
+    "password": "Password",
+    "password2": "Confirm password"
   },
   "noteSent": {
     "tipNoteSend": "Send method description",
@@ -316,8 +330,10 @@
     "10033": "This trigger exist already, cannot add",
     "10045": "Email verify code error",
     "10046": "You have bound email already, please sign out first",
-    "10047": "No such user",
+    "10047": "No such user, please sign in again",
     "10050": "This email has been set to recipient already",
-    "10053": "Email have not been registered"
+    "10053": "Email have not been registered",
+    "10075": "The login name has been registered by others",
+    "10076": "Login name or password error"
   }
 }

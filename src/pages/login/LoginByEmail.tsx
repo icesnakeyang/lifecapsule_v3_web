@@ -2,9 +2,9 @@ import {Button, Card, Form, Input, message} from "antd";
 import {useState, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
-import {apiSendVerifyCodeToEmail, apiSignByEmail} from "../../api/Api";
+import {apiSendVerifyCodeToEmail, apiSignByEmail, apiSignInByNothing} from "../../api/Api";
 import {useNavigate} from "react-router-dom";
-import {saveUserToken} from "../../store/userDataSlice";
+import {saveUserData, saveUserToken} from "../../store/userDataSlice";
 
 let timer: any = null;
 
@@ -65,7 +65,18 @@ const LoginByEmail = () => {
     }
 
     const onSignAsGuest = () => {
-        navigate("/", {replace: true})
+        console.log('no token')
+        /**
+         * 如果没有token，就注册一个新用户
+         */
+        // navigate("/guest/login");
+        apiSignInByNothing().then((res: any) => {
+            if (res.code === 0) {
+                dispatch(saveUserData(res.data));
+                localStorage.setItem("lifecapsule3_token", res.data.token);
+                navigate("/main/dashboard");
+            }
+        });
     }
 
     const onSendCode = () => {

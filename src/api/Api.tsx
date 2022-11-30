@@ -264,3 +264,11 @@ export const apiUpdateMyTaskTodoCompleteStatus = (params: any) => {
 export const apiCreateTriggerInstant = (params: any) => {
     return Post(`${host}/web/trigger/createTriggerInstant`, params);
 };
+
+export const apiSignByLoginName = (params: any) => {
+    return Post(`${host}/web/user/signByLoginName`, params);
+};
+
+export const apiSetLoginNamePassword = (params: any) => {
+    return Post(`${host}/web/user/setLoginNamePassword`, params);
+};

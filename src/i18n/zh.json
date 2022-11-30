@@ -14,7 +14,8 @@
     "noData": "没有数据",
     "noTitle": "无标题",
     "unRead": "未读",
-    "btAdd": "添加"
+    "btAdd": "添加",
+    "constructing": "建设中，敬请期待！"
   },
   "nav": {
     "home": "首页",
@@ -35,6 +36,10 @@
     "mySendNote": "我发送的笔记"
   },
   "login": {
+    "tabEmail": "Email",
+    "titleEmail": "Email认证登录",
+    "emailHolder": "请输入Email邮箱",
+    "tabLoginName": "用户名密码",
     "greeting1": "欢迎登录时空笔记",
     "greeting2": "写一封信给未来的自己吧",
     "greeting3": "欢迎注册时空笔记",
@@ -57,7 +62,8 @@
     "tipNoEmailCode": "请输入校验码",
     "email": "Email",
     "emailCode": "验证码",
-    "btGuestIn": "游客登录"
+    "btGuestIn": "游客登录",
+    "titleLoginName": "用户名密码登录"
   },
   "note": {
     "noteList": "我的笔记",
@@ -232,7 +238,14 @@
     "nickname": "昵称",
     "btNickname": "修改昵称",
     "modalNicknameTitle": "编辑昵称",
-    "tipSaveNicknameSuccess": "保存昵称成功"
+    "tipSaveNicknameSuccess": "保存昵称成功",
+    "titleLoginName": "设置登录用户名和密码",
+    "tipTitleLoginName": "设置后可通过用户名密码登录",
+    "loginName": "登录名",
+    "tipNoLoginName": "你还没有设置你的登录名和密码，设置后你可以使用登录名和密码登录。",
+    "btSetLoginName": "设置登录名",
+    "password": "密码",
+    "password2": "确认密码"
   },
   "noteSend": {
     "tipSendSuccess": "发送成功",
@@ -268,6 +281,8 @@
     "10046": "您已经绑定过email了，若要更换，请退出后再绑定",
     "10047": "没有查询到用户信息",
     "10050": "该Email已经添加到接收人了",
-    "10053": "该Email还没有注册"
+    "10053": "该Email还没有注册",
+    "10075": "登录名已被其他用户注册了",
+    "10076": "登录名或密码错误"
   }
 }
