@@ -119,18 +119,30 @@ const MyTriggerListPage = () => {
                                                     style={{
                                                         width: 120,
                                                         marginLeft: 10
-                                                    }}>{t('myTrigger.sendOut')}</Button>
+                                                    }} onClick={() => {
+                                                setTabTriggerType('SEND_OUT')
+                                            }
+                                            }>{t('myTrigger.sendOut')}</Button>
                                         </> : null
                                 }
                             </div>
                         </div>
+                        <div>lskdjflasdjfl</div>
                         {
                             tabTriggerType === 'QUE' ?
-                                triggerQueList.length > 0 ?
-                                    triggerQueList.map((item, index) => (
-                                        <TriggerRow item={item} key={index}/>
-                                    ))
-                                    : null : null
+                                <>
+                                    <div style={{color: 'red'}}>lkdsjf</div>
+                                    {triggerQueList.length > 0 ?
+                                        triggerQueList.map((item, index) => (
+                                            <TriggerRow item={item} key={index}/>
+                                        ))
+                                        : 'no trigger to que'
+                                    }
+                                </>
+                                :
+                                <div style={{color:'red'}}>
+                                'send already'
+                                </div>
                         }
 
                     </div>
