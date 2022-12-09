@@ -73,7 +73,7 @@ const NoteList = () => {
                 } else {
                     message.error(t("syserr." + res.code));
                     if (res.code === 10003) {
-                        navigate("/guest/login");
+                        navigate("/guest/LoginPage");
                     }
                 }
             })
