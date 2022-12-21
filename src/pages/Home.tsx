@@ -100,7 +100,7 @@ const Home = () => {
 
     return (
         <div
-            style={{height: '100vh'}}
+            style={{minHeight: '100vh'}}
         >
             <div style={{}}>
                 <Carousel autoplay>

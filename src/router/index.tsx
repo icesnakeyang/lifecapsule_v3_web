@@ -14,8 +14,6 @@ import SelectRecipient from "../pages/recipient/SelectRecipient";
 import TriggerDetail from "../pages/trigger/TriggerDetail";
 import TodoPage from "../pages/task/todolist/TodoPage";
 import TodoEdit from "../pages/task/todolist/TodoEdit";
-import CreativeNoteList from "../pages/creativeNote/CreativeNoteList";
-import CreativeNoteEdit from "../pages/creativeNote/CreativeNoteEdit";
 import QuadrantTaskList from "../pages/task/quadrant/QuadrantTaskList";
 import QuadrantTaskEdit from "../pages/task/quadrant/QuadrantTaskEdit";
 import QuadrantTaskNew from "../pages/task/quadrant/QuadrantTaskNew";
@@ -38,6 +36,9 @@ import MyTriggerListPage from "../pages/mySendOutNote/MyTriggerListPage";
 import MyTriggerEdit from "../pages/mySendOutNote/MyTriggerEdit";
 import LoginPage from "../pages/login/LoginPage";
 import SetLoginName from "../pages/login/SetLoginName";
+import AntiDelayNoteList from "../pages/antiDelayNote/AntiDelayNoteList";
+import AntiDelayNoteEdit from "../pages/antiDelayNote/AntiDelayNoteEdit";
+import AntiDelayNoteNew from "../pages/antiDelayNote/AntiDelayNoteNew";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -136,22 +137,6 @@ const Routers = () => {
                     element={
                         <ProtectRouter>
                             <TodoEdit/>
-                        </ProtectRouter>
-                    }
-                />
-                <Route
-                    path="/main/CreativeNoteList"
-                    element={
-                        <ProtectRouter>
-                            <CreativeNoteList/>
-                        </ProtectRouter>
-                    }
-                />
-                <Route
-                    path="/main/CreativeNoteEdit"
-                    element={
-                        <ProtectRouter>
-                            <CreativeNoteEdit/>
                         </ProtectRouter>
                     }
                 />
@@ -296,6 +281,30 @@ const Routers = () => {
                     element={
                         <ProtectRouter>
                             <SetLoginName/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/AntiDelayNoteList"
+                    element={
+                        <ProtectRouter>
+                            <AntiDelayNoteList/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/AntiDelayNoteEdit"
+                    element={
+                        <ProtectRouter>
+                            <AntiDelayNoteEdit/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/AntiDelayNoteNew"
+                    element={
+                        <ProtectRouter>
+                            <AntiDelayNoteNew/>
                         </ProtectRouter>
                     }
                 />

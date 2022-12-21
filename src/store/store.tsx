@@ -10,11 +10,11 @@ import recipientSlice from "./recipinetSlice";
 import triggerSlice from "./triggerSlice";
 import commonSlice from "./commonSlice";
 import taskTodoSlice from "./taskTodoSlice";
-import creativeNoteSlice from "./creativeNoteSlice";
 import themeSlice from "./themeSlice";
 import taskQuadSlice from "./taskQuadSlic";
 import noteSendSlice from "./noteSendSlice";
 import tagSlice from "./tagSlice";
+import antiDelaySlice from "./antiDelaySlice";
 
 const persistConfig = {
     key: "root",
@@ -29,7 +29,7 @@ const rootReducer = combineReducers({
     triggerSlice,
     commonSlice,
     taskTodoSlice,
-    creativeNoteSlice,
+    antiDelaySlice,
     themeSlice,
     taskQuadSlice,
     noteSendSlice,

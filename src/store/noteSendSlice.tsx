@@ -58,6 +58,9 @@ export const noteSendSlice = createSlice({
         },
         saveSendToEmail: (state: any, action: any) => {
             state.sendToEmail = action.payload
+        },
+        saveSendNoteContent:(state:any, action:any)=>{
+            state.sendNoteContent=action.payload
         }
     },
 });
@@ -75,7 +78,8 @@ export const {
     saveSendPageSize,
     saveSendNote,
     saveSendToName,
-    saveSendToEmail
+    saveSendToEmail,
+    saveSendNoteContent
 } = noteSendSlice.actions;
 
 export default noteSendSlice.reducer;

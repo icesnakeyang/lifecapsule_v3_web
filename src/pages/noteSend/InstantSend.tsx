@@ -7,7 +7,7 @@ import {ExclamationCircleOutlined, SmileTwoTone, TeamOutlined} from "@ant-design
 import {apiCreateTriggerInstant, apiListMyContact, apiRequestRsaPublicKey} from "../../api/Api";
 import {Encrypt, GenerateKey, RSAencrypt} from "../../common/crypto";
 import CryptoJS from "crypto-js";
-import {saveSendNote, saveSendToEmail, saveSendToName} from "../../store/noteSendSlice";
+import {saveSendNote, saveSendNoteContent, saveSendToEmail, saveSendToName} from "../../store/noteSendSlice";
 import SendContactRow from "./SendContactRow";
 
 const InstantSend = () => {
@@ -248,6 +248,8 @@ const InstantSend = () => {
                                     <div style={{color: themeColor.textLight}}> {t('noteSent.sendContent')}</div>
                                     <Input.TextArea autoSize={true} value={content} onChange={(e: any) => {
                                         setContent(e.target.value)
+                                        console.log(e.target.value)
+                                        dispatch(saveSendNoteContent(e.target.value))
                                     }}/>
                                     <div style={{color: themeColor.textHolder}}> {t('noteSent.tipSendContent')}</div>
                                 </Form.Item>

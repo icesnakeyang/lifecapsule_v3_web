@@ -272,3 +272,23 @@ export const apiSignByLoginName = (params: any) => {
 export const apiSetLoginNamePassword = (params: any) => {
     return Post(`${host}/web/user/setLoginNamePassword`, params);
 };
+
+export const apiListMyAntiDelayNote = (params: any) => {
+    return Post(`${host}/web/anti_delay/listMyAntiDelayNote`, params);
+};
+
+export const apiGetMyAntiDelayNote = (params: any) => {
+    return Post(`${host}/web/anti_delay/getMyAntiDelayNote`, params);
+};
+
+export const apiLoadLastMyAntiDelayNote = (params: any) => {
+    return Post(`${host}/web/anti_delay/loadLastMyAntiDelayNote`, params);
+};
+
+export const apiCreateMyAntiDelayNote = (params: any) => {
+    return Post(`${host}/web/anti_delay/createMyAntiDelayNote`, params);
+};
+
+export const apiUpdateMyAntiDelayNote = (params: any) => {
+    return Post(`${host}/web/anti_delay/updateMyAntiDelayNote`, params);
+};
