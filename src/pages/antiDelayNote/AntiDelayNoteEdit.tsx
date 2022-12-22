@@ -159,8 +159,12 @@ const AntiDelayNoteEdit = (data: any) => {
         <div>
             <div style={{color: themeColor.textLight}}>{t('antiDelayNote.antiDelayTile')}</div>
             <div style={{marginTop: 10}}>
-                <Input style={{color: themeColor.textLight, background: themeColor.blockDark, fontSize: 20}}
-                       value={title} onChange={e => {
+                <Input.TextArea autoSize style={{
+                    color: themeColor.textLight,
+                    background: themeColor.blockDark,
+                    fontSize: 16
+                }}
+                                value={title} onChange={e => {
                     setTitle(e.target.value)
                 }}/>
             </div>
@@ -169,7 +173,7 @@ const AntiDelayNoteEdit = (data: any) => {
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
                     <Card style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
                           headStyle={{color: themeColor.textLight}} title={t('antiDelayNote.yesterday')}>
-                        <Input.TextArea style={{background: themeColor.blockDark, color: themeColor.textLight}}
+                        <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         onChange={e => {
                                             setHappyYesterday(e.target.value)
                                         }}
@@ -182,7 +186,7 @@ const AntiDelayNoteEdit = (data: any) => {
                           title={t('antiDelayNote.myThought')}
                           headStyle={{color: themeColor.textLight}}
                     >
-                        <Input.TextArea style={{background: themeColor.blockDark, color: themeColor.textLight}}
+                        <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         value={myThought} onChange={e => {
                             setMyThought(e.target.value)
                         }}/>
@@ -197,7 +201,7 @@ const AntiDelayNoteEdit = (data: any) => {
                           title={t('antiDelayNote.longGoal')}
                           headStyle={{color: themeColor.textLight}}
                     >
-                        <Input.TextArea style={{background: themeColor.blockDark, color: themeColor.textLight}}
+                        <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         value={longGoal}
                                         onChange={e => {
                                             setLongGoal(e.target.value)
@@ -214,7 +218,7 @@ const AntiDelayNoteEdit = (data: any) => {
                           title={t('antiDelayNote.whatToDoToday')}
                           headStyle={{color: themeColor.textLight}}
                     >
-                        <Input.TextArea style={{background: themeColor.blockDark, color: themeColor.textLight}}
+                        <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         onChange={e => {
                                             setTodayGoal(e.target.value)
                                         }}
