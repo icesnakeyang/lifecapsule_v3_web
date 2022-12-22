@@ -73,8 +73,9 @@ const AntiDelayTodoTaskRow = (data: any) => {
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <Checkbox checked={item.complete} onChange={() => {
                         onCompleteTodoTask(item)
-                    }}></Checkbox>;
+                    }}></Checkbox>
                     <div style={{
+                        marginLeft: 10,
                         color: themeColor.textHolder,
                         textDecorationLine: 'line-through'
                     }}>{item.taskTitle}</div>
@@ -88,8 +89,8 @@ const AntiDelayTodoTaskRow = (data: any) => {
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     <Checkbox checked={item.complete} onChange={() => {
                         onCompleteTodoTask(item)
-                    }}></Checkbox>;
-                    <div style={{color: themeColor.textLight}}>{item.taskTitle}</div>
+                    }}></Checkbox>
+                    <div style={{marginLeft: 10, color: themeColor.textLight}}>{item.taskTitle}</div>
                     <Button style={{background: themeColor.blockDark, borderWidth: 0}} onClick={() => {
                         console.log('bt remove')
                         onRemoveTask(item);
