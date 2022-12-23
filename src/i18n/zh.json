@@ -63,7 +63,9 @@
     "email": "Email",
     "emailCode": "验证码",
     "btGuestIn": "游客登录",
-    "titleLoginName": "用户名密码登录"
+    "titleLoginName": "用户名密码登录",
+    "btCanSend": "发送验证码",
+    "btSending": "发送中..."
   },
   "note": {
     "noteList": "我的笔记",

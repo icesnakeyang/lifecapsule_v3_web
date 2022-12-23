@@ -54,6 +54,10 @@ const AntiDelayNoteNew = () => {
                                 console.log(c1);
                                 setLongGoal(c1)
                             }
+                            if (item.type === 'TODAY_GOAL') {
+                                let c2 = Decrypt(item.content, strKey, strKey)
+                                setTodayGoal(c2)
+                            }
                         });
                         //
                     }
@@ -146,8 +150,9 @@ const AntiDelayNoteNew = () => {
         <div>
             <div style={{color: themeColor.textLight}}>{t('antiDelayNote.antiDelayTile')}</div>
             <div style={{marginTop: 10}}>
-                <Input.TextArea autoSize style={{color: themeColor.textLight, background: themeColor.blockDark, fontSize: 16}}
-                       value={title} onChange={e => {
+                <Input.TextArea autoSize
+                                style={{color: themeColor.textLight, background: themeColor.blockDark, fontSize: 16}}
+                                value={title} onChange={e => {
                     setTitle(e.target.value)
                 }}/>
             </div>
@@ -250,9 +255,9 @@ const AntiDelayNoteNew = () => {
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <Input style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                onChange={e => {
-                            setTaskTodoTitle(e.target.value)
-                        }
-                        }/>
+                                   setTaskTodoTitle(e.target.value)
+                               }
+                               }/>
                         <Button style={{background: themeColor.blockDark, color: themeColor.textLight, marginLeft: 10}}
                                 icon={<CheckOutlined/>} onClick={() => {
                             onAddTask()

@@ -45,7 +45,7 @@
     "greeting2": "Write letter and send to future",
     "greeting3": "Welcome to register Lifecapsule",
     "btSignIn": "Sign in",
-    "btSignIning": "Sign in",
+    "btSignIning": "Login...",
     "btRegister": "Register",
     "btRegistering": "Registering",
     "loginNameHolder": "Please input login name",
@@ -64,7 +64,9 @@
     "email": "Email",
     "emailCode": "Verify code",
     "btGuestIn": "Sign in as guest",
-    "titleLoginName": "Sign by login name and password"
+    "titleLoginName": "Sign by login name and password",
+    "btCanSend": "Send",
+    "btSending": "Sending"
   },
   "note": {
     "noteList": "Note list",

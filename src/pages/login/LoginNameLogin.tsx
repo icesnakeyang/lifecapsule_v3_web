@@ -2,17 +2,19 @@ import {Button, Card, Form, Input, message} from "antd";
 import {useState} from "react";
 import {useTranslation} from "react-i18next";
 import {apiSignByLoginName} from "../../api/Api";
-import {clearUserData, saveUserData, saveUserToken} from "../../store/userDataSlice";
-import {useDispatch} from "react-redux";
+import {clearUserData, saveLoginName, saveUserData, saveUserToken} from "../../store/userDataSlice";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
 const LoginNameLogin = () => {
     const {t} = useTranslation()
-    const [loginName, setLoginName] = useState('')
     const [password, setPassword] = useState('')
     const [saving, setSaving] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const themeColor = useSelector((state: any) => state.themeSlice.themeColor)
+
+    const loginName = useSelector((state: any) => state.userDataSlice.loginName)
 
     const onSignLoginNamePassword = () => {
         if (!loginName) {
@@ -56,18 +58,28 @@ const LoginNameLogin = () => {
 
     return (
         <div>
-            <Card title={t('login.titleLoginName')}>
+            <Card style={{background: themeColor.blockDark}} title={t('login.titleLoginName')}
+                  headStyle={{color: themeColor.textLight}}
+            >
                 <Form>
                     <Form.Item>
-                        <Input placeholder={t('login.loginNameHolder')}
-                               onChange={(e: any) => {
-                                   setLoginName(e.target.value)
-                               }}
-                               value={loginName}
+                        <div style={{color: themeColor.textLight}}>{t('login.loginNameHolder')}</div>
+                        <Input
+                            style={{background: themeColor.blockDark, color: themeColor.textLight}}
+                            onChange={(e: any) => {
+                                dispatch(saveLoginName(e.target.value))
+                                // setLoginName(e.target.value)
+                            }}
+                            value={loginName}
                         />
                     </Form.Item>
                     <Form.Item>
-                        <Input type='password' placeholder={t('login.passwordHolder')} onChange={(e: any) => {
+                        <div style={{
+                            color: themeColor.textLight,
+                        }}> {t('login.passwordHolder')}</div>
+                        <Input
+                            style={{background: themeColor.blockDark, color: themeColor.textLight}}
+                            type='password' onChange={(e: any) => {
                             setPassword(e.target.value)
                         }} value={password}/>
                     </Form.Item>
