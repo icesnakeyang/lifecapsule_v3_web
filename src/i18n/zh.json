@@ -223,7 +223,8 @@
     "tipDeleteAntiDelayNoteSuccess": "删除成功",
     "modalDeleteTitle": "删除方拖延笔记",
     "modalDeleteTip1": "确定要删除方拖延笔记吗？删除后不可恢复",
-    "tipNoTitle": "请输入标题"
+    "tipNoTitle": "请输入标题",
+    "btAddNew": "新建"
   },
   "setting": {
     "btSelect": "选择"

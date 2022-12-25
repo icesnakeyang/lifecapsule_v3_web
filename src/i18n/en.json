@@ -224,7 +224,8 @@
     "tipDeleteAntiDelayNoteSuccess": "Delete success",
     "modalDeleteTitle": "Delete Anti-Delay Note",
     "modalDeleteTip1": "Are you sure to delete this note？ It cannot be recoverd after delete!",
-    "tipNoTitle": "Please input title"
+    "tipNoTitle": "Please input title",
+    "btAddNew": "Create"
   },
   "setting": {
     "btSelect": "Select"

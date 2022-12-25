@@ -40,7 +40,7 @@ const AntiDelayNoteList = () => {
             <Card style={{background: themeColor.blockDark}}>
                 <Button type='primary' onClick={() => {
                     navigate("/main/AntiDelayNoteNew")
-                }}>{t('common.btAdd')}</Button>
+                }}>{t('antiDelayNote.btAddNew')}</Button>
             </Card>
             {
                 noteList.map((item, index) => (
