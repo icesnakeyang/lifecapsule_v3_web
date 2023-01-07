@@ -17,7 +17,6 @@ import {
     saveTotalSendNote,
     saveTotalSendNoteUnread,
 } from "../store/noteSendSlice";
-import banner1 from "../resources/aser-min.jpg"
 
 const contentStyle: React.CSSProperties = {
     // height: '360px',
@@ -102,60 +101,77 @@ const Home = () => {
         <div
             style={{minHeight: '100vh'}}
         >
-            <div style={{}}>
-                <Carousel autoplay>
-                    <div>
-                        <h3 style={contentStyle}>
-                            <img src={banner1} width="100%"/>
-                        </h3>
-                    </div>
-                </Carousel>
-            </div>
-
+            {/*<div style={{backgroundImage:`url("http://localhost:3000/aser-min.jpeg")`}}>*/}
             <div style={{
-                position: "absolute",
-                top: '20%',
-                left: '10%'
+                minHeight: 550,
+                // background:'red',
+                backgroundImage: `url("http://localhost:3000/aser-min.jpg")`,
+                backgroundPosition: '50%',
+                backgroundSize: "cover",
+                justifyContent: 'center',
+                alignItems: 'center',
+                display: 'flex'
             }}>
-                <div
-                    style={{
-                        width: 500,
-                        padding: 20,
-                        background: '#333675'
+                <Row style={{padding: 20, background: 'green'}} gutter={36}>
+                    <Col style={{
+                        background: 'grey',
+
                     }}>
-                    <div style={{}}>
-                        <div style={{color: '#fff', fontSize: 42}}>
-                            {t("webSite.home.tip1")}
+                        <div style={{
+                            paddingTop: 200
+                        }}>
+                            <div
+                                style={{
+                                    width: 500,
+                                    padding: 20,
+                                    background: '#333675'
+                                }}>
+                                <div style={{}}>
+                                    <div style={{color: '#fff', fontSize: 42}}>
+                                        {t("webSite.home.tip1")}
+                                    </div>
+                                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                                        {t("webSite.home.tip2")}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                            {t("webSite.home.tip2")}
+                    </Col>
+                    <Col style={{background: 'red'}}>
+                        <div style={{
+                            // position: 'absolute',
+                            top: '30%', left: '50%',
+                            marginTop: 100,
+                            paddingLeft: 10,
+                            padding: 20,
+                            background: '#333675'
+                        }}>
+                            <div style={{width: 600}}>
+                                <div style={{color: '#fff', fontSize: 42}}>
+                                    {t("webSite.home.tip8")}
+                                </div>
+                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                                    {t("webSite.home.tip3")}
+                                </div>
+                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                                    {t("webSite.home.tip4")}
+                                </div>
+                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                                    {t("webSite.home.tip5")}
+                                </div>
+                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                                    {t("webSite.home.tip6")}
+                                </div>
+                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
+                                    {t("webSite.home.tip7")}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
+
             </div>
 
-            <div style={{position: 'absolute', top: '30%', left: '50%', padding: 20, background: '#333675'}}>
-                <div style={{width: 600}}>
-                    <div style={{color: '#fff', fontSize: 42}}>
-                        {t("webSite.home.tip8")}
-                    </div>
-                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                        {t("webSite.home.tip3")}
-                    </div>
-                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                        {t("webSite.home.tip4")}
-                    </div>
-                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                        {t("webSite.home.tip5")}
-                    </div>
-                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                        {t("webSite.home.tip6")}
-                    </div>
-                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                        {t("webSite.home.tip7")}
-                    </div>
-                </div>
-            </div>
 
             <div style={{marginTop: 50, marginLeft: 400}}>
                 <Button

@@ -24,6 +24,6 @@ const NotePageTagRow = (data: any) => {
         dispatch(saveNoteListTags(tags))
         dispatch(loadRefresh())
     }
-    return (<Tag closable={true} onClick={onSelectTag} onClose={onRemoveTag}>{item.tagName}</Tag>)
+    return (<Tag closable={true} onClick={onSelectTag} onClose={onRemoveTag} color='blue'>{item.tagName}</Tag>)
 }
 export default NotePageTagRow

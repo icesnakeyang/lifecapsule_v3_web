@@ -1,1 +1,28 @@
 @import 'antd/dist/reset.css';
+
+.ant-pagination .ant-pagination-item a {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-17p3bx5).ant-pagination .ant-pagination-item-active a {
+    color: #1677ff;
+}
+
+:where(.css-dev-only-do-not-override-17p3bx5).ant-pagination .ant-pagination-prev button {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-17p3bx5).ant-pagination .ant-pagination-next button {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-17p3bx5).ant-pagination .ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis {
+    color: white;
+}
+
+:where(.css-dev-only-do-not-override-17p3bx5).ant-pagination .ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+    color: white;
+}
+input::placeholder .ant-input{
+    color: red;
+}

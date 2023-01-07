@@ -169,6 +169,14 @@ const AntiDelayNoteEdit = (data: any) => {
                 }}/>
             </div>
 
+            <Row>
+                <Col>
+                    <Row>
+
+                    </Row>
+                </Col>
+            </Row>
+
             <Row gutter={16}>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
                     <Card style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
