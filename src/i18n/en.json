@@ -314,7 +314,8 @@
   },
   "tag": {
     "tags": "Tags",
-    "hotTags": "Hot tags"
+    "hotTags": "Hot tags",
+    "myTags": "My tags"
   },
   "email": {
     "tipValidateEmailErr": "Please input validate email"

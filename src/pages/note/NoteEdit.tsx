@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation} from "react-router-dom";
 import {
     apiDeleteMyNote,
-    apiGetMyNote, apiListHotNoteTags,
+    apiGetMyNote, apiListHotNoteTags, apiListUserNoteTag,
     apiRequestRsaPublicKey,
     apiSaveMyNote, apiSaveMyNoteTags,
 } from "../../api/Api";
@@ -38,6 +38,7 @@ import NoteEditTagRow from "./NoteEditTagRow";
 import NoteEditTagRowEdit from "./NoteEditTagRowEdit";
 import {saveEditTags} from "../../store/tagSlice";
 import {saveSendNote} from "../../store/noteSendSlice";
+import MyAllTagRow from "./MyAllTagRow";
 
 const NoteEdit = () => {
     const {noteId}: any = useLocation().state;
@@ -60,6 +61,7 @@ const NoteEdit = () => {
     const [hotTags, setHotTags] = useState([])
     const editTags = useSelector((state: any) => state.tagSlice.editTags)
     const refresh = useSelector((state: any) => state.commonSlice.refresh)
+    const [myNoteTags, setMyNoteTags] = useState([])
 
     useEffect(() => {
         loadAllData();
@@ -122,6 +124,15 @@ const NoteEdit = () => {
             if (res.code === 0) {
                 setHotTags(res.data.tagList)
             }
+        })
+
+        console.log('list user note tag')
+        apiListUserNoteTag().then((res: any) => {
+            console.log(res.data.tagList)
+            if (res.code === 0) {
+                setMyNoteTags(res.data.tagList)
+            }
+        }).catch(() => {
         })
     };
 
@@ -293,7 +304,7 @@ const NoteEdit = () => {
                         style={{marginLeft: "10px"}}
                         icon={<AimOutlined/>}
                         onClick={() => {
-                            let data={
+                            let data = {
                                 content,
                                 title
                             }
@@ -476,6 +487,36 @@ const NoteEdit = () => {
                     {editTags.length > 0 ? editTags.map((item: any, index: any) => (
                         <NoteEditTagRowEdit item={item} key={index}/>
                     )) : null}
+                </div>
+                <Divider/>
+                <div>
+                    <div>{t('tag.myTags')}</div>
+                    <div>
+                        {myNoteTags && myNoteTags.length > 0 ?
+                            myNoteTags.map((item, index) => (
+                                <MyAllTagRow item={item} key={index} onSelectTag={(data: any) => {
+                                    if (editTags.length === 0) {
+                                        let tags = [{tagName: data.tagName}]
+                                        dispatch(saveEditTags(tags))
+                                    } else {
+                                        let tags: any = []
+                                        let cc = 0;
+                                        editTags.map((item2: any) => {
+                                            if (data.tagName === item2.tagName) {
+                                                cc++
+                                            } else {
+                                                tags.push(item2)
+                                            }
+                                        })
+                                        if (cc === 0) {
+                                            tags.push(data)
+                                            dispatch(saveEditTags(tags))
+                                        }
+                                    }
+                                }}/>
+                            )) : <div>没有我的tag</div>
+                        }
+                    </div>
                 </div>
                 <Divider/>
                 <div>
