@@ -1,4 +1,4 @@
-import {Button, Carousel, Col, Row} from "antd";
+import {Button, Carousel, Col, Menu, MenuProps, Row} from "antd";
 import {useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
@@ -17,15 +17,8 @@ import {
     saveTotalSendNote,
     saveTotalSendNoteUnread,
 } from "../store/noteSendSlice";
-
-const contentStyle: React.CSSProperties = {
-    // height: '360px',
-    height: '550px',
-    color: '#912929',
-    lineHeight: '360px',
-    textAlign: 'center',
-    background: '#fff',
-};
+import {GlobalOutlined, MailOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
+import i18n from "i18next";
 
 const Home = () => {
     const {t} = useTranslation();
@@ -33,6 +26,86 @@ const Home = () => {
     const userData = useSelector((state: any) => state.userDataSlice);
     const themeId = useSelector((state: any) => state.themeSlice.currentThemeId);
     const dispatch = useDispatch();
+
+    const lan = i18n.language
+
+    useEffect(() => {
+        console.log('lan changed')
+        if (!lan) {
+            i18n.changeLanguage('en')
+        }
+        console.log(lan)
+    }, [lan])
+
+    console.log(userData)
+
+    const headerMenuItemsUnSign: MenuProps['items'] = [
+        {
+            label: lan === 'zh' ? '中文' : 'Language',
+            // label: 'Navigation Three - Submenu',
+            key: 'language',
+            icon: <GlobalOutlined/>,
+            children: [
+                {
+                    label: 'English',
+                    key: 'menuEnglish'
+                },
+                {
+                    label: '中文',
+                    key: 'menuChinese'
+                }
+            ]
+        }
+    ]
+
+    const headerMenuItemsSigned: MenuProps['items'] = [
+        {
+            label: userData.nickname,
+            key: 'signout',
+            icon: <UserOutlined/>,
+            children: [
+                {
+                    label: 'Sign out',
+                    icon: <MailOutlined/>,
+                    key: 'menuSignOut'
+                }
+            ]
+        },
+        {
+            label: lan === 'zh' ? '中文' : 'Language',
+            // label: 'Navigation Three - Submenu',
+            key: 'language',
+            icon: <GlobalOutlined/>,
+            children: [
+                {
+                    label: 'English',
+                    key: 'menuEnglish'
+                },
+                {
+                    label: '中文',
+                    key: 'menuChinese'
+                }
+            ]
+        }
+    ]
+
+    const onMenuHeader: MenuProps['onClick'] = (e) => {
+        console.log(e)
+        if (e.key === 'menuEnglish') {
+            console.log('select english')
+            i18n.changeLanguage("en");
+        }
+        if (e.key === 'menuChinese') {
+            console.log('选择中文')
+            i18n.changeLanguage("zh");
+        }
+        if (e.key === 'menuLogin') {
+            console.log('login')
+        }
+        if (e.key === 'menuSignOut') {
+            console.log('sign Out')
+        }
+    }
 
     useEffect(() => {
         if (themeId) {
@@ -99,81 +172,67 @@ const Home = () => {
 
     return (
         <div
-            style={{minHeight: '100vh'}}
+            style={{}}
         >
-            {/*<div style={{backgroundImage:`url("http://localhost:3000/aser-min.jpeg")`}}>*/}
-            <div style={{
-                minHeight: 550,
-                // background:'red',
-                backgroundImage: `url("http://localhost:3000/aser-min.jpg")`,
-                backgroundPosition: '50%',
-                backgroundSize: "cover",
-                justifyContent: 'center',
-                alignItems: 'center',
-                display: 'flex'
-            }}>
-                <Row style={{padding: 20, background: 'green'}} gutter={36}>
-                    <Col style={{
-                        background: 'grey',
-
-                    }}>
-                        <div style={{
-                            paddingTop: 200
-                        }}>
-                            <div
-                                style={{
-                                    width: 500,
-                                    padding: 20,
-                                    background: '#333675'
-                                }}>
-                                <div style={{}}>
-                                    <div style={{color: '#fff', fontSize: 42}}>
-                                        {t("webSite.home.tip1")}
-                                    </div>
-                                    <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                                        {t("webSite.home.tip2")}
-                                    </div>
-                                </div>
+            {/*header*/}
+            <div style={{padding: 10}}>
+                <Row style={{width: '100%', display: 'flex', alignItems: 'center'}}>
+                    <Col xs={12} sm={8} md={8} lg={4} xl={4} xxl={4}>
+                        {/*logo*/}
+                        <div style={{display: 'flex', alignItems: 'center'}}>
+                            <div style={{}}>
+                                <img src="/logo5.png" width='42px'/>
+                            </div>
+                            <div style={{marginLeft: 20, fontSize: 20, fontWeight: 'bold'}}>
+                                {t('common.appTitle')}
                             </div>
                         </div>
                     </Col>
-                    <Col style={{background: 'red'}}>
+                    <Col xs={12} sm={16} md={16} lg={20} xl={20} xxl={20}>
                         <div style={{
-                            // position: 'absolute',
-                            top: '30%', left: '50%',
-                            marginTop: 100,
-                            paddingLeft: 10,
-                            padding: 20,
-                            background: '#333675'
+                            width: '100%',
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            background: 'green'
                         }}>
-                            <div style={{width: 600}}>
-                                <div style={{color: '#fff', fontSize: 42}}>
-                                    {t("webSite.home.tip8")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                                    {t("webSite.home.tip3")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                                    {t("webSite.home.tip4")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                                    {t("webSite.home.tip5")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                                    {t("webSite.home.tip6")}
-                                </div>
-                                <div style={{color: '#fff', fontSize: 20, marginTop: 20}}>
-                                    {t("webSite.home.tip7")}
-                                </div>
-                            </div>
+                            {userData && userData.nickname ?
+                                <Menu style={{width: '100%', justifyContent: 'flex-end', borderWidth: 0}}
+                                      items={headerMenuItemsSigned}
+                                      mode="horizontal"
+                                      onClick={onMenuHeader}
+                                />
+                                :
+                                <Menu style={{width: '100%', justifyContent: 'flex-end', borderWidth: 0}}
+                                      items={headerMenuItemsUnSign}
+                                      mode="horizontal" onClick={onMenuHeader}/>
+                            }
                         </div>
                     </Col>
                 </Row>
-
             </div>
 
+            {/*banner*/}
+            <div style={{}}>
+                <Carousel autoplay style={{
+                    height: 450
+                }}>
+                    <div>
+                        <img src='/ban5.jpg' width='100%' height='450px'/>
+                    </div>
+                    <div>
+                        <img src='/aser-min.jpg' width='100%' height='450px'/>
+                    </div>
+                    <div>
+                        <img src='/ban3.webp' width='100%' height='450px'/>
+                    </div>
+                    <div>
+                        <img src='/ban4.webp' width='100%' height='450px'/>
+                    </div>
+                </Carousel>
+            </div>
 
-            <div style={{marginTop: 50, marginLeft: 400}}>
+            {/*Sign button*/}
+            <div style={{marginTop: 40, textAlign: 'center'}}>
                 <Button
                     style={{background: '#333675', borderColor: '#333333', width: 200, height: 60, fontSize: 24}}
                     type="primary"
@@ -182,21 +241,280 @@ const Home = () => {
                     }}
                     size='large'
                 >
-                    Free To Try
+                    Start Now
                 </Button>
             </div>
 
-            <div>
-                {/*<h3>Embed YouTube video - <a href="https://www.cluemediator.com">Clue Mediator</a></h3>*/}
-                {/*<ReactPlayer*/}
-                {/*    url="https://www.youtube.com/watch?v=UVCP4bKy9Iw"*/}
-                {/*/>*/}
+            {/*private note, Encrypt Share, deep social*/}
+            <Row style={{marginTop: 20, padding: 20}}>
+                <Col style={{
+                    justifyContent: 'center',
+                    display: 'flex',
+                    // background: '#ff0080',
+                    flexDirection: "column",
+                    alignItems: "center"
+                }} xs={24} sm={24} md={8} lg={8} xl={8} xxl={8}>
+                    <div style={{padding: 10, height: '100%', maxWidth: 550, background: '#ff0080',}}>
+                        <div style={{
+                            color: '#fff',
+                            fontSize: 28,
+
+                            height: 50,
+                            textAlign: "center",
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            display: 'flex'
+                        }}>
+                            {t("webSite.home.privateNote")}
+                        </div>
+                        <div style={{marginTop: 0}}>
+                            <img src='/notebook.jpeg' width='100%'/>
+                        </div>
+                        <div>
+                            <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
+                                {t("webSite.home.privateNote1")}
+                            </div>
+                            <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
+                                {t("webSite.home.privateNote2")}
+                            </div>
+                        </div>
+                    </div>
+                </Col>
+                <Col style={{
+                    // background: '#008040',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    flexDirection: 'column'
+                }} xs={24} sm={24} md={8}
+                     lg={8} xl={8} xxl={8}>
+                    <div style={{padding: 10, height: '100%', maxWidth: 550, background: '#008040',}}>
+                        <div style={{
+                            color: '#fff',
+                            fontSize: 28,
+
+                            height: 50,
+                            textAlign: "center",
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            display: 'flex'
+                        }}>
+                            {t("webSite.home.encryptedSharing")}
+                        </div>
+                        <div style={{marginTop: 0}}>
+                            <img src='/ban6.jpg' width='100%'/>
+                        </div>
+                        <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
+                            {t("webSite.home.encryptedSharing1")}
+                        </div>
+                        <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
+                            {t("webSite.home.encryptedSharing2")}
+                        </div>
+                    </div>
+                </Col>
+
+                <Col style={{
+                    // background: '#004080',
+                    display: 'flex', justifyContent: "center", alignItems: "center"
+                }}
+                     xs={24} sm={24}
+                     md={8}
+                     lg={8} xl={8} xxl={8}>
+                    <div style={{padding: 10, height: '100%', maxWidth: 550, background: '#004080'}}>
+                        <div style={{
+                            color: '#fff',
+                            fontSize: 28,
+                            height: 50,
+                            textAlign: "center",
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            display: 'flex'
+                        }}>
+                            {t("webSite.home.deepMindSocial")}
+                        </div>
+                        <div style={{marginTop: 0}}>
+                            <img src='/pic3.jpeg' width='100%'/>
+                        </div>
+                        <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
+                            {t("webSite.home.deepMindSocial1")}
+                        </div>
+                        <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
+                            {t("webSite.home.deepMindSocial2")}
+                        </div>
+                    </div>
+                </Col>
+            </Row>
+
+            {/*What is lifecapsule*/}
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center'}}>
+                <div style={{padding: 20, marginTop: 80, maxWidth: 1080}}>
+                    <div style={{
+                        border: '2px solid red',
+                        padding: 20,
+                        borderRadius: 10
+                    }}>
+                        <Row>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12} style={{}}>
+                                <div style={{
+                                    fontSize: 28,
+                                    fontWeight: 'bold',
+                                    color: '#f6027d'
+                                }}>{t('webSite.home.whatIsLifeCapsule')}</div>
+
+                                <div style={{
+                                    fontSize: 14,
+                                    lineHeight: 2.0,
+                                    marginTop: 10
+                                }}>{t('webSite.home.whatIsLifeCapsule1')}</div>
+                            </Col>
+                            <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}
+                                 style={{padding: 20}}>
+                                <div style={{height: 300}}>
+                                    <img src='/pic4.jpg' width='100%' height='100%' style={{objectFit: 'scale-down'}}/>
+                                </div>
+                            </Col>
+                        </Row>
+
+                        <div>
+
+                        </div>
+                    </div>
+                    <div style={{border: '2px solid red', padding: 20, borderRadius: 10, marginTop: 20}}>
+                        <div style={{
+                            fontSize: 28,
+                            fontWeight: 'bold',
+                            color: '#027d41'
+                        }}>{t('webSite.home.whatIsLifeCapsule2')}</div>
+                        <div style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginTop: 10
+                        }}>{t('webSite.home.whatIsLifeCapsule3')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule4')}</div>
+                        <div style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginTop: 10
+                        }}>{t('webSite.home.whatIsLifeCapsule5')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule6')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule7')}</div>
+
+                        <div style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginTop: 10
+                        }}>{t('webSite.home.whatIsLifeCapsule8')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule9')}</div>
+
+                        <div style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginTop: 10
+                        }}>{t('webSite.home.whatIsLifeCapsule10')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule11')}</div>
+
+                        <div style={{
+                            fontSize: 20,
+                            fontWeight: 'bold',
+                            marginTop: 10
+                        }}>{t('webSite.home.whatIsLifeCapsule12')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule13')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule14')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule15')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule16')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule17')}</div>
+                        <div style={{fontSize: 14, lineHeight: 2.0}}>{t('webSite.home.whatIsLifeCapsule18')}</div>
+                    </div>
+                </div>
+
+                {/*Sign button*/}
+                <div style={{marginTop: 40, textAlign: 'center'}}>
+                    <Button
+                        style={{background: '#333675', borderColor: '#333333', width: 200, height: 60, fontSize: 24}}
+                        type="primary"
+                        onClick={() => {
+                            onSignIn();
+                        }}
+                        size='large'
+                    >
+                        Start Now
+                    </Button>
+                </div>
+
+                <div style={{background: 'purple', padding: 20, maxWidth: 1080, borderRadius: 10, marginTop: 60}}>
+                    <Row>
+                        <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                            <div style={{padding: 20}}>
+                                <div style={{fontSize: 28, fontWeight: 'bold', color: '#fff'}}>
+                                    {t('webSite.home.confidentialRules')}
+                                </div>
+                                <div style={{
+                                    fontSize: 14,
+                                    marginTop: 20,
+                                    color: '#fff',
+                                    lineHeight: 2
+                                }}>{t('webSite.home.confidentialRules1')}</div>
+                            </div>
+                        </Col>
+                        <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                            <div style={{height: 300}}>
+                                <img src='/pic5.jpeg' width='100%' height='100%' style={{objectFit: 'cover'}}/>
+                            </div>
+                        </Col>
+                    </Row>
+
+                </div>
+
+                <div style={{background: 'green', padding: 20, borderRadius: 10, maxWidth: 1080, marginTop: 40}}>
+                    <Row>
+                        <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                            <div>
+                                <img src='/pic7.jpeg' width='100%' height='100%' style={{objectFit: 'cover'}}/>
+                            </div>
+                        </Col>
+                        <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12} style={{padding: 20}}>
+                            <div style={{fontSize: 28, fontWeight: 'bold', color: '#fff'}}>
+                                {t('webSite.home.cloudSynchronization')}
+                            </div>
+                            <div style={{
+                                fontSize: 14,
+                                marginTop: 20,
+                                color: '#fff',
+                                lineHeight: 2
+                            }}>{t('webSite.home.cloudSynchronization1')}</div>
+                        </Col>
+                    </Row>
+
+                </div>
+
+                <div style={{background: 'darkblue', padding: 20, borderRadius: 10, maxWidth: 1080, marginTop: 40}}>
+                    <Row>
+                        <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12} style={{padding: 20}}>
+                            <div style={{fontSize: 28, fontWeight: 'bold', color: '#fff'}}>
+                                {t('webSite.home.crossPlatform')}
+                            </div>
+                            <div style={{
+                                fontSize: 14,
+                                marginTop: 20,
+                                color: '#fff',
+                                lineHeight: 2
+                            }}>{t('webSite.home.crossPlatform1')}</div>
+                        </Col>
+                        <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
+                            <div style={{height: 400}}>
+                                <img src='/pic6.png' width='100%' height='100%' style={{objectFit: 'fill'}}/>
+                            </div>
+                        </Col>
+                    </Row>
+
+                </div>
             </div>
 
             <div style={{
-                position: "fixed",
+                // position: "fixed",
+                marginTop: 60,
                 bottom: 0,
-                background: '#ccc',
+                background: '#bbb',
                 width: '100%',
                 display: 'flex',
                 justifyContent: 'space-around'
@@ -208,7 +526,7 @@ const Home = () => {
                     Contact us: support@tellmeafter.com
                 </div>
                 <div style={{margin: 50, fontSize: 20}}>
-                    <a href="">Copyright © GOGOYANG DATATECH LIMIT</a>
+                    <a href="#">Copyright © GOGOYANG DATATECH LIMIT</a>
                 </div>
             </div>
         </div>
