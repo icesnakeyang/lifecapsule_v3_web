@@ -39,6 +39,7 @@ import SetLoginName from "../pages/login/SetLoginName";
 import AntiDelayNoteList from "../pages/antiDelayNote/AntiDelayNoteList";
 import AntiDelayNoteEdit from "../pages/antiDelayNote/AntiDelayNoteEdit";
 import AntiDelayNoteNew from "../pages/antiDelayNote/AntiDelayNoteNew";
+import PublicNoteByMail from "../pages/publicUserBox/PublicNoteByMail";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -315,6 +316,7 @@ const Routers = () => {
                 <Route path="/guest/LoginPage" element={<LoginPage/>}/>
                 {/*  <Route path="/guest/register" element={<Register />} />*/}
             </Route>
+            <Route path="/publicMail/:logId" element={<PublicNoteByMail/>}></Route>
         </Routes>
     );
 };

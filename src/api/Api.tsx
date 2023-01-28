@@ -289,3 +289,7 @@ export const apiCreateMyAntiDelayNote = (params: any) => {
 export const apiUpdateMyAntiDelayNote = (params: any) => {
     return Post(`${host}/web/anti_delay/updateMyAntiDelayNote`, params);
 };
+
+export const apiGetNoteFromMail = (params:any) => {
+    return Post(`${host}/web/publicUser/getNoteFromMail`, params);
+};
