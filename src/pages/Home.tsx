@@ -5,7 +5,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {
     apiListTheme,
-    apiLoadMyNoteSendStatistic,
+    apiLoadMyNoteSendStatistic, apiSaveUserLanguage,
     apiSignInByNothing,
     apiSignToken,
 } from "../api/Api";
@@ -17,8 +17,9 @@ import {
     saveTotalSendNote,
     saveTotalSendNoteUnread,
 } from "../store/noteSendSlice";
-import {GlobalOutlined, MailOutlined, SettingOutlined, UserOutlined} from "@ant-design/icons";
+import {GlobalOutlined, MailOutlined, UserOutlined} from "@ant-design/icons";
 import i18n from "i18next";
+import {saveLanguage} from "../store/commonSlice";
 
 const Home = () => {
     const {t} = useTranslation();
@@ -26,16 +27,25 @@ const Home = () => {
     const userData = useSelector((state: any) => state.userDataSlice);
     const themeId = useSelector((state: any) => state.themeSlice.currentThemeId);
     const dispatch = useDispatch();
-
+    const language = useSelector((state: any) => state.commonSlice.language)
     const lan = i18n.language
 
     useEffect(() => {
         console.log('lan changed')
-        if (!lan) {
-            i18n.changeLanguage('en')
-        }
+        console.log(language)
         console.log(lan)
-    }, [lan])
+
+        if (!language) {
+            i18n.changeLanguage('en')
+            dispatch(saveLanguage("en"))
+            apiSaveUserLanguage({language: "en"})
+        } else {
+            i18n.changeLanguage(language)
+            dispatch(saveLanguage(language))
+            apiSaveUserLanguage({language: language})
+        }
+
+    }, [language])
 
     console.log(userData)
 
@@ -94,10 +104,14 @@ const Home = () => {
         if (e.key === 'menuEnglish') {
             console.log('select english')
             i18n.changeLanguage("en");
+            dispatch(saveLanguage("en"))
+            apiSaveUserLanguage({language: "en"})
         }
         if (e.key === 'menuChinese') {
             console.log('选择中文')
             i18n.changeLanguage("zh");
+            dispatch(saveLanguage("zh"))
+            apiSaveUserLanguage({language: "zh"})
         }
         if (e.key === 'menuLogin') {
             console.log('login')
@@ -164,7 +178,7 @@ const Home = () => {
                     });
                     navigate("/main/dashboard");
                 } else {
-                    navigate("/guest/LoginByEmail")
+                    navigate("/guest/LoginPage")
                 }
             });
         }

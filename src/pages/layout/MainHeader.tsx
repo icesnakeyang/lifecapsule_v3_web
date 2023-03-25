@@ -6,6 +6,8 @@ import {UserOutlined, GlobalOutlined, MailOutlined} from "@ant-design/icons";
 import {clearUserData} from "../../store/userDataSlice";
 import {clearNoteState} from "../../store/noteDataSlice";
 import {useNavigate} from "react-router-dom";
+import {apiSaveUserLanguage} from "../../api/Api";
+import {saveLanguage} from "../../store/commonSlice";
 
 const MainHeader = () => {
     const navigate = useNavigate();
@@ -21,9 +23,13 @@ const MainHeader = () => {
     const onMenu = (e: any) => {
         if (e.key === "menuLanEn") {
             i18n.changeLanguage("en");
+            dispatch(saveLanguage("en"))
+            apiSaveUserLanguage({language: "en"})
         }
         if (e.key === "menuLanZh") {
             i18n.changeLanguage("zh");
+            dispatch(saveLanguage("zh"))
+            apiSaveUserLanguage({language: "zh"})
         }
         if (e.key === "menuSignOut") {
             localStorage.removeItem("lifecapsule3_token");

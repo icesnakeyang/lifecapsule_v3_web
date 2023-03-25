@@ -34,7 +34,8 @@
     "setting": "Settings",
     "myProfile": "My profile",
     "myReceiveNote": "My receive note",
-    "mySendNote": "My Send out note"
+    "mySendNote": "My Send out note",
+    "myPublicNote": "My public note"
   },
   "login": {
     "tabEmail": "Email",
@@ -97,7 +98,23 @@
     "createTime": "Create time",
     "addTag": "Add tag",
     "editTag": "Edit tag",
-    "searchHolder": "Search title"
+    "searchHolder": "Search title",
+    "send": {
+      "sendInstantly": "Send instantly",
+      "primaryCountdown": "Primary countdown",
+      "sendByDatetime": "Send by datetime",
+      "publishToTopic": "Publish to Topic",
+      "publishToMotto": "Publish to Motto",
+      "publishToPublic": "Publish to public website",
+      "tipSendInstantly": "Send note to email instantly",
+      "tipPublishToPublic": "Publish this note to a web page, anyone can read it",
+      "publishToPublicPage": {
+        "title": "Publish to website",
+        "btPublish": "Publish",
+        "btPublishing": "Publishing...",
+        "tipPublishSuccess": "Publish note success"
+      }
+    }
   },
   "contact": {
     "contactList": "My contacts",
@@ -364,6 +381,22 @@
     "notSend": "Not send",
     "sendAlready": "Send already"
   },
+  "public": {
+    "mail": {
+      "tipOverdue": "This note has been overdue yet, you can check it by login "
+    }
+  },
+  "inbox": {
+    "detail": {
+      "fromName": "From",
+      "sentTime": "Sent time",
+      "content": "Content",
+      "tipEncrypt": "If you cannot read the content, maybe it has been encrypted by author who send this note to you, you must contact him/her to obtain the decryption code to decrypt this message",
+      "btDecode": "Decode",
+      "decryptionCode": "Decryption code",
+      "decryptionCodeHolder": "Input decryption code"
+    }
+  },
   "syserr": {
     "10001": "System or network error",
     "10002": "Please login and try it again",
@@ -380,6 +413,7 @@
     "10050": "This email has been set to recipient already",
     "10053": "Email have not been registered",
     "10075": "The login name has been registered by others",
-    "10076": "Login name or password error"
+    "10076": "Login name or password error",
+    "10080": "This note has been overdue yet"
   }
 }

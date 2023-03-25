@@ -290,6 +290,22 @@ export const apiUpdateMyAntiDelayNote = (params: any) => {
     return Post(`${host}/web/anti_delay/updateMyAntiDelayNote`, params);
 };
 
-export const apiGetNoteFromMail = (params:any) => {
+export const apiGetNoteFromMail = (params: any) => {
     return Post(`${host}/web/publicUser/getNoteFromMail`, params);
+};
+
+export const apiSaveUserLanguage = (params: any) => {
+    return Post(`${host}/settings/language/saveUserLanguage`, params);
+};
+
+export const apiPublishNoteToPublicWeb = (params: any) => {
+    return Post(`${host}/web/webpublicweb/publishNoteToPublicWeb`, params);
+};
+
+export const apiListMyPublicNote = (params: any) => {
+    return Post(`${host}/web/webpublicweb/listMyPublicNote`, params);
+};
+
+export const apiGetMyPublicNote = (params: any) => {
+    return Post(`${host}/web/webpublicweb/getMyPublicNote`, params);
 };

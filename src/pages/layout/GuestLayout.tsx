@@ -3,19 +3,27 @@ import {Outlet} from "react-router-dom";
 import FooterBar from "./FooterBar";
 import i18n from "i18next";
 import {useTranslation} from "react-i18next";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {saveLanguage} from "../../store/commonSlice";
+import {apiSaveUserLanguage} from "../../api/Api";
 
 const {Header, Content, Footer} = Layout;
 
 const GuestLayout = () => {
     const {t} = useTranslation();
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor)
+    const dispatch=useDispatch()
+
     const onMenu = (e: any) => {
         if (e.key === "menuLanZh") {
             i18n.changeLanguage("zh");
+            dispatch(saveLanguage("zh"))
+            apiSaveUserLanguage({language: "zh"})
         }
         if (e.key === "menuLanEn") {
             i18n.changeLanguage("en");
+            dispatch(saveLanguage("en"))
+            apiSaveUserLanguage({language: "en"})
         }
     };
     return (

@@ -49,6 +49,9 @@ const MainSider = () => {
         if (e.key === "menuMySendNote") {
             navigate("/main/MyTriggerListPage");
         }
+        if (e.key === "menuMyPublicNote") {
+            navigate("/main/PublicNoteList");
+        }
     };
     return (
         <Menu
@@ -105,6 +108,11 @@ const MainSider = () => {
                     key: "menuMySendNote",
                     icon: <UserOutlined/>,
                     label: t("nav.mySendNote"),
+                },
+                {
+                    key: "menuMyPublicNote",
+                    icon: <UserOutlined/>,
+                    label: t("nav.myPublicNote"),
                 },
             ]}
             onClick={(e) => {

@@ -104,7 +104,7 @@ const InstantSend = () => {
                         if (res2.code === 0) {
                             message.success(t('noteSent.tipSendSuccess'))
                             if (res2.code === 10002) {
-                                navigate('LoginByEmail')
+                                navigate('LoginPage')
                             }
                             navigate(-1)
                         } else {

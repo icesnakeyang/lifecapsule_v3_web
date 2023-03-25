@@ -1,6 +1,6 @@
 import {useLocation, useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Button, Card, Form, Input, message} from "antd";
+import {Button, Card, Col, Form, Input, message, Row} from "antd";
 import {apiGetMyNote, apiRequestRsaPublicKey, apiWebSendNote} from "../../api/Api";
 import {Decrypt, Decrypt2, Encrypt, GenerateRandomString16, RSAencrypt} from "../../common/crypto";
 import {useTranslation} from "react-i18next";
@@ -89,38 +89,30 @@ const SendPage = () => {
         });
     }
 
-    return (<div>
-        <Card>
-            <Form>
-                <Form.Item>
-                    <div>{t('noteSend.receiverEmail')}</div>
-                    <Input onChange={(e) => {
-                        setEmail(e.target.value)
-                    }}/>
-                </Form.Item>
-                <Form.Item>
-                    <div>{t('noteSend.codecKey')}</div>
-                    <Input onChange={(e) => {
-                        setCodecKey(e.target.value)
-                    }}/>
-                    <div>{t('noteSend.tipCodecKey')}</div>
-                </Form.Item>
-                <Form.Item>
-                    <div>{t('noteSend.title')}</div>
-                    <Input onChange={(e) => {
-                        setTitle(e.target.value)
-                    }}/>
-                </Form.Item>
-            </Form>
-            <div style={{display: 'flex', justifyContent: 'center'}}>
-                {sending ? <Button type='primary' loading>{t('note.btSending')}</Button> :
-                    <Button type='primary' onClick={() => {
-                        onSendNote()
-                    }}>
-                        {t('note.btSend')}
-                    </Button>}
-            </div>
-        </Card>
+    return (<div style={{}}>
+        <Row gutter={[16, { xs: 2, sm: 2, md: 2, lg: 32 }]}>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6} xxl={6}>
+                <Card style={{minHeight:130}}>
+                    <div style={{}}>
+                        <Button type='primary' block>{t('note.send.sendInstantly')}</Button>
+                    </div>
+                    <div>{t('note.send.tipSendInstantly')}</div>
+                </Card>
+            </Col>
+            <Col xs={24} sm={24} md={12} lg={8} xl={6} xxl={6}>
+                <Card style={{minHeight:130}}>
+                    <div>
+                        <Button type='primary' style={{background: '#2e9599'}}
+                                block onClick={()=>{
+                                    navigate("/main/PublishToPublicWeb")
+                        }}>{t('note.send.publishToPublic')}</Button>
+                    </div>
+                    <div>{t('note.send.tipPublishToPublic')}</div>
+                </Card>
+            </Col>
+        </Row>
+
+
     </div>)
 }
 export default SendPage;

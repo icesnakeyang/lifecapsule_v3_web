@@ -308,6 +308,7 @@ const NoteEdit = () => {
                                 content,
                                 title
                             }
+                            console.log(data)
                             dispatch(saveSendNote(data))
                             navigate("/main/NoteSendMethod", {state: {noteId}});
                         }}
@@ -319,6 +320,12 @@ const NoteEdit = () => {
                         style={{marginLeft: "10px"}}
                         icon={<SendOutlined/>}
                         onClick={() => {
+                            let data = {
+                                content,
+                                title
+                            }
+                            console.log(data)
+                            dispatch(saveSendNote(data))
                             navigate("/main/SendPage", {state: {noteId}});
                         }}
                     >

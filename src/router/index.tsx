@@ -20,11 +20,8 @@ import QuadrantTaskNew from "../pages/task/quadrant/QuadrantTaskNew";
 import ThemeSetting from "../pages/setting/ThemeSetting";
 import MyProfilePage from "../pages/myProfile/MyProfilePage";
 import SendPage from "../pages/send/SendPage";
-import MyReceiveNote from "../pages/send/MyReceiveNote";
-import MyReceiveNoteDetail from "../pages/send/MyReceiveNoteDetail";
 import MySendNote from "../pages/send/MySendNote";
 import MySendNoteDetail from "../pages/send/MySendNoteDetail";
-import LoginByEmail from "../pages/login/LoginByEmail";
 import Testpage from "../pages/testpage";
 import UserPrivacy from "../pages/UserPrivacy";
 import TodoNew from "../pages/task/todolist/TodoNew";
@@ -40,6 +37,11 @@ import AntiDelayNoteList from "../pages/antiDelayNote/AntiDelayNoteList";
 import AntiDelayNoteEdit from "../pages/antiDelayNote/AntiDelayNoteEdit";
 import AntiDelayNoteNew from "../pages/antiDelayNote/AntiDelayNoteNew";
 import PublicNoteByMail from "../pages/publicUserBox/PublicNoteByMail";
+import MyReceiveNote from "../pages/inbox/MyReceiveNote";
+import MyReceiveNoteDetail from "../pages/inbox/MyReceiveNoteDetail";
+import PublishToPublicWeb from "../pages/send/PublishToPublicWeb";
+import PublicNoteList from "../pages/publicNote/PublicNoteList";
+import PublicNoteEdit from "../pages/publicNote/PublicNoteEdit";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -309,10 +311,34 @@ const Routers = () => {
                         </ProtectRouter>
                     }
                 />
+                <Route
+                    path="/main/PublishToPublicWeb"
+                    element={
+                        <ProtectRouter>
+                            <PublishToPublicWeb/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/PublicNoteList"
+                    element={
+                        <ProtectRouter>
+                            <PublicNoteList/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/PublicNoteEdit"
+                    element={
+                        <ProtectRouter>
+                            <PublicNoteEdit/>
+                        </ProtectRouter>
+                    }
+                />
             </Route>
 
             <Route path="/guest" element={<GuestLayout/>}>
-                <Route path="/guest/LoginByEmail" element={<LoginByEmail/>}/>
+                {/*<Route path="/guest/LoginByEmail" element={<LoginByEmail/>}/>*/}
                 <Route path="/guest/LoginPage" element={<LoginPage/>}/>
                 {/*  <Route path="/guest/register" element={<Register />} />*/}
             </Route>
