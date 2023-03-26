@@ -242,7 +242,9 @@
     "modalDeleteTitle": "Delete Anti-Delay Note",
     "modalDeleteTip1": "Are you sure to delete this note？ It cannot be recoverd after delete!",
     "tipNoTitle": "Please input title",
-    "btAddNew": "Create"
+    "btAddNew": "Create",
+    "antiDelayNoteList": "Anti-procrastination list",
+    "antiProcrastination": "Anti-procrastination"
   },
   "setting": {
     "btSelect": "Select"
@@ -366,7 +368,8 @@
   "tag": {
     "tags": "Tags",
     "hotTags": "Hot tags",
-    "myTags": "My tags"
+    "myTags": "My tags",
+    "tipNoMyTag": "No tags"
   },
   "email": {
     "tipValidateEmailErr": "Please input validate email"

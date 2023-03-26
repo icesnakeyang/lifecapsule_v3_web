@@ -10,6 +10,8 @@ export const antiDelaySlice = createSlice({
     longGoal: '',
     todayGoal: '',
     antiDelayNoteTitle: '',
+    antiDelayNotePageIndex:1,
+    antiDelayNotePageSize:10
   },
 
   reducers: {
@@ -45,6 +47,12 @@ export const antiDelaySlice = createSlice({
     saveAntiDelayTodoListEdit: (state: any, action: any) => {
       state.antiDelayTodoListEdit = action.payload;
     },
+    saveAntiDelayNotePageIndex:(state:any, action:any)=>{
+      state.antiDelayNotePageIndex=action.payload
+    },
+    saveAntiDelayNotePageSize:(state:any, action:any)=>{
+      state.antiDelayNotePageSize=action.payload
+    }
   },
 });
 
@@ -58,5 +66,7 @@ export const {
   saveAntiDelayNoteTitle,
   clearAntiDelayNoteRedux,
   saveAntiDelayTodoListEdit,
+  saveAntiDelayNotePageIndex,
+  saveAntiDelayNotePageSize
 } = antiDelaySlice.actions;
 export default antiDelaySlice.reducer;

@@ -8,22 +8,33 @@ export const tagSlice = createSlice({
         //推荐的标签
         hotTags: [],
         //当前正在编辑的标签
-        editTags: []
+        editTags: [],
+        //我的所有使用过的笔记标签
+        myAllNoteTags:[]
     },
     reducers: {
         saveEditTags: (state: any, action: any) => {
             state.editTags = action.payload;
         },
+        saveHotTags: (state: any, action: any) => {
+            state.hotTags = action.payload
+        },
+        saveMyAllNoteTags:(state:any, action:any)=>{
+            state.myAllNoteTags=action.payload
+        },
         clearAllTags: (state: any) => {
             state.noteTags = [];
             state.hotTags = [];
             state.editTags = [];
+            state.myAllNoteTags=[]
         },
     },
 });
 
 export const {
     saveEditTags,
+    saveHotTags,
+    saveMyAllNoteTags,
     clearAllTags,
 } = tagSlice.actions;
 

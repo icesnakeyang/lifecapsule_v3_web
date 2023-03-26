@@ -23,7 +23,7 @@ import {
     Input,
     message,
     Modal,
-    Radio,
+    Radio, Space,
     Spin,
     Tooltip,
 } from "antd";
@@ -39,6 +39,8 @@ import NoteEditTagRowEdit from "./NoteEditTagRowEdit";
 import {saveEditTags} from "../../store/tagSlice";
 import {saveSendNote} from "../../store/noteSendSlice";
 import MyAllTagRow from "./MyAllTagRow";
+import MyNoteTags1 from "../components/MyNoteTags1";
+import HotTags1 from "../components/HotTags1";
 
 const NoteEdit = () => {
     const {noteId}: any = useLocation().state;
@@ -120,20 +122,9 @@ const NoteEdit = () => {
             }
         });
 
-        apiListHotNoteTags().then((res: any) => {
-            if (res.code === 0) {
-                setHotTags(res.data.tagList)
-            }
-        })
 
-        console.log('list user note tag')
-        apiListUserNoteTag().then((res: any) => {
-            console.log(res.data.tagList)
-            if (res.code === 0) {
-                setMyNoteTags(res.data.tagList)
-            }
-        }).catch(() => {
-        })
+
+
     };
 
     const onSaveNote = () => {
@@ -261,27 +252,19 @@ const NoteEdit = () => {
                 height: "100%",
             }}
         >
-            <Breadcrumb style={{}}>
-                <Breadcrumb.Item>
-                    <a href="/main/dashboard">
-            <span style={{color: themeColor.textLight}}>
-              {t("common.home")}
-            </span>
-                    </a>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-                    <a href="/main/noteList">
-            <span style={{color: themeColor.textLight}}>
-              {t("note.noteList")}
-            </span>
-                    </a>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-          <span style={{color: themeColor.textLight}}>
-            {t("note.noteEdit")}
-          </span>
-                </Breadcrumb.Item>
-            </Breadcrumb>
+            <Breadcrumb items={[
+                {
+                    title: t("common.home"),
+                    href: '/main/dashboard'
+                },
+                {
+                    title: t("note.noteList"),
+                    href: '/main/noteList'
+                },
+                {
+                    title: t("note.noteEdit")
+                }
+            ]} />
             <div>
                 {/*toolbar*/}
                 <div
@@ -373,11 +356,11 @@ const NoteEdit = () => {
                                     <Button type='primary' onClick={() => {
                                         setModalTag(true)
                                     }}>
-                                        {t('note.editTag')}
+                                        # {t('note.editTag')}
                                     </Button>
                                 </div>
                                 <div style={{marginLeft: 10}}>
-                                    {tagList.length > 0 ? tagList.map((item: any, index: any) => (
+                                    {editTags.length > 0 ? editTags.map((item: any, index: any) => (
                                         <NoteEditTagRow item={item} key={index}/>
                                     )) : null}
                                 </div>
@@ -396,7 +379,7 @@ const NoteEdit = () => {
                             <Input.TextArea
                                 autoSize={true}
                                 style={{
-                                    color: themeColor.textLight,
+                                    color:themeColor.textLight,
                                     backgroundColor: themeColor.blockDark,
                                 }}
                                 value={content}
@@ -441,7 +424,7 @@ const NoteEdit = () => {
                 </div>
             </div>
             <Modal
-                visible={modalDelete}
+                open={modalDelete}
                 closable={false}
                 onOk={() => {
                     let params = {
@@ -470,7 +453,7 @@ const NoteEdit = () => {
             </Modal>
 
             <Modal
-                visible={modalTag}
+                open={modalTag}
                 closable={false}
                 onOk={() => {
                     onSaveTags()
@@ -481,12 +464,12 @@ const NoteEdit = () => {
                 <Form>
                     <Form.Item>
                         <div>{t('note.addTag')}</div>
-                        <Input.Group compact>
+                        <Space.Compact>
                             <Input style={{width: 'calc(100% - 100px)'}} value={tagEdit} onChange={(e) => {
                                 setTagEdit(e.target.value)
                             }}/>
                             <Button type='primary' onClick={() => onAddTag()}>{t('common.btAdd')}</Button>
-                        </Input.Group>
+                        </Space.Compact>
 
                     </Form.Item>
                 </Form>
@@ -498,59 +481,15 @@ const NoteEdit = () => {
                 <Divider/>
                 <div>
                     <div>{t('tag.myTags')}</div>
-                    <div>
-                        {myNoteTags && myNoteTags.length > 0 ?
-                            myNoteTags.map((item, index) => (
-                                <MyAllTagRow item={item} key={index} onSelectTag={(data: any) => {
-                                    if (editTags.length === 0) {
-                                        let tags = [{tagName: data.tagName}]
-                                        dispatch(saveEditTags(tags))
-                                    } else {
-                                        let tags: any = []
-                                        let cc = 0;
-                                        editTags.map((item2: any) => {
-                                            if (data.tagName === item2.tagName) {
-                                                cc++
-                                            } else {
-                                                tags.push(item2)
-                                            }
-                                        })
-                                        if (cc === 0) {
-                                            tags.push(data)
-                                            dispatch(saveEditTags(tags))
-                                        }
-                                    }
-                                }}/>
-                            )) : <div>没有我的tag</div>
-                        }
+                    <div style={{marginTop:10}}>
+                        <MyNoteTags1 />
                     </div>
                 </div>
                 <Divider/>
                 <div>
                     <div>{t('tag.hotTags')}</div>
                     <div style={{marginTop: 10}}>
-                        {hotTags && hotTags.length > 0 ? hotTags.map((item, index) => (
-                            <HotTagRow item={item} key={index} onSelectTag={(data: any) => {
-                                if (editTags.length === 0) {
-                                    let tags = [{tagName: data.tagName}]
-                                    dispatch(saveEditTags(tags))
-                                } else {
-                                    let tags: any = []
-                                    let cc = 0;
-                                    editTags.map((item2: any) => {
-                                        if (data.tagName === item2.tagName) {
-                                            cc++
-                                        } else {
-                                            tags.push(item2)
-                                        }
-                                    })
-                                    if (cc === 0) {
-                                        tags.push(data)
-                                        dispatch(saveEditTags(tags))
-                                    }
-                                }
-                            }}/>
-                        )) : null}
+                        <HotTags1 />
                     </div>
                 </div>
             </Modal>

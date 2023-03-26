@@ -12,12 +12,12 @@ const NoteListRow = (data: any) => {
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
     const dispatch = useDispatch()
     return (
-        <div
+        <Card size='small' bordered={false}
             style={{
                 background: themeColor.blockDark,
                 marginTop: 10,
                 color: themeColor.textLight,
-                padding: 10,
+                padding: 0,
             }}
         >
             <div>
@@ -36,7 +36,7 @@ const NoteListRow = (data: any) => {
                     {moment(item.createTime).format("LLL")}
                 </div>
             </div>
-        </div>
+        </Card>
     );
 };
 

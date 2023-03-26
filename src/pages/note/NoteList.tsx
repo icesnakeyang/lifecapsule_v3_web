@@ -25,6 +25,8 @@ import NoteListRow from "./NoteListRow";
 import NotePageTagRow from "./NotePageTagRow";
 import NotePageModalTagRow from "./NotePageModalTagRow";
 import {loadRefresh} from "../../store/commonSlice";
+import {PlusOutlined} from "@ant-design/icons";
+import Search from "antd/es/input/Search";
 
 const NoteList = () => {
     const navigate = useNavigate();
@@ -48,11 +50,13 @@ const NoteList = () => {
     const searchKey = useSelector((state: any) => state.noteDataSlice.noteListSearchKey)
 
     useEffect(() => {
-        dispatch(saveNotePageIndex(1))
+        console.log('set page index to 1')
+        // dispatch(saveNotePageIndex(1))
     }, [])
     useEffect(() => {
+        console.log('loaddata')
         loadAllData()
-    }, [refresh, notePageIndex])
+    }, [refresh, notePageIndex, notePageSize])
 
     const loadAllData = () => {
         console.log('load all data')
@@ -95,20 +99,19 @@ const NoteList = () => {
 
     return (
         <div style={{}}>
-            <Breadcrumb style={{margin: "20px 0"}}>
-                <Breadcrumb.Item>
-                    <a href="/main/dashboard">
-            <span style={{color: themeColor.textLight}}>
-              {t("common.home")}
-            </span>
-                    </a>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item>
-          <span style={{color: themeColor.textLight}}>
-            {t("note.noteList")}
-          </span>
-                </Breadcrumb.Item>
-            </Breadcrumb>
+            <Breadcrumb style={{margin: "20px 0"}} items={[
+                {
+                    title: t("common.home"),
+                    href: '/main/dashboard'
+                },
+                {
+                    title: t("note.noteList"),
+                    href: '/main/noteList'
+                },
+                {
+                    title: t("note.noteNew")
+                }
+            ]}/>
             {loading ? (
                 <div
                     style={{
@@ -123,10 +126,11 @@ const NoteList = () => {
             ) : (
                 <div>
                     <Card style={{background: themeColor.blockDark}}>
-                        <Row>
+                        <Row gutter={[16, 24]}>
                             <Col>
                                 <Button
                                     type="primary"
+                                    icon={<PlusOutlined/>}
                                     onClick={() => {
                                         dispatch(clearNoteState())
                                         navigate("/main/noteNew");
@@ -135,30 +139,34 @@ const NoteList = () => {
                                     {t("note.btNewNote")}
                                 </Button>
                             </Col>
-                            <Col offset={1}>
-                                <div style={{display: 'flex'}}>
-                                    <Input placeholder={t('note.searchHolder')}
-                                           onChange={e => dispatch(saveNoteListSearchKey(e.target.value))}
-                                           value={searchKey}
-                                    />
-                                    <Button type='primary' onClick={() => {
-                                        dispatch(loadRefresh())
-                                    }}>Search</Button>
+                            <Col>
+                                <Search style={{background: themeColor.blockDark}}
+                                        placeholder={t('note.searchHolder')}
+                                        onChange={(e) => {
+                                            console.log(e.target.value)
+                                            dispatch(saveNoteListSearchKey(e.target.value))
+                                        }}
+                                        allowClear
+                                        value={searchKey}
+                                        onSearch={() => {
+                                            dispatch(loadRefresh())
+                                        }}/>
+                            </Col>
+                            <Col>
+                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <Button type="primary" onClick={() => {
+                                        setModalTag(true)
+                                    }}
+                                    ># {t('tag.tags')}</Button>
+                                    <div style={{marginLeft: 10}}>
+                                        {noteListTags && noteListTags.length > 0 ?
+                                            noteListTags.map((item: any, index: any) => (
+                                                <NotePageTagRow item={item} key={index}/>
+                                            )) : null}
+                                    </div>
                                 </div>
                             </Col>
                         </Row>
-                        <div style={{marginTop: 10, display: 'flex', alignItems: 'center'}}>
-                            <Button type="primary" onClick={() => {
-                                setModalTag(true)
-                            }}
-                            >{t('tag.tags')}</Button>
-                            <div style={{marginLeft: 10}}>
-                                {noteListTags && noteListTags.length > 0 ?
-                                    noteListTags.map((item: any, index: any) => (
-                                        <NotePageTagRow item={item} key={index}/>
-                                    )) : null}
-                            </div>
-                        </div>
                     </Card>
 
                     <div style={{marginTop: 10}}>
@@ -173,6 +181,7 @@ const NoteList = () => {
                             style={{marginTop: 10, color: themeColor.textLight}}
                             total={totalNote}
                             current={notePageIndex}
+                            defaultPageSize={notePageSize}
                             showQuickJumper
                             showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
                             onChange={(page, pz) => {
@@ -185,7 +194,7 @@ const NoteList = () => {
                 </div>
             )}
 
-            <Modal visible={modalTag} onCancel={() => setModalTag(false)} onOk={() => {
+            <Modal open={modalTag} onCancel={() => setModalTag(false)} onOk={() => {
                 setModalTag(false)
             }}>
                 <div style={{marginLeft: 10}}>

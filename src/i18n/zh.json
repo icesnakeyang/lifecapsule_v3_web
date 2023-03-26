@@ -224,7 +224,9 @@
     "modalDeleteTitle": "删除方拖延笔记",
     "modalDeleteTip1": "确定要删除方拖延笔记吗？删除后不可恢复",
     "tipNoTitle": "请输入标题",
-    "btAddNew": "新建"
+    "btAddNew": "新建",
+    "antiDelayNoteList": "我的防拖延笔记",
+    "antiProcrastination": "防拖延笔记"
   },
   "setting": {
     "btSelect": "选择"
@@ -314,7 +316,8 @@
   "tag": {
     "tags": "标签",
     "hotTags": "热门标签",
-    "myTags": "我的标签"
+    "myTags": "我的标签",
+    "tipNoMyTag": "没有标签"
   },
   "syserr": {
     "10001": "系统错误",

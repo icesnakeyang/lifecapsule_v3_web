@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {apiGetMyAntiDelayNote, apiRequestRsaPublicKey, apiUpdateMyAntiDelayNote} from "../../api/Api";
 import {Decrypt, Decrypt2, Encrypt, GenerateKey, GenerateRandomString16, RSAencrypt} from "../../common/crypto";
-import {Button, Card, Col, Input, message, Row} from "antd";
+import {Breadcrumb, Button, Card, Col, Input, message, Row} from "antd";
 import {useTranslation} from "react-i18next";
 import {useDispatch, useSelector} from "react-redux";
 import {saveAntiDelayTodoListEdit} from "../../store/antiDelaySlice";
@@ -10,6 +10,7 @@ import {CheckOutlined, CloseOutlined, PlusSquareOutlined} from "@ant-design/icon
 import AntiDelayTodoTaskRow from "./AntiDelayTodoTaskRow";
 import CryptoJS from "crypto-js";
 import {loadRefresh} from "../../store/commonSlice";
+import moment from "moment";
 
 const AntiDelayNoteEdit = (data: any) => {
     const {antiDelayNoteId}: any = useLocation().state;
@@ -28,6 +29,7 @@ const AntiDelayNoteEdit = (data: any) => {
     const [taskTodoTitle, setTaskTodoTitle] = useState('');
     const [saving, setSaving] = useState(false)
     const navigate = useNavigate()
+    const [createTime, setCreateTime] = useState(null)
 
     useEffect(() => {
         loadAllData()
@@ -61,6 +63,7 @@ const AntiDelayNoteEdit = (data: any) => {
                         setLongGoal(LONG_GOAL)
                         setTodayGoal(TODAY_GOAL)
                         setTitle(res.data.title)
+                        setCreateTime(res.data.createTime)
                         dispatch(saveAntiDelayTodoListEdit(res.data.todoList));
                     } else {
                         message.error(t('syserr.' + res.code))
@@ -157,7 +160,20 @@ const AntiDelayNoteEdit = (data: any) => {
 
     return (
         <div>
-            <div style={{color: themeColor.textLight}}>{t('antiDelayNote.antiDelayTile')}</div>
+            <Breadcrumb style={{margin: "20px 0"}} items={[
+                {
+                    title: t("common.home"),
+                    href: '/main/dashboard'
+                },
+                {
+                    title: t("antiDelayNote.antiDelayNoteList"),
+                    href: '/main/AntiDelayNoteList'
+                },
+                {
+                    title:t('antiDelayNote.antiProcrastination')
+                }
+            ]}/>
+            <div style={{color: themeColor.textHolder}}>{t('antiDelayNote.antiDelayTile')}</div>
             <div style={{marginTop: 10}}>
                 <Input.TextArea autoSize style={{
                     color: themeColor.textLight,
@@ -169,45 +185,42 @@ const AntiDelayNoteEdit = (data: any) => {
                 }}/>
             </div>
 
-            <Row>
-                <Col>
-                    <Row>
-
-                    </Row>
-                </Col>
-            </Row>
+            <div style={{marginTop: 20, color: themeColor.textHolder}}>
+                {t('note.createTime')}:
+                {createTime && moment(createTime).format('LL')}
+            </div>
 
             <Row gutter={16}>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                    <Card style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
-                          headStyle={{color: themeColor.textLight}} title={t('antiDelayNote.yesterday')}>
+                    <Card size='small' style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
+                          headStyle={{color: themeColor.textHolder}} title={t('antiDelayNote.yesterday')}>
                         <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         onChange={e => {
                                             setHappyYesterday(e.target.value)
                                         }}
                                         value={happyYesterday}/>
-                        <div style={{marginTop: 10}}>{t('antiDelayNote.tipYesterday')}</div>
+                        <div style={{marginTop: 10, color:themeColor.textHolder}}>{t('antiDelayNote.tipYesterday')}</div>
                     </Card>
                 </Col>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                    <Card style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
+                    <Card size='small' style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
                           title={t('antiDelayNote.myThought')}
-                          headStyle={{color: themeColor.textLight}}
+                          headStyle={{color: themeColor.textHolder}}
                     >
                         <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         value={myThought} onChange={e => {
                             setMyThought(e.target.value)
                         }}/>
-                        <div style={{marginTop: 10}}>{t('antiDelayNote.tipMyThought')}</div>
+                        <div style={{marginTop: 10,color:themeColor.textHolder}}>{t('antiDelayNote.tipMyThought')}</div>
                     </Card>
                 </Col>
             </Row>
 
             <Row gutter={16}>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                    <Card style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
+                    <Card size='small' style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
                           title={t('antiDelayNote.longGoal')}
-                          headStyle={{color: themeColor.textLight}}
+                          headStyle={{color: themeColor.textHolder}}
                     >
                         <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         value={longGoal}
@@ -215,33 +228,32 @@ const AntiDelayNoteEdit = (data: any) => {
                                             setLongGoal(e.target.value)
                                         }}
                         />
-                        <div style={{marginTop: 10}}>{t('antiDelayNote.tipLongGoal1')}</div>
-                        <div>{t('antiDelayNote.tipLongGoal2')}</div>
-                        <div>{t('antiDelayNote.tipLongGoal3')}</div>
-                        <div>{t('antiDelayNote.tipLongGoal4')}</div>
+                        <div style={{marginTop: 10, color:themeColor.textHolder}}>{t('antiDelayNote.tipLongGoal1')}</div>
+                        <div style={{color:themeColor.textHolder}}>{t('antiDelayNote.tipLongGoal2')}</div>
+                        <div style={{color:themeColor.textHolder}}>{t('antiDelayNote.tipLongGoal3')}</div>
+                        <div style={{color:themeColor.textHolder}}>{t('antiDelayNote.tipLongGoal4')}</div>
                     </Card>
                 </Col>
                 <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
-                    <Card style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
+                    <Card size='small' style={{marginTop: 20, background: themeColor.blockDark, color: themeColor.textLight}}
                           title={t('antiDelayNote.whatToDoToday')}
-                          headStyle={{color: themeColor.textLight}}
+                          headStyle={{color: themeColor.textHolder}}
                     >
                         <Input.TextArea autoSize style={{background: themeColor.blockDark, color: themeColor.textLight}}
                                         onChange={e => {
                                             setTodayGoal(e.target.value)
                                         }}
                                         value={todayGoal}/>
-                        <div style={{marginTop: 10}}>{t('antiDelayNote.tipTodayGoal')}</div>
+                        <div style={{marginTop: 10,color:themeColor.textHolder}}>{t('antiDelayNote.tipTodayGoal')}</div>
                     </Card>
                 </Col>
             </Row>
 
-            <Card style={{marginTop: 20, background: themeColor.blockDark}} title={t('antiDelayNote.10SecAction')}
+            <Card size='small' style={{marginTop: 20, background: themeColor.blockDark}} title={t('antiDelayNote.10SecAction')}
                   headStyle={{color: themeColor.textLight}}>
 
                 {/* what do you do today */}
-                <div style={{marginTop: 20}}>
-
+                <div style={{marginTop: 0}}>
                     <div style={{color: themeColor.textHolder}}>
                         {t('antiDelayNote.tip10SecAction')}
                     </div>
@@ -288,7 +300,7 @@ const AntiDelayNoteEdit = (data: any) => {
                     ) : (
                         <div style={{marginTop: 10}}>
                             <div style={{color: themeColor.textHolder}}>
-                                {t('antiDelay.tipAddTodoTask')}
+                                {t('antiDelayNote.tipAddTodoTask')}
                             </div>
                         </div>
                     )}

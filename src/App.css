@@ -1,8 +1,8 @@
 @import 'antd/dist/reset.css';
 
-.ant-pagination .ant-pagination-item a {
-    color: red;
-}
+/*.ant-pagination .ant-pagination-item a {*/
+/*    color: red;*/
+/*}*/
 
 :where(.css-dev-only-do-not-override-17p3bx5).ant-pagination .ant-pagination-item-active a {
     color: #1677ff;

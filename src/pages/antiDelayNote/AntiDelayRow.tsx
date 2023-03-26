@@ -8,19 +8,17 @@ const AntiDelayRow = (data: any) => {
     const navigate = useNavigate()
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor)
     return (
-        <Card style={{margin: '10px 0 0 0', background: themeColor.blockDark}}>
+        <Card size='small' style={{margin: '10px 0 0 0', background: themeColor.blockDark}}>
+            <div>
+                <a style={{color: themeColor.textLight, fontWeight: 'bold'}}
+                   onClick={() => {
+                       navigate("/main/AntiDelayNoteEdit", {state: {antiDelayNoteId: item.noteId}})
+                   }}
+                >{item.title}</a>
+            </div>
             <Row>
                 <Col>
-                    <a style={{color: themeColor.textLight, fontSize: 18, fontWeight: 'bold'}}
-                       onClick={() => {
-                           navigate("/main/AntiDelayNoteEdit", {state: {antiDelayNoteId: item.noteId}})
-                       }}
-                    >{item.title}</a>
-                </Col>
-            </Row>
-            <Row>
-                <Col>
-                    <div style={{color: themeColor.textLight}}>
+                    <div style={{color: themeColor.textHolder}}>
                         {moment(item.createTime).format('ll')}
                     </div>
                 </Col>
