@@ -26,7 +26,6 @@ const AntiDelayNoteList = () => {
             pageIndex:antiDelayNotePageIndex,
             pageSize:antiDelayNotePageSize
         }
-        console.log(params)
         apiListMyAntiDelayNote(params).then((res: any) => {
             if (res.code === 0) {
                 setNoteList(res.data.noteList)
@@ -68,7 +67,6 @@ const AntiDelayNoteList = () => {
                 showQuickJumper
                 showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
                 onChange={(page, pz) => {
-                    console.log('page:' + page)
                     dispatch(saveAntiDelayNotePageIndex(page));
                     dispatch(saveAntiDelayNotePageSize(pz));
                 }}

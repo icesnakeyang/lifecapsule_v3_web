@@ -6,7 +6,8 @@ export const commonSlice = createSlice({
         editing: 0,
         tempId: -1,
         refresh: 0,
-        language: 'en'
+        language: 'en',
+        doNotLoadTodoTask: false
     },
     reducers: {
         saveEditing: (state: any, action: PayloadAction<number>) => {
@@ -29,6 +30,9 @@ export const commonSlice = createSlice({
         },
         saveLanguage: (state: any, action: any) => {
             state.language = action.payload
+        },
+        saveDoNotLoadToDoTask: (state: any, action: any) => {
+            state.doNotLoadTodoTask = action.payload
         }
     },
 });
@@ -39,6 +43,7 @@ export const {
     clearRefresh,
     saveLanguage,
     clearCommonState,
+    saveDoNotLoadToDoTask
 } = commonSlice.actions;
 
 export default commonSlice.reducer;

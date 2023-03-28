@@ -44,14 +44,12 @@ const AntiDelayNoteNew = () => {
                 params.keyToken = res1.data.keyToken;
 
                 apiLoadLastMyAntiDelayNote(params).then((res: any) => {
-                    console.log(res);
                     if (res.code === 0) {
                         let strKey = res.data.userEncodeKey;
                         strKey = Decrypt2(strKey, keyAES_1);
                         res.data.subList.map((item: any) => {
                             if (item.type === 'LONG_GOAL') {
                                 let c1 = Decrypt(item.content, strKey, strKey);
-                                console.log(c1);
                                 setLongGoal(c1)
                             }
                             if (item.type === 'TODAY_GOAL') {
@@ -78,7 +76,6 @@ const AntiDelayNoteNew = () => {
         if (cc === 0) {
             list.push({taskTitle: taskTodoTitle});
         }
-        console.log(list)
         dispatch(saveAntiDelayTodoListNew(list));
         setTaskTodoTitle('');
         setAddingTask(false);

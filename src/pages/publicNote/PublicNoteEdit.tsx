@@ -19,7 +19,6 @@ const PublicNoteEdit = () => {
         let params = {
             noteId
         }
-        console.log(noteId)
         apiGetMyPublicNote(params).then((res: any) => {
             if (res.code === 0) {
                 setTitle(res.data.note.title)

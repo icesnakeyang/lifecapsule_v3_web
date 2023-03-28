@@ -319,6 +319,17 @@
     "myTags": "我的标签",
     "tipNoMyTag": "没有标签"
   },
+  "project": {
+    "title": "项目",
+    "myProjectList": "我的项目",
+    "createNewProject": "创建新的项目",
+    "editProject": "编辑项目",
+    "projectName": "项目名称",
+    "btSave": "保存项目",
+    "tipSaveSuccess": "保存项目成功！",
+    "projectNameHolder": "请输入项目名称",
+    "currentProject": "当前项目"
+  },
   "syserr": {
     "10001": "系统错误",
     "10002": "没有查询到用户信息，或者用户登录已过期",

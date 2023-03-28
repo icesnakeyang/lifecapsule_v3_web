@@ -36,14 +36,10 @@ const PublicNoteByMail = (data: any) => {
                 setCreateTime(res.data.note.createTime)
                 setLoading(false)
             } else {
-                console.log(1)
-                console.log(res.code)
                 if (res.code === 10080) {
-                    console.log(2)
                     setOverdue(true)
                     setLoading(false)
                 }else{
-                    console.log(3)
                 }
             }
         }).catch(() => {

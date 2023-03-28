@@ -7,7 +7,6 @@ const TriggerRow = (data: any) => {
     const {item} = data
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor)
     const {t} = useTranslation()
-    console.log(item)
     return (
         <div style={{background: themeColor.blockDark, marginTop: 10, padding: 10, borderRadius: 5}}>
             <Row>

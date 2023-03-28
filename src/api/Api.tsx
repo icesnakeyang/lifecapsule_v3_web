@@ -1,8 +1,8 @@
 import {Get, Post} from "./ApiBase";
 
-// const host = "http://localhost:8003/lifecapsule3_api";
+const host = "http://localhost:8003/lifecapsule3_api";
 // const host = "http://124.217.246.120:8003/lifecapsule3_api";
-const host = "https://tellmeafter.com/lifecapsule3_api";
+// const host = "https://tellmeafter.com/lifecapsule3_api";
 
 export const apiLogin = (params: any) => {
     return Post(`${host}/web/user/login`, params);
@@ -308,4 +308,16 @@ export const apiListMyPublicNote = (params: any) => {
 
 export const apiGetMyPublicNote = (params: any) => {
     return Post(`${host}/web/webpublicweb/getMyPublicNote`, params);
+};
+
+export const apiSaveMyProject = (params: any) => {
+    return Post(`${host}/web/project/saveMyProject`, params);
+};
+
+export const apiListMyProject = (params: any) => {
+    return Post(`${host}/web/project/listMyProject`, params);
+};
+
+export const apiGetProject = (params: any) => {
+    return Post(`${host}/web/project/getProject`, params);
 };

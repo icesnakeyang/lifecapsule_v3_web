@@ -6,7 +6,6 @@ import {useNavigate} from "react-router-dom";
 
 const PublicNoteRow = (data: any) => {
     const {item} = data
-    console.log(item.title)
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor)
     const {t} = useTranslation()
     const navigate = useNavigate()
@@ -27,7 +26,6 @@ const PublicNoteRow = (data: any) => {
                 </Col>
                 <Col offset={1}>
                     <Button type='primary' onClick={() => {
-                        console.log(item.noteId)
                         navigate("/main/PublicNoteEdit", {state: {noteId: item.noteId}})
                     }}>{t('common.btDetail')}</Button>
                 </Col>

@@ -291,7 +291,6 @@ const NoteEdit = () => {
                                 content,
                                 title
                             }
-                            console.log(data)
                             dispatch(saveSendNote(data))
                             navigate("/main/NoteSendMethod", {state: {noteId}});
                         }}
@@ -307,7 +306,6 @@ const NoteEdit = () => {
                                 content,
                                 title
                             }
-                            console.log(data)
                             dispatch(saveSendNote(data))
                             navigate("/main/SendPage", {state: {noteId}});
                         }}

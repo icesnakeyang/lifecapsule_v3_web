@@ -12,12 +12,14 @@ const NoteListRow = (data: any) => {
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
     const dispatch = useDispatch()
     return (
-        <Card size='small' bordered={false}
+        <Card
+            size='small'
+            bordered={false}
             style={{
                 background: themeColor.blockDark,
                 marginTop: 10,
-                color: themeColor.textLight,
-                padding: 0,
+                // color: themeColor.textLight,
+                // padding: 0,
             }}
         >
             <div>

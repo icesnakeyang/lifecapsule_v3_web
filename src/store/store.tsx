@@ -15,6 +15,7 @@ import taskQuadSlice from "./taskQuadSlic";
 import noteSendSlice from "./noteSendSlice";
 import tagSlice from "./tagSlice";
 import antiDelaySlice from "./antiDelaySlice";
+import projectSlice from "./projectSlice";
 
 const persistConfig = {
     key: "root",
@@ -33,7 +34,8 @@ const rootReducer = combineReducers({
     themeSlice,
     taskQuadSlice,
     noteSendSlice,
-    tagSlice
+    tagSlice,
+    projectSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

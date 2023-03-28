@@ -7,7 +7,7 @@ import {
     List,
     message,
     Pagination,
-    Row,
+    Row, Tag,
 } from "antd";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
@@ -22,6 +22,9 @@ import {
 import {useNavigate} from "react-router-dom";
 import TodoRow from "./TodoRow";
 import {Spin} from "antd/es";
+import {FolderOutlined, PlusOutlined} from "@ant-design/icons";
+import {clearCurrentProject} from "../../../store/projectSlice";
+import {saveDoNotLoadToDoTask} from "../../../store/commonSlice";
 
 const TodoPage = () => {
     const [loadMore, setLoadMore] = useState(false);
@@ -40,16 +43,25 @@ const TodoPage = () => {
     );
     const [hideComplete, setHideComplete] = useState(false);
     const [loading, setLoading] = useState(true)
+    const currentProjectName = useSelector((state: any) => state.projectSlice.currentProjectName)
+    const currentProjectId = useSelector((state: any) => state.projectSlice.currentProjectId)
+    const doNotLoadTodoTask = useSelector((state: any) => state.commonSlice.doNotLoadTodoTask)
 
     useEffect(() => {
-
+        console.log('effect 1')
         loadAllData();
         return () => {
         };
-    }, [todoPageIndex, refresh,hideComplete]);
+    }, [todoPageIndex, refresh, hideComplete, currentProjectId]);
 
     useEffect(() => {
-        dispatch(saveTodoPageIndex(1))
+        console.log('effect 2')
+        if (doNotLoadTodoTask) {
+            dispatch(saveDoNotLoadToDoTask(false))
+        } else {
+            console.log('set page to 1')
+            dispatch(saveTodoPageIndex(1))
+        }
         // loadAllData()
     }, [])
 
@@ -58,6 +70,7 @@ const TodoPage = () => {
             pageIndex: todoPageIndex,
             pageSize: todoPageSize,
             hideComplete,
+            projectId: currentProjectId
         };
         setLoading(true)
         apiListMyTaskTodo(params)
@@ -73,6 +86,9 @@ const TodoPage = () => {
                     setLoading(false)
                 } else {
                     message.error(t("syserr." + res.code));
+                    if (res.code === 10047) {
+                        navigate("/guest/LoginPage");
+                    }
                 }
             })
             .catch(() => {
@@ -96,7 +112,7 @@ const TodoPage = () => {
                     </Button>,
                 ]}
             >
-                dlskdjsl{item.complete}
+                {item.complete}
                 {item.complete}
                 {item.complete ? (
                     <div style={{}}>{item.title}完成</div>
@@ -114,15 +130,18 @@ const TodoPage = () => {
 
     return (
         <div>
-            <Breadcrumb style={{}}>
-                <Breadcrumb.Item>
-          <span style={{color: themeColor.textLight}}>
-            {t("task.myTodoList")}
-          </span>
-                </Breadcrumb.Item>
+            <Breadcrumb style={{}} items={[
+                {
+                    title: t("common.home"),
+                    href: '/main/dashboard'
+                },
+                {
+                    title: t("task.myTodoList"),
+                }
+            ]}>
             </Breadcrumb>
 
-            <Card style={{background: themeColor.blockDark}}>
+            <Card size='small' style={{background: themeColor.blockDark}}>
                 <Row>
                     <Col>
                         <Button
@@ -130,6 +149,7 @@ const TodoPage = () => {
                             onClick={() => {
                                 navigate("/main/TodoNew");
                             }}
+                            icon={<PlusOutlined/>}
                         >
                             {t("task.btAddTodo")}
                         </Button>
@@ -141,6 +161,20 @@ const TodoPage = () => {
                         >
                             {t("task.hideComplete")}
                         </Checkbox>
+                    </Col>
+                    <Col offset={1} style={{display: 'flex', alignItems: 'center'}}>
+                        <Button type='primary' icon={<FolderOutlined/>}
+                                onClick={() => {
+                                    navigate("/main/ProjectList")
+                                }}
+                        >{t('project.currentProject')}</Button>
+                        {currentProjectName &&
+                            <div style={{marginLeft: 10}}>
+                                <Tag closable onClose={() => {
+                                    dispatch(clearCurrentProject())
+                                }}>{currentProjectName}</Tag>
+                            </div>
+                        }
                     </Col>
                 </Row>
             </Card>

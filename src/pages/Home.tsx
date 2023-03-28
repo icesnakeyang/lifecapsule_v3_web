@@ -31,10 +31,6 @@ const Home = () => {
     const lan = i18n.language
 
     useEffect(() => {
-        console.log('lan changed')
-        console.log(language)
-        console.log(lan)
-
         if (!language) {
             i18n.changeLanguage('en')
             dispatch(saveLanguage("en"))
@@ -46,8 +42,6 @@ const Home = () => {
         }
 
     }, [language])
-
-    console.log(userData)
 
     const headerMenuItemsUnSign: MenuProps['items'] = [
         {
@@ -100,24 +94,19 @@ const Home = () => {
     ]
 
     const onMenuHeader: MenuProps['onClick'] = (e) => {
-        console.log(e)
         if (e.key === 'menuEnglish') {
-            console.log('select english')
             i18n.changeLanguage("en");
             dispatch(saveLanguage("en"))
             apiSaveUserLanguage({language: "en"})
         }
         if (e.key === 'menuChinese') {
-            console.log('选择中文')
             i18n.changeLanguage("zh");
             dispatch(saveLanguage("zh"))
             apiSaveUserLanguage({language: "zh"})
         }
         if (e.key === 'menuLogin') {
-            console.log('login')
         }
         if (e.key === 'menuSignOut') {
-            console.log('sign Out')
         }
     }
 
@@ -144,7 +133,6 @@ const Home = () => {
 
     const onSignIn = () => {
         if (!userData.token) {
-            console.log('no token')
             /**
              * 如果没有token，就注册一个新用户
              */
@@ -157,7 +145,6 @@ const Home = () => {
                 }
             });
         } else {
-            console.log('has token')
             apiSignToken().then((res: any) => {
                 if (res.code === 0) {
                     let data = {

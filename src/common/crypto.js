@@ -50,16 +50,12 @@ export function GenerateRandomString16() {
 }
 
 export function Decrypt2(word, keyStr) {
-  console.log(10)
   let key = CryptoJS.enc.Utf8.parse(keyStr);
   let decrypt = CryptoJS.AES.decrypt(word, key, {
     mode: CryptoJS.mode.ECB,
     padding: CryptoJS.pad.Pkcs7,
   });
-  console.log(9)
   let ss = CryptoJS.enc.Utf8.stringify(decrypt).toString();
-  console.log(11)
-  console.log(ss)
   return ss;
 }
 

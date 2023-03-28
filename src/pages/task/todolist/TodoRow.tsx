@@ -3,10 +3,11 @@ import {apiDeleteMyTaskTodo, apiUpdateMyTaskTodoCompleteStatus} from "../../../a
 import {useTranslation} from "react-i18next";
 import {CheckboxChangeEvent} from "antd/lib/checkbox";
 import {useDispatch, useSelector} from "react-redux";
-import {loadRefresh} from "../../../store/commonSlice";
+import {loadRefresh, saveDoNotLoadToDoTask} from "../../../store/commonSlice";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
+import {saveTodoTaskId} from "../../../store/taskTodoSlice";
 
 const TodoRow = (data: any) => {
     const {item} = data;
@@ -82,7 +83,6 @@ const TodoRow = (data: any) => {
                         checked={complete}
                         onChange={(e) => {
                             onUpdateCompleteStatus(e, item.taskId);
-                            console.log(e.target)
                             setComplete(e.target.checked)
                         }}
                     ></Checkbox>
@@ -113,7 +113,9 @@ const TodoRow = (data: any) => {
                         type="primary"
                         size="small"
                         onClick={() => {
-                            navigate("/main/TodoEdit", {state: {taskId: item.taskId}});
+                            dispatch(saveTodoTaskId(item.taskId))
+                            dispatch(saveDoNotLoadToDoTask(true))
+                            navigate("/main/TodoEdit");
                         }}
                     >
                         {t("common.btDetail")}
@@ -132,7 +134,7 @@ const TodoRow = (data: any) => {
             </Row>
 
             <Modal
-                visible={modalDelete}
+                open={modalDelete}
                 onCancel={() => setModalDelete(false)}
                 title={t("task.tipDelete1")}
                 onOk={() => onDeleteTask()}

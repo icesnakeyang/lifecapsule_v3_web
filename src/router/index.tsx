@@ -42,6 +42,8 @@ import MyReceiveNoteDetail from "../pages/inbox/MyReceiveNoteDetail";
 import PublishToPublicWeb from "../pages/send/PublishToPublicWeb";
 import PublicNoteList from "../pages/publicNote/PublicNoteList";
 import PublicNoteEdit from "../pages/publicNote/PublicNoteEdit";
+import ProjectList from "../pages/task/project/ProjectList";
+import ProjectEdit from "../pages/task/project/ProjectEdit";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -332,6 +334,22 @@ const Routers = () => {
                     element={
                         <ProtectRouter>
                             <PublicNoteEdit/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/ProjectList"
+                    element={
+                        <ProtectRouter>
+                            <ProjectList/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/ProjectEdit"
+                    element={
+                        <ProtectRouter>
+                            <ProjectEdit/>
                         </ProtectRouter>
                     }
                 />

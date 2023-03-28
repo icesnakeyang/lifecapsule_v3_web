@@ -20,7 +20,6 @@ const PublishToPublicWeb = () => {
             title: sendNoteTitle,
             content: sendNoteContent
         }
-        console.log(params)
         setSaving(true)
         apiPublishNoteToPublicWeb(params).then((res: any) => {
             if (res.code === 0) {

@@ -40,6 +40,7 @@ const NoteNew = () => {
             content: "",
             encryptKey: "",
             keyToken: "",
+            tagList: editTags
         };
         setSaving(true);
         if (encrypt === 1) {
@@ -57,6 +58,7 @@ const NoteNew = () => {
                         params.encryptKey =
                             RSAencrypt(params.encryptKey, res.data.publicKey) || "";
                         params.keyToken = res.data.keyToken;
+                        console.log(params)
                         apiSaveMyNote(params)
                             .then((res: any) => {
                                 if (res.code === 0) {
@@ -122,9 +124,8 @@ const NoteNew = () => {
         }
     }
 
-    useEffect(()=>{
-        console.log(editTags)
-    },[])
+    useEffect(() => {
+    }, [])
 
     return (
         <div>
@@ -224,7 +225,7 @@ const NoteNew = () => {
                     // onSaveTags()
                     setModalTag(false)
                 }}
-                cancelButtonProps={{style:{display:"none"}}}
+                cancelButtonProps={{style: {display: "none"}}}
             >
                 <Form>
                     <Form.Item>

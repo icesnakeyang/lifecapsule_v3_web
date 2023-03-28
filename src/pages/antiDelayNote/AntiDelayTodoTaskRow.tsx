@@ -46,7 +46,6 @@ const AntiDelayTodoTaskRow = (data: any) => {
     };
 
     const onRemoveTask = (item1: any) => {
-        console.log('delete')
         let list: any = [];
         if (method && method === 'edit') {
             antiDelayTodoListEdit.map((reduxRow: any) => {
@@ -80,7 +79,6 @@ const AntiDelayTodoTaskRow = (data: any) => {
                         textDecorationLine: 'line-through'
                     }}>{item.taskTitle}</div>
                     <Button style={{background: themeColor.blockDark, borderWidth: 0}} onClick={() => {
-                        console.log('bt remove')
                         onRemoveTask(item);
                     }} icon={<CloseOutlined
                         style={{color: themeColor.colorDanger}}/>}></Button>
@@ -92,7 +90,6 @@ const AntiDelayTodoTaskRow = (data: any) => {
                     }}></Checkbox>
                     <div style={{marginLeft: 10, color: themeColor.textLight}}>{item.taskTitle}</div>
                     <Button style={{background: themeColor.blockDark, borderWidth: 0}} onClick={() => {
-                        console.log('bt remove')
                         onRemoveTask(item);
                     }} icon={<CloseOutlined
                         style={{color: themeColor.colorDanger}}/>}></Button>

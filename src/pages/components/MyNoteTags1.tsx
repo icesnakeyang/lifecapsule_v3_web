@@ -12,7 +12,6 @@ const MyNoteTags1 = () => {
     const {t}=useTranslation()
 
     useEffect(() => {
-        console.log('list user note tag')
         apiListUserNoteTag().then((res: any) => {
             if (res.code === 0) {
                 dispatch(saveMyAllNoteTags(res.data.tagList))

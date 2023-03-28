@@ -52,12 +52,9 @@ const AntiDelayNoteEdit = (data: any) => {
                         let strKey = res.data.userEncodeKey
                         strKey = Decrypt2(strKey, keyAES_1);
                         let yesterday = Decrypt(res.data.HAPPY_YESTERDAY.content, strKey, strKey);
-                        console.log(yesterday)
                         let LONG_GOAL = Decrypt(res.data.LONG_GOAL.content, strKey, strKey);
                         let MY_THOUGHT = Decrypt(res.data.MY_THOUGHT.content, strKey, strKey);
                         let TODAY_GOAL = Decrypt(res.data.TODAY_GOAL.content, strKey, strKey);
-                        console.log(LONG_GOAL)
-                        console.log(TODAY_GOAL)
                         setHappyYesterday(yesterday)
                         setMyThought(MY_THOUGHT)
                         setLongGoal(LONG_GOAL)

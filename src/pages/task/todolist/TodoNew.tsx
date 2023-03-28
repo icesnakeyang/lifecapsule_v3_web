@@ -1,4 +1,4 @@
-import {Breadcrumb, Button, Form, Input, message, Modal, Spin} from "antd";
+import {Breadcrumb, Button, Form, Input, message, Modal, Spin, Tag} from "antd";
 import FormItem from "antd/lib/form/FormItem";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
@@ -7,6 +7,9 @@ import {apiCreateMyTaskTodo, apiGetMyTaskTodo, apiRequestRsaPublicKey, apiUpdate
 import {useNavigate, useLocation} from "react-router-dom";
 import {Decrypt, Decrypt2, Encrypt, GenerateKey, GenerateRandomString16, RSAencrypt} from "../../../common/crypto";
 import CryptoJS from "crypto-js";
+import {use} from "i18next";
+import {FolderOutlined} from "@ant-design/icons";
+import {clearCurrentProject} from "../../../store/projectSlice";
 
 const TodoNew = () => {
     const {t} = useTranslation();
@@ -16,13 +19,16 @@ const TodoNew = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
+    const currentProjectId = useSelector((state: any) => state.projectSlice.currentProjectId)
+    const currentProjectName = useSelector((state: any) => state.projectSlice.currentProjectName)
 
     const saveTodo = () => {
         let params = {
             title: todoTitle,
             content: todoContent,
             encryptKey: '',
-            keyToken: ''
+            keyToken: '',
+            projectId: currentProjectId
         };
         setSaving(true);
         const uuid = GenerateKey();
@@ -73,6 +79,22 @@ const TodoNew = () => {
                 </Breadcrumb.Item>
             </Breadcrumb>
             <Form layout="vertical">
+                <FormItem>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <Button type='primary' icon={<FolderOutlined/>}
+                                onClick={() => {
+                                    navigate("/main/ProjectList")
+                                }}
+                        >{t('project.currentProject')}</Button>
+                        {currentProjectName &&
+                            <div style={{marginLeft: 10}}>
+                                <Tag closable onClose={() => {
+                                    dispatch(clearCurrentProject())
+                                }}>{currentProjectName}</Tag>
+                            </div>
+                        }
+                    </div>
+                </FormItem>
                 <FormItem>
                     <div style={{color: themeColor.textLight}}>
                         {t("task.title")}

@@ -171,7 +171,6 @@ const LoginPage = () => {
     ];
 
     const onSignAsGuest = () => {
-        console.log('no token')
         /**
          * 如果没有token，就注册一个新用户
          */

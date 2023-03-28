@@ -400,6 +400,17 @@
       "decryptionCodeHolder": "Input decryption code"
     }
   },
+  "project": {
+    "title": "Project",
+    "myProjectList": "My projects",
+    "createNewProject": "Create new project",
+    "editProject": "Edit project",
+    "projectName": "Project name",
+    "btSave": "Save project",
+    "tipSaveSuccess": "Save project success!",
+    "projectNameHolder": "Please input project name here",
+    "currentProject": "Project"
+  },
   "syserr": {
     "10001": "System or network error",
     "10002": "Please login and try it again",

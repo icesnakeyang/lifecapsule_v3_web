@@ -41,7 +41,6 @@ const InstantSend = () => {
             pageIndex,
             pageSize
         }
-        console.log(params)
         apiListMyContact(params).then((res: any) => {
             if (res.code === 0) {
                 setContactList(res.data.contactList)
@@ -86,7 +85,6 @@ const InstantSend = () => {
             encryptKey: {},
             keyToken: ''
         }
-        console.log(params)
 
         setSaving(true)
 
@@ -128,10 +126,6 @@ const InstantSend = () => {
     }
 
     const onSelectContact = (data: any) => {
-        console.log('on select contact')
-        console.log(data)
-        // console.log(item.contactName)
-        // console.log(item.email)
         setModalContact(false)
     }
 
@@ -248,7 +242,6 @@ const InstantSend = () => {
                                     <div style={{color: themeColor.textLight}}> {t('noteSent.sendContent')}</div>
                                     <Input.TextArea autoSize={true} value={content} onChange={(e: any) => {
                                         setContent(e.target.value)
-                                        console.log(e.target.value)
                                         dispatch(saveSendNoteContent(e.target.value))
                                     }}/>
                                     <div style={{color: themeColor.textHolder}}> {t('noteSent.tipSendContent')}</div>
@@ -309,7 +302,6 @@ const InstantSend = () => {
 
             <Modal visible={modalContact}
                    onOk={() => {
-                       console.log('ok')
                    }}
                    onCancel={() => {
                        setModalContact(false)

@@ -50,16 +50,13 @@ const NoteList = () => {
     const searchKey = useSelector((state: any) => state.noteDataSlice.noteListSearchKey)
 
     useEffect(() => {
-        console.log('set page index to 1')
         // dispatch(saveNotePageIndex(1))
     }, [])
     useEffect(() => {
-        console.log('loaddata')
         loadAllData()
     }, [refresh, notePageIndex, notePageSize])
 
     const loadAllData = () => {
-        console.log('load all data')
         let params = {
             pageIndex: notePageIndex,
             pageSize: notePageSize,
@@ -70,7 +67,6 @@ const NoteList = () => {
         apiListMyNote(params)
             .then((res: any) => {
                 if (res.code === 0) {
-                    console.log('save note list')
                     dispatch(saveNoteList(res.data.noteList));
                     setTotalNote(res.data.totalNote);
                     setLoading(false);
@@ -143,7 +139,6 @@ const NoteList = () => {
                                 <Search style={{background: themeColor.blockDark}}
                                         placeholder={t('note.searchHolder')}
                                         onChange={(e) => {
-                                            console.log(e.target.value)
                                             dispatch(saveNoteListSearchKey(e.target.value))
                                         }}
                                         allowClear
@@ -185,7 +180,6 @@ const NoteList = () => {
                             showQuickJumper
                             showTotal={(total) => `${t("note.totalNotes")}: ${total}`}
                             onChange={(page, pz) => {
-                                console.log('page:' + page)
                                 dispatch(saveNotePageIndex(page));
                                 dispatch(saveNotePageSize(pz));
                             }}

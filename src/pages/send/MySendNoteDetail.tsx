@@ -42,30 +42,20 @@ const MySendNoteDetail = () => {
 
                 apiGetMyNoteSendOutLog(params)
                     .then((res: any) => {
-                        console.log(res)
                         if (res.code === 0) {
                             let data = res.data.noteSendLog;
                             setTriggerType(data.triggerType);
-                            console.log(1)
-                            console.log(data.userEncodeKey)
                             if (data.userEncodeKey) {
                                 // setEncrypt(0);
-                                console.log(2)
                                 let strKey = data.userEncodeKey;
-                                console.log(5)
                                 strKey = Decrypt2(strKey, keyAES_1);
-                                console.log(6)
                                 let content = Decrypt(data.content, strKey, strKey);
-                                console.log(7)
                                 // setEncrypt(1);
                                 setNoteContent(content);
-                                console.log(8)
                             } else {
                                 // setEncrypt(0);
-                                console.log(3)
                                 setNoteContent(data.content);
                             }
-                            console.log(4)
                             setSendLog(res.data.noteSendLog);
                             setLoading(false);
                         } else {
@@ -92,7 +82,6 @@ const MySendNoteDetail = () => {
                 setNoteContent(content);
                 setDecoding(false);
             } catch (err) {
-                console.log(err)
             }
         }
     };

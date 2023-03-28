@@ -30,11 +30,9 @@ const LoginNameLogin = () => {
             loginName,
             password
         }
-        console.log(params)
         setSaving(true)
         apiSignByLoginName(params).then((res: any) => {
             if (res.code === 0) {
-                console.log(res.data)
                 dispatch(clearUserData())
                 let userData = {
                     token: res.data.token,
