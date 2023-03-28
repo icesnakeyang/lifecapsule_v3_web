@@ -19,6 +19,7 @@ const ProjectRow = (data: any) => {
                     <Button type='primary' size='small' onClick={() => {
                         dispatch(saveCurrentProjectId(item.projectId))
                         dispatch(saveCurrentProjectName(item.projectName))
+                        dispatch(saveDoNotLoadToDoTask(true))
                         navigate(-1)
                     }}>Select</Button>
                     <Button style={{marginLeft: 10}} color={themeColor.color1} size='small' onClick={() => {

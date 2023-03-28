@@ -28,6 +28,7 @@ const TodoEdit = () => {
 
         useEffect(() => {
             console.log(doNotLoadTodoTask)
+            console.log(currentProjectName)
             if (todoTaskId) {
                 //修改
                 if (doNotLoadTodoTask) {

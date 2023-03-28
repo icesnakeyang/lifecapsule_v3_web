@@ -1,4 +1,4 @@
-import {Button, Checkbox, Col, message, Modal, Row, Spin} from "antd";
+import {Button, Card, Checkbox, Col, message, Modal, Row, Spin} from "antd";
 import {apiDeleteMyTaskTodo, apiUpdateMyTaskTodoCompleteStatus} from "../../../api/Api";
 import {useTranslation} from "react-i18next";
 import {CheckboxChangeEvent} from "antd/lib/checkbox";
@@ -66,72 +66,66 @@ const TodoRow = (data: any) => {
     };
 
     return (
-        <>
-            <Row
-                style={{
-                    padding: 10,
-                    marginTop: 10,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    // border: "1px solid #ccc",
-                    background: themeColor.blockDark,
-                }}
-            >
-                <Col span="2">
-                    <Checkbox
-                        checked={complete}
-                        onChange={(e) => {
-                            onUpdateCompleteStatus(e, item.taskId);
-                            setComplete(e.target.checked)
-                        }}
-                    ></Checkbox>
-                </Col>
-                <Col
-                    span="14"
-                    style={{
-                        display: "flex",
-                        alignItems: "center",
-                    }}
-                >
-                    {complete ? (
-                        <div
-                            style={{
-                                textDecorationLine: "line-through",
-                                textDecorationStyle: "double",
-                                color: themeColor.textHolder,
+        <div style={{marginTop:5}}>
+            <Card size='small' style={{background:themeColor.blockDark}}>
+                <div style={{display: 'flex'}}>
+                    <div style={{width: 30}}>
+                        <Checkbox
+                            checked={complete}
+                            onChange={(e) => {
+                                onUpdateCompleteStatus(e, item.taskId);
+                                setComplete(e.target.checked)
+                            }}
+                        ></Checkbox>
+                    </div>
+                    <div style={{width: '100%'}}>
+                        {complete ? (
+                            <div
+                                style={{
+                                    textDecorationLine: "line-through",
+                                    textDecorationStyle: "double",
+                                    color: themeColor.textHolder,
+                                    overflow: 'hidden',
+                                    wordBreak: "break-all",
+                                }}
+                            >
+                                {item.taskTitle}
+                            </div>
+                        ) : (
+                            <div style={{
+                                color: themeColor.textLight,
+                                overflow: 'hidden',
+                                wordBreak: "break-all",
+                                marginLeft: 10
+                            }}>{item.taskTitle}</div>
+                        )}
+                    </div>
+                    <div style={{width: 150}}>
+                        <Button
+                            type="primary"
+                            size="small"
+                            onClick={() => {
+                                dispatch(saveTodoTaskId(item.taskId))
+                                dispatch(saveDoNotLoadToDoTask(false))
+                                navigate("/main/TodoEdit");
                             }}
                         >
-                            {item.taskTitle}
-                        </div>
-                    ) : (
-                        <div style={{color: themeColor.textLight}}>{item.taskTitle}</div>
-                    )}
-                </Col>
-                <Col span="4">
-                    <Button
-                        type="primary"
-                        size="small"
-                        onClick={() => {
-                            dispatch(saveTodoTaskId(item.taskId))
-                            dispatch(saveDoNotLoadToDoTask(true))
-                            navigate("/main/TodoEdit");
-                        }}
-                    >
-                        {t("common.btDetail")}
-                    </Button>
-                </Col>
-                <Col span="4">
-                    <Button
-                        type="primary"
-                        size="small"
-                        danger
-                        onClick={() => setModalDelete(true)}
-                    >
-                        {t("common.btDelete")}
-                    </Button>
-                </Col>
-            </Row>
+                            {t("common.btDetail")}
+                        </Button>
+
+                        <Button
+                            style={{marginLeft:10}}
+                            type="primary"
+                            size="small"
+                            danger
+                            onClick={() => setModalDelete(true)}
+                        >
+                            {t("common.btDelete")}
+                        </Button>
+                    </div>
+                </div>
+            </Card>
+
 
             <Modal
                 open={modalDelete}
@@ -157,7 +151,7 @@ const TodoRow = (data: any) => {
                     </div>
                 )}
             </Modal>
-        </>
+        </div>
     );
 };
 

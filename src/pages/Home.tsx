@@ -176,7 +176,7 @@ const Home = () => {
             style={{}}
         >
             {/*header*/}
-            <div style={{padding: 10}}>
+            <div style={{padding: 10, background: '#02182b'}}>
                 <Row style={{width: '100%', display: 'flex', alignItems: 'center'}}>
                     <Col xs={12} sm={8} md={8} lg={4} xl={4} xxl={4}>
                         {/*logo*/}
@@ -184,7 +184,7 @@ const Home = () => {
                             <div style={{}}>
                                 <img src="/logo5.png" width='42px'/>
                             </div>
-                            <div style={{marginLeft: 20, fontSize: 20, fontWeight: 'bold'}}>
+                            <div style={{marginLeft: 20, fontSize: 20, fontWeight: 'bold', color: '#fff'}}>
                                 {t('common.appTitle')}
                             </div>
                         </div>
@@ -193,11 +193,10 @@ const Home = () => {
                         <div style={{
                             width: '100%',
                             display: 'flex',
-                            justifyContent: 'flex-end',
-                            background: 'green'
+                            justifyContent: 'flex-end'
                         }}>
                             {userData && userData.nickname ?
-                                <Menu style={{width: '100%', justifyContent: 'flex-end', borderWidth: 0}}
+                                <Menu theme='dark' style={{width: '100%', justifyContent: 'flex-end', borderWidth: 0}}
                                       items={headerMenuItemsSigned}
                                       mode="horizontal"
                                       onClick={onMenuHeader}
