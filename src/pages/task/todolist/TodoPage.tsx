@@ -82,6 +82,13 @@ const TodoPage = () => {
                         dispatch(saveTodoList(res.data.taskTodoList));
                     }
                     dispatch(saveTotalTodo(res.data.totalTaskTodo));
+                    let psize=res.data.totalTaskTodo/todoPageSize
+                    let pmod=res.data.totalTaskTodo%todoPageSize
+                    if(todoPageIndex>psize){
+                        if(pmod===0){
+                            dispatch(saveTodoPageIndex(psize))
+                        }
+                    }
                     setLoadMore(false);
                     setLoading(false)
                 } else {
@@ -142,8 +149,8 @@ const TodoPage = () => {
             </Breadcrumb>
 
             <Card size='small' style={{background: themeColor.blockDark}}>
-                <Row>
-                    <Col>
+                <Row gutter={[16, 8]}>
+                    <Col xs={12} sm={12} md={12} lg={5} xl={4} xxl={3}>
                         <Button
                             type="primary"
                             onClick={() => {
@@ -154,7 +161,7 @@ const TodoPage = () => {
                             {t("task.btAddTodo")}
                         </Button>
                     </Col>
-                    <Col offset="1" style={{display: "flex", alignItems: "center"}}>
+                    <Col xs={12} sm={12} md={12} lg={5} xl={4} xxl={3} style={{display: "flex", alignItems: "center"}}>
                         <Checkbox
                             style={{color: themeColor.textLight}}
                             onChange={onComplete}
@@ -162,7 +169,7 @@ const TodoPage = () => {
                             {t("task.hideComplete")}
                         </Checkbox>
                     </Col>
-                    <Col offset={1} style={{display: 'flex', alignItems: 'center'}}>
+                    <Col xs={24} sm={24} md={24} lg={14} xl={16} xxl={18} style={{display: 'flex', alignItems: 'center'}}>
                         <Button type='primary' icon={<FolderOutlined/>}
                                 onClick={() => {
                                     navigate("/main/ProjectList")

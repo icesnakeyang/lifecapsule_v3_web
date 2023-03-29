@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {ExclamationCircleOutlined} from "@ant-design/icons";
 import {saveTodoTaskId} from "../../../store/taskTodoSlice";
+import moment from "moment";
 
 const TodoRow = (data: any) => {
     const {item} = data;
@@ -66,41 +67,45 @@ const TodoRow = (data: any) => {
     };
 
     return (
-        <div style={{marginTop:5}}>
-            <Card size='small' style={{background:themeColor.blockDark}}>
-                <div style={{display: 'flex'}}>
-                    <div style={{width: 30}}>
-                        <Checkbox
-                            checked={complete}
-                            onChange={(e) => {
-                                onUpdateCompleteStatus(e, item.taskId);
-                                setComplete(e.target.checked)
-                            }}
-                        ></Checkbox>
-                    </div>
-                    <div style={{width: '100%'}}>
-                        {complete ? (
-                            <div
-                                style={{
-                                    textDecorationLine: "line-through",
-                                    textDecorationStyle: "double",
-                                    color: themeColor.textHolder,
+        <div style={{marginTop: 5}}>
+            <Card size='small' style={{background: themeColor.blockDark}}>
+                <Row style={{display: 'flex'}} gutter={[16,8]}>
+                    <Col xs={24} sm={24} md={24} lg={15} xl={17} xxl={19}>
+                        <div style={{display: 'flex'}}>
+                            <Checkbox
+                                checked={complete}
+                                onChange={(e) => {
+                                    onUpdateCompleteStatus(e, item.taskId);
+                                    setComplete(e.target.checked)
+                                }}
+                            ></Checkbox>
+                            {complete ? (
+                                <div
+                                    style={{
+                                        textDecorationLine: "line-through",
+                                        textDecorationStyle: "double",
+                                        color: themeColor.textHolder,
+                                        overflow: 'hidden',
+                                        wordBreak: "break-all",
+                                        marginLeft: 10
+                                    }}
+                                >
+                                    {item.taskTitle}
+                                </div>
+                            ) : (
+                                <div style={{
+                                    color: themeColor.textLight,
                                     overflow: 'hidden',
                                     wordBreak: "break-all",
-                                }}
-                            >
-                                {item.taskTitle}
-                            </div>
-                        ) : (
-                            <div style={{
-                                color: themeColor.textLight,
-                                overflow: 'hidden',
-                                wordBreak: "break-all",
-                                marginLeft: 10
-                            }}>{item.taskTitle}</div>
-                        )}
-                    </div>
-                    <div style={{width: 150}}>
+                                    marginLeft: 10
+                                }}>{item.taskTitle}</div>
+                            )}
+                        </div>
+                    </Col>
+                    <Col xs={10} sm={16} md={16} lg={4} xl={3} xxl={2} style={{color:themeColor.textHolder}}>
+                        {moment(item.createTime).format('ll')}
+                    </Col>
+                    <Col xs={14} sm={8} md={8} lg={5} xl={4} xxl={3} style={{}}>
                         <Button
                             type="primary"
                             size="small"
@@ -114,7 +119,7 @@ const TodoRow = (data: any) => {
                         </Button>
 
                         <Button
-                            style={{marginLeft:10}}
+                            style={{marginLeft: 10}}
                             type="primary"
                             size="small"
                             danger
@@ -122,8 +127,8 @@ const TodoRow = (data: any) => {
                         >
                             {t("common.btDelete")}
                         </Button>
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </Card>
 
 
