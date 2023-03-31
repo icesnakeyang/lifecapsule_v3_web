@@ -6,6 +6,7 @@ import {Decrypt} from "../../common/crypto";
 import moment from "moment";
 import {Card, Col, Divider, message, Row} from "antd";
 import {useTranslation} from "react-i18next";
+import TextArea from "antd/es/input/TextArea";
 
 const PublicNoteByMail = (data: any) => {
     const {logId} = useParams()
@@ -39,7 +40,7 @@ const PublicNoteByMail = (data: any) => {
                 if (res.code === 10080) {
                     setOverdue(true)
                     setLoading(false)
-                }else{
+                } else {
                 }
             }
         }).catch(() => {
@@ -58,25 +59,40 @@ const PublicNoteByMail = (data: any) => {
             }}>
                 {loading ?
                     <Spin size='large'/> :
-                    <Card title={title} style={{background: '#eee', padding: 20, maxWidth: 1080, border: '2px solid'}}>
+                    <Card title={title} style={{
+                        background: '#eee',
+                        padding: 20, maxWidth: 1080,
+                        border: '2px solid',
+                        width: '100%',
+                        color: '#333'
+                    }}
+                          headStyle={{color: '#333'}}
+                    >
                         {overdue ?
                             <div>{t('public.mail.tipOverdue')}<a href="/">LifeCapsule</a></div>
                             :
-                            <div>
-                                <Row>
+                            <div style={{width: '100%'}}>
+                                <Row style={{width: '100%'}}>
                                     <Col span={3} style={{textAlign: 'right'}}>From</Col>
                                     <Col span={20} offset={1}>{fromName}</Col>
                                 </Row>
-                                <Row>
+                                <Row style={{marginTop: 10}}>
                                     <Col span={3} style={{textAlign: 'right'}}>Create time</Col>
                                     <Col span={20} offset={1}>{moment(createTime).format('LLL')}</Col>
                                 </Row>
-                                <Row>
+                                <Row style={{marginTop: 10}}>
                                     <Col span={3} style={{textAlign: 'right'}}>To</Col>
                                     <Col span={20} offset={1}>{toName}</Col>
                                 </Row>
-                                <Divider/>
-                                <div style={{fontSize: 18, lineHeight: 2}}>{content}</div>
+                                <div style={{marginTop: 20}}>
+                                    <TextArea autoSize style={{
+                                        borderWidth: 0.1,
+                                        fontSize: 18,
+                                        lineHeight: 2,
+                                        background: '#eee',
+                                        color: '#333'
+                                    }} value={content}/>
+                                </div>
                             </div>
                         }
                     </Card>
