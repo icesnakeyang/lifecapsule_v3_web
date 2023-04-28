@@ -35,6 +35,7 @@
     "myProfile": "My profile",
     "myReceiveNote": "My receive note",
     "mySendNote": "My Send out note",
+    "mySendNoteDetail": "Send note detail",
     "myPublicNote": "My public note"
   },
   "login": {
@@ -69,11 +70,266 @@
     "btCanSend": "Send",
     "btSending": "Sending"
   },
+  "MyNotes": {
+    "noteNew": "New note",
+    "btNewNote": "Create note",
+    "noteList": "My note list",
+    "noteEdit": "Note edit",
+    "sendNoteInstant": "Send note instantly",
+    "sendNotePrimary": "Send note by primary count down",
+    "sendNoteDatetime": "Send note by specific datetime",
+    "publishToTopic": "Publish topic",
+    "publishToMotto": "Publish motto",
+    "publishToPublicWeb": "Publish to internet",
+    "title": "Title",
+    "titleHolder": "Please input title",
+    "editTag": "Tag",
+    "content": "Note content",
+    "contentHolder": "Please write your note here",
+    "NoteList": {
+      "searchHolder": "Search title keywords",
+      "totalNotes": "Total notes"
+    },
+    "NoteNew": {
+      "encrypt": "Encrypt save",
+      "noEncrypt": "Not encrypt save",
+      "tipEncrypt": "Encrypting and saving notes can effectively protect your privacy, and it is impossible for network hackers and database administrators to see the contents of your notes. But because of this, keyword query search will not be supported after encryption.If you think keyword search is important, you can add tags to your notes, or save this note in plain text.",
+      "btSaveNewNote": "Create note",
+      "tipNoteSaveSuccess": "Save note success"
+    },
+    "NoteEdit": {
+      "btSend": "Send",
+      "title": "Title",
+      "createTime": "Create time",
+      "tipNoteDelete": "Are you sure to delete this note? The note cannot be recovered after you delete it.",
+      "tipNoteDeleteSuccess": "Delete note success",
+      "tipNoteSaveSuccess": "Save note success"
+    },
+    "SendPage": {
+      "sendInstantly": "Send instantly",
+      "tipSendInstantly": "Send note to email instantly",
+      "primaryCountdown": "Primary countdown",
+      "tipPrimaryCountdown": "Send when your primary countdown to 0",
+      "sendByDatetime": "Send by datetime",
+      "tipSendByDatetime": "Send by time what you specified",
+      "publishToTopic": "Publish to Topic",
+      "tipPublishToTopic": "Publish this note to public topic zone",
+      "publishToMotto": "Publish to Motto",
+      "tipPublishToMotto": "Publish this note as Motto, that other yours can see it",
+      "publishToPublic": "Publish to public website",
+      "tipPublishToPublic": "Publish this note to a web page, anyone can read it",
+      "title": "Title",
+      "tipTitle": "The note title will display to recipient",
+      "recipientEmail": "Send to email",
+      "tipRecipientEmail": "Email of who you want to send",
+      "fromName": "From",
+      "tipFromName": "This name will display to receive user",
+      "toName": "To",
+      "tipToName": "The name of person who you want to send",
+      "btSend": "Send",
+      "sendContent": "Send content",
+      "tipSendContent": "This content will be send to recipient",
+      "tipNoTitle": "Please input title",
+      "tipNoToName": "Please input the name who you want to send",
+      "tipNoFromName": "Please input from name",
+      "tipNoContent": "You cannot send an empty note",
+      "preview": "Recipient preview",
+      "recentContact": "My recent contact",
+      "toEmail": "To email",
+      "createTime": "Create time",
+      "tipNoEmail": "You must specify the receiver email",
+      "receiverEmail": "Receiver email",
+      "sendUser": "Send user",
+      "sendUserEmail": "Send user email",
+      "sendTime": "Send time",
+      "readTime": "Read time",
+      "InstantSend": {
+        "tipNoteSend": "What is send instantly",
+        "tipNoteSend2": "You can set a email who you want to send, The system will send to the email directly",
+        "tipNoteSend3": "For the security and privacy, you need to set a encode key, we will encrypt note use this encode key. And you also need to tell this encode key to recipient, because she/he need input this key to decrypt the note.",
+        "encryptSend": "Encrypt",
+        "tip2": "For your private safe, please set a code to encrypt the note. No one can read this note except you give them this code",
+        "encode": "Encrypt code",
+        "tip1": "e.g: I will be back",
+        "tipEncodeWarn1": "Warning! Please remember this code, if you forget it, there will be no way to find it back!",
+        "tipEncode2": "If you don't wanna set encrypt key, just leave it empty",
+        "codecKey": "Set an encrypt codec key",
+        "tipCodecKey": "If you set this codec, that's means the note will be encrypted by this codec and receiver need to input this code to read the note",
+        "tipEncrypt": "This is HI-TOP-SECRET encrypt note, you must contact sender to obtain decrypt code to decipher the message",
+        "btDecode": "Decode",
+        "decode": "Decrypt code",
+        "tipSendSuccess": "Send success"
+      },
+      "PrimarySend": {
+        "tipSendByPrimary": "What is send by primary",
+        "tipSendByPrimary1": "Send to the email address of the recipient along with your primary countdown",
+        "tipSendByPrimary2": "Each user has a 30-day primary countdown timer, and when the 30-day countdown ends, all notes set to be sent by the primary countdown timer will be sent to the designated recipients. You can reset your primary countdown timer by clicking the Snooze button on the home page",
+        "tipCreatePrimarySendSuccess": "Create primary send trigger success"
+      },
+      "DatetimeSend": {
+        "tipSendByDatetime": "What is send by datetime",
+        "tipSendByDatetime1": "The note will be sent to recipients by this specific time",
+        "tipSendByDatetime2": "Write a letter to your future self, or him/her",
+        "sendTime": "Send time",
+        "tipSendTime": "Send by this time",
+        "tipNoSendTime": "You must set the send time",
+        "tipCreateDatetimeSendSuccess": "Create time trigger success"
+      },
+      "PublishToTopic": {
+        "tipPublishToTopic": "What is publish to topic",
+        "tipPublishToTopic1": "Publish this note to public topic zone",
+        "tipPublishToTopic2": "You can discuss in-depth thoughts of interest with others",
+        "tipPublishTopicSuccess": "Publish topic success",
+        "title": "Topic title",
+        "tipTitle": "The title will display in the topic zone",
+        "authorName": "Author name",
+        "tipAuthorName": "Author of this topic",
+        "tipNoAuthorName": "Sorry, you must input author name",
+        "publishContent": "Publish content",
+        "tipContent": "The topic content",
+        "tipNoContent": "Sorry, you cannot publish empty topic",
+        "btPublish": "Publish to topic",
+        "btPublishing": "Publishing"
+      },
+      "PublishToMotto": {
+        "tipPublishToMotto": "What is publish to motto",
+        "tipPublishToMotto1": "Publish this note as a motto",
+        "tipPublishToMotto2": "The motto is generally a short inspirational and healing text, which randomly appears on the boot screen of all users. Maybe your perception of life can help some people",
+        "tipPublishMottoSuccess": "Publish motto success",
+        "authorName": "Author name",
+        "tipAuthorName": "Author of this motto",
+        "tipNoAuthorName": "Sorry, you must input author name",
+        "mottoContent": "Motto content",
+        "tipContent": "The motto content",
+        "tipNoContent": "Sorry, you cannot publish empty motto",
+        "btPublish": "Publish motto",
+        "btPublishing": "Publishing"
+      },
+      "PublishToPublicWeb": {
+        "tip1": "What is publish to public web",
+        "tip2": "Publish this note as an Internet article",
+        "tip3": "You may publish this note on the Internet for all public viewing",
+        "tipTitle": "Title to publish",
+        "authorName": "Author name",
+        "tipAuthorName": "The author displayed after the article is published",
+        "articleContent": "Article content",
+        "btPublish": "Publish",
+        "btPublishing": "Publishing",
+        "tipPublishToWebSuccess": "Publish to article success"
+      }
+    }
+  },
+  "Tag": {
+    "addTag": "Add tag",
+    "tags": "Tags",
+    "hotTags": "Hot tags",
+    "myTags": "My tags",
+    "tipNoMyTag": "No tags",
+    "tipSaveTagSuccess": "Save tag success"
+  },
+  "MyReceiveNote": {
+    "MyReceiveNoteDetail": {
+      "fromName": "From",
+      "sentTime": "Sent time",
+      "content": "Content",
+      "tipEncrypt": "If you cannot read the content, maybe it has been encrypted by author who send this note to you, you must contact him/her to obtain the decryption code to decrypt this message",
+      "btDecode": "Decode",
+      "decryptionCode": "Decryption code",
+      "decryptionCodeHolder": "Input decryption code"
+    }
+  },
+  "Public": {
+    "mail": {
+      "tipOverdue": "This note has been overdue yet, you can check it by login "
+    },
+    "PublicArticle": {
+      "tipNoArticle": "Sorry, the article you are querying is not exist.",
+      "views": "Views",
+      "publishTime": "Publish date",
+      "authorName": "Author"
+    }
+  },
+  "MyNoteSend": {
+    "toName": "To name",
+    "toEmail": "To email",
+    "fromName": "From name",
+    "que": "Send que",
+    "sendOut": "Send already",
+    "sendTime": "Send time",
+    "MyTriggerEdit": {
+      "title": "Title",
+      "createTime": "Create time",
+      "sendContent": "Send content",
+      "decode": "Decode",
+      "decryptionCodeHolder": "Input decryption code",
+      "btDecode": "Decode",
+      "btUpdate": "Update note to send",
+      "btCancel": "Cancel this send"
+    },
+    "MySendNoteDetail": {
+      "sendUser": "Send user",
+      "readTime": "Read time",
+      "unRead": "un-read",
+      "content": "Content",
+      "encode": "Encrypt code",
+      "btDecode": "Decode"
+    }
+  },
+  "MyPublicNote": {
+    "webAddress": "Web address",
+    "btCopy": "Copy",
+    "title": "Title",
+    "content": "Content",
+    "tipSuccess": "Update article success"
+  },
+  "AntiProcrastination": {
+    "antiDelayTile": "Title",
+    "yesterday": "Please write some happy moment yesterday",
+    "myThought": "Write your thought",
+    "longGoal": "What's your long term goal",
+    "whatToDoToday": "So what do you have to do today?",
+    "tipLongGoal1": "Who do you want to be in 7 years?",
+    "tipLongGoal2": "What do you need to do for this?",
+    "tipLongGoal3": "What goals do you have to accomplish this year?",
+    "tipLongGoal4": "How do you achieve this goal?",
+    "tipTodayGoal": "In order to achieve your long term goal, what do you must do for it, and you must handle it today.",
+    "10SecAction": "Actions in 10 seconds",
+    "tip10SecAction": "List the task todolist, what you can start it in 10 seconds",
+    "tipAddTodoTask": "Add todo task here",
+    "tipYesterday": "Write down three things that made you happy yesterday, things that you want to be grateful for, and things that feel particularly good. (Recording positive emotions guides us to stay positive, kind of like a gratitude journal.)",
+    "tipMyThought": "Aiming at the above things, write down your corresponding thoughts. Talk to yourself objectively and calmly, develop metacognition skills, and better understand yourself.",
+    "createTime": "Create time",
+    "tipNoAntiDelayNote": "You haven't created any anti-procrastination note yet, trust me, this will definitely work for you",
+    "startNow": "Start now",
+    "tipDeleteAntiDelayNoteSuccess": "Delete success",
+    "modalDeleteTitle": "Delete Anti-Delay Note",
+    "modalDeleteTip1": "Are you sure to delete this note？ It cannot be recoverd after delete!",
+    "tipNoTitle": "Please input title",
+    "btAddNew": "Create",
+    "antiDelayNoteList": "Anti-procrastination list",
+    "antiProcrastination": "Anti-procrastination"
+  },
+  "Trigger": {
+    "TIMER_TYPE_PRIMARY": "Time up",
+    "tip5": "The note will be sent to recipients when your master time up",
+    "TIMER_TYPE_DATETIME": "Time Capsule",
+    "tip6": "The note will be sent to recipients by this specific time",
+    "tip1": "You can set a condition and recipients for this note, when the condition triggered, the note will be sent to the recipients",
+    "tipAddTrigger1": "You didn't add the send condition trigger, the note will not be sent. Please add a trigger to send",
+    "btAddTrigger": "Add condition",
+    "sendCondition": "Send condition",
+    "sendTime": "Send time",
+    "editTrigger": "Edit condition",
+    "tipTrigger1": "Set a condition to trigger the note to recipient",
+    "btTrigger": "Trigger",
+    "INSTANT_MESSAGE": "Instant message",
+    "triggerType": "Trigger type",
+    "REPLY_SEND_LOG": "Reply"
+  },
   "note": {
     "noteList": "Note list",
     "noteEdit": "Note edit",
     "noteNew": "New note",
-    "btNewNote": "Create note",
     "btEditNote": "Edit note",
     "title": "Title",
     "titleHolder": "Please input title",
@@ -104,7 +360,6 @@
       "primaryCountdown": "Primary countdown",
       "sendByDatetime": "Send by datetime",
       "publishToTopic": "Publish to Topic",
-      "publishToMotto": "Publish to Motto",
       "publishToPublic": "Publish to public website",
       "tipSendInstantly": "Send note to email instantly",
       "tipPublishToPublic": "Publish this note to a web page, anyone can read it",
@@ -162,22 +417,6 @@
     "recentRecipient": "Recent recipient",
     "tipNoEmail": "Please input email what you want to send"
   },
-  "trigger": {
-    "TIMER_TYPE_PRIMARY": "Time up",
-    "tip5": "The note will be sent to recipients when your master time up",
-    "TIMER_TYPE_DATETIME": "Time Capsule",
-    "tip6": "The note will be sent to recipients by this specific time",
-    "tip1": "You can set a condition and recipients for this note, when the condition triggered, the note will be sent to the recipients",
-    "tipAddTrigger1": "You didn't add the send condition trigger, the note will not be sent. Please add a trigger to send",
-    "btAddTrigger": "Add condition",
-    "sendCondition": "Send condition",
-    "sendTime": "Send time",
-    "editTrigger": "Edit condition",
-    "tipTrigger1": "Set a condition to trigger the note to recipient",
-    "btTrigger": "Trigger",
-    "INSTANT_MESSAGE": "Instant message",
-    "triggerType": "Trigger type"
-  },
   "task": {
     "task": "Task",
     "myTodoList": "My todolist",
@@ -215,37 +454,6 @@
     "taskStatus": "Current status",
     "hideComplete": "Hide complete"
   },
-  "antiDelayNote": {
-    "title": "Anti-Delay-Note",
-    "antiDelayTile": "Title",
-    "titleNew": "Create note",
-    "yesterday": "Please write some happy moment yesterday",
-    "tipYesterday": "Write down three things that made you happy yesterday, things that you want to be grateful for, and things that feel particularly good. (Recording positive emotions guides us to stay positive, kind of like a gratitude journal.)",
-    "myThought": "Write your thought",
-    "tipMyThought": "Aiming at the above things, write down your corresponding thoughts. Talk to yourself objectively and calmly, develop metacognition skills, and better understand yourself.",
-    "longGoal": "What's your long term goal",
-    "tipLongGoal1": "Who do you want to be in 7 years?",
-    "tipLongGoal2": "What do you need to do for this?",
-    "tipLongGoal3": "What goals do you have to accomplish this year?",
-    "tipLongGoal4": "How do you achieve this goal?",
-    "whatToDoToday": "So what do you have to do today?",
-    "todoTaskHolder": "Input task to do",
-    "tipAddTodoTask": "Add todo task here",
-    "tipSaveAntiDelayNoteSuccess": "Save success",
-    "tipTodayGoal": "In order to achieve your long term goal, what do you must do for it, and you must handle it today.",
-    "10SecAction": "Actions in 10 seconds",
-    "tip10SecAction": "List the task todolist, what you can start it in 10 seconds",
-    "titleEdit": "Edit",
-    "tipNoAntiDelayNote": "You haven't created any anti-procrastination note yet, trust me, this will definitely work for you",
-    "startNow": "Start now",
-    "tipDeleteAntiDelayNoteSuccess": "Delete success",
-    "modalDeleteTitle": "Delete Anti-Delay Note",
-    "modalDeleteTip1": "Are you sure to delete this note？ It cannot be recoverd after delete!",
-    "tipNoTitle": "Please input title",
-    "btAddNew": "Create",
-    "antiDelayNoteList": "Anti-procrastination list",
-    "antiProcrastination": "Anti-procrastination"
-  },
   "setting": {
     "btSelect": "Select"
   },
@@ -277,47 +485,6 @@
     "tipSetLoginNameSuccess": "Set login name and password success",
     "password": "Password",
     "password2": "Confirm password"
-  },
-  "noteSent": {
-    "tipNoteSend": "Send method description",
-    "tipNoteSend2": "You can set a email who you want to send, The system will send to the email directly",
-    "tipNoteSend3": "For the security and privacy, you need to set a encode key, we will encrypt note use this encode key. And you also need to tell this encode key to recipient, because she/he need input this key to decrypt the note.",
-    "tipTitle": "The note title will display to recipient",
-    "recipientEmail": "Send to email",
-    "tipRecipientEmail": "Email of who you want to send",
-    "fromName": "From",
-    "tipFromName": "This name will display to receive user",
-    "toName": "To",
-    "tipToName": "The name of person who you want to send",
-    "encryptSend": "Encrypt",
-    "tip2": "For your private safe, please set a code to encrypt the note. No one can read this note except you give them this code",
-    "encode": "Encrypt code",
-    "tip1": "e.g: I will be back",
-    "tipEncodeWarn1": "Warning! Please remember this code, if you fotget it, there will be no way to find it back!",
-    "tipEncode2": "If you don't wanna set encrypt key, just leave it empty",
-    "btSend": "Send",
-    "tipSendSuccess": "Send success",
-    "tipNoEmail": "You must specify the receiver email",
-    "receiverEmail": "Receiver email",
-    "codecKey": "Set an encrypt codec key",
-    "tipCodecKey": "If you set this codec, that's means the note will be encrypted by this codec and receiver need to input this code to read the note",
-    "title": "Title",
-    "tipEncrypt": "This is HI-TOP-SECRET encrypt note, you must contact sender to obtain decrypt code to decipher the message",
-    "btDecode": "Decode",
-    "sendUser": "Send user",
-    "sendUserEmail": "Send user email",
-    "sendTime": "Send time",
-    "readTime": "Read time",
-    "decode": "Decrypt code",
-    "sendContent": "Send content",
-    "tipSendContent": "This content will be send to recipient",
-    "tipNoTitle": "Please input title",
-    "tipNoToName": "Please input the name who you want to send",
-    "tipNoFromName": "Please input from name",
-    "tipNoContent": "You cannot send an empty note",
-    "preview": "Recipient preview",
-    "recentContact": "My recent contact",
-    "toEmail": "To email"
   },
   "webSite": {
     "home": {
@@ -365,40 +532,16 @@
       "crossPlatform1": "All user notes are encrypted and stored in the cloud, allowing seamless data synchronization on mobile phones, tablets, and desktop computers. The user has an idea, takes out the mobile phone to record, and then opens the notebook to modify and perfect it when he is free. No need to worry about data loss."
     }
   },
-  "tag": {
-    "tags": "Tags",
-    "hotTags": "Hot tags",
-    "myTags": "My tags",
-    "tipNoMyTag": "No tags"
-  },
   "email": {
     "tipValidateEmailErr": "Please input validate email"
-  },
-  "myTrigger": {
-    "que": "Send que",
-    "sendOut": "Send already"
   },
   "triggerQue": {
     "status": "Current status",
     "ACTIVE": "Waiting to send",
     "notSend": "Not send",
-    "sendAlready": "Send already"
-  },
-  "public": {
-    "mail": {
-      "tipOverdue": "This note has been overdue yet, you can check it by login "
-    }
-  },
-  "inbox": {
-    "detail": {
-      "fromName": "From",
-      "sentTime": "Sent time",
-      "content": "Content",
-      "tipEncrypt": "If you cannot read the content, maybe it has been encrypted by author who send this note to you, you must contact him/her to obtain the decryption code to decrypt this message",
-      "btDecode": "Decode",
-      "decryptionCode": "Decryption code",
-      "decryptionCodeHolder": "Input decryption code"
-    }
+    "sendAlready": "Send already",
+    "isEmailSentAlready": "Email sent yet?",
+    "isTheNoteSentYet": "Whether the note sent to recipient App?"
   },
   "project": {
     "title": "Project",
@@ -428,6 +571,7 @@
     "10053": "Email have not been registered",
     "10075": "The login name has been registered by others",
     "10076": "Login name or password error",
-    "10080": "This note has been overdue yet"
+    "10080": "This note has been overdue yet",
+    "10083": "You must set the send time"
   }
 }

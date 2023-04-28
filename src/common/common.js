@@ -13,3 +13,9 @@ export function timeLeft(triggerTimeSpan) {
         seconds,
     };
 }
+
+export function timePlusDays(date, days) {
+    const date2 = new Date(date);
+    date2.setDate(date2.getDate() + days);
+    return date2
+}

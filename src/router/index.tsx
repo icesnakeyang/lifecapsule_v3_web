@@ -4,46 +4,49 @@ import Home from "../pages/Home";
 import GuestLayout from "../pages/layout/GuestLayout";
 import MainLayout from "../pages/layout/MainLayout";
 import {useSelector} from "react-redux";
-import NoteList from "../pages/note/NoteList";
-import NoteNew from "../pages/note/NoteNew";
-import NoteEdit from "../pages/note/NoteEdit";
-import ContactList from "../pages/contact/ContactList";
-import ContactEdit from "../pages/contact/ContactEdit";
+import NoteList from "../pages/MyNotes/NoteList";
+import NoteNew from "../pages/MyNotes/NoteNew";
+import NoteEdit from "../pages/MyNotes/NoteEdit";
+import ContactList from "../pages/Contact/ContactList";
+import ContactEdit from "../pages/Contact/ContactEdit";
 import TriggerPage from "../pages/trigger";
 import SelectRecipient from "../pages/recipient/SelectRecipient";
 import TriggerDetail from "../pages/trigger/TriggerDetail";
-import TodoPage from "../pages/task/todolist/TodoPage";
-import TodoEdit from "../pages/task/todolist/TodoEdit";
+import TodoPage from "../pages/TodoList/TodoPage";
+import TodoEdit from "../pages/TodoList/TodoEdit";
 import QuadrantTaskList from "../pages/task/quadrant/QuadrantTaskList";
 import QuadrantTaskEdit from "../pages/task/quadrant/QuadrantTaskEdit";
 import QuadrantTaskNew from "../pages/task/quadrant/QuadrantTaskNew";
 import ThemeSetting from "../pages/setting/ThemeSetting";
-import MyProfilePage from "../pages/myProfile/MyProfilePage";
-import SendPage from "../pages/send/SendPage";
-import MySendNote from "../pages/send/MySendNote";
-import MySendNoteDetail from "../pages/send/MySendNoteDetail";
+import MyProfilePage from "../pages/MyProfile/MyProfilePage";
 import Testpage from "../pages/testpage";
 import UserPrivacy from "../pages/UserPrivacy";
-import TodoNew from "../pages/task/todolist/TodoNew";
-import NoteSendMethod from "../pages/noteSend/NoteSendMehtod";
-import InstantSend from "../pages/noteSend/InstantSend";
-import PrimarySend from "../pages/noteSend/PrimarySend";
-import SendDatetime from "../pages/noteSend/SendDatetime";
-import MyTriggerListPage from "../pages/mySendOutNote/MyTriggerListPage";
-import MyTriggerEdit from "../pages/mySendOutNote/MyTriggerEdit";
+import TodoNew from "../pages/TodoList/TodoNew";
+import NoteSendList from "../pages/MySendNote/NoteSendList";
+import MyTriggerEdit from "../pages/MySendNote/MyTriggerEdit";
 import LoginPage from "../pages/login/LoginPage";
 import SetLoginName from "../pages/login/SetLoginName";
-import AntiDelayNoteList from "../pages/antiDelayNote/AntiDelayNoteList";
-import AntiDelayNoteEdit from "../pages/antiDelayNote/AntiDelayNoteEdit";
-import AntiDelayNoteNew from "../pages/antiDelayNote/AntiDelayNoteNew";
+import AntiDelayNoteList from "../pages/AntiProcrastination/AntiDelayNoteList";
+import AntiDelayNoteEdit from "../pages/AntiProcrastination/AntiDelayNoteEdit";
+import AntiDelayNoteNew from "../pages/AntiProcrastination/AntiDelayNoteNew";
 import PublicNoteByMail from "../pages/publicUserBox/PublicNoteByMail";
-import MyReceiveNote from "../pages/inbox/MyReceiveNote";
-import MyReceiveNoteDetail from "../pages/inbox/MyReceiveNoteDetail";
-import PublishToPublicWeb from "../pages/send/PublishToPublicWeb";
-import PublicNoteList from "../pages/publicNote/PublicNoteList";
-import PublicNoteEdit from "../pages/publicNote/PublicNoteEdit";
+import MyReceiveNote from "../pages/MyReceiveNote/MyReceiveNote";
+import MyReceiveNoteDetail from "../pages/MyReceiveNote/MyReceiveNoteDetail";
+import PublicNoteList from "../pages/MyPublicNote/PublicNoteList";
+import PublicNoteEdit from "../pages/MyPublicNote/PublicNoteEdit";
 import ProjectList from "../pages/task/project/ProjectList";
 import ProjectEdit from "../pages/task/project/ProjectEdit";
+import SendPage from "../pages/MyNotes/Send/SendPage";
+import InstantSend from "../pages/MyNotes/Send/InstantSend";
+import DatetimeSend from "../pages/MyNotes/Send/DatetimeSend";
+import PrimarySend from "../pages/MyNotes/Send/PrimarySend";
+import PublishToTopic from "../pages/MyNotes/Send/PublishToTopic";
+import PublishToMotto from "../pages/MyNotes/Send/PublishToMotto";
+import PublishToPublicWeb from "../pages/MyNotes/Send/PublishToPublicWeb";
+import PublicArticle from "../pages/publicUserBox/PublicArticle";
+import TriggerList from "../pages/MyTrigger/TriggerList";
+import MySendNote from "../pages/MySendNote/MySendNote";
+import MySendNoteDetail from "../pages/MySendNote/MySendNoteDetail";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -234,14 +237,6 @@ const Routers = () => {
                     }
                 />
                 <Route
-                    path="/main/NoteSendMethod"
-                    element={
-                        <ProtectRouter>
-                            <NoteSendMethod/>
-                        </ProtectRouter>
-                    }
-                />
-                <Route
                     path="/main/InstantSend"
                     element={
                         <ProtectRouter>
@@ -258,18 +253,18 @@ const Routers = () => {
                     }
                 />
                 <Route
-                    path="/main/SendDatetime"
+                    path="/main/DatetimeSend"
                     element={
                         <ProtectRouter>
-                            <SendDatetime/>
+                            <DatetimeSend/>
                         </ProtectRouter>
                     }
                 />
                 <Route
-                    path="/main/MyTriggerListPage"
+                    path="/main/NoteSendList"
                     element={
                         <ProtectRouter>
-                            <MyTriggerListPage/>
+                            <NoteSendList/>
                         </ProtectRouter>
                     }
                 />
@@ -353,6 +348,22 @@ const Routers = () => {
                         </ProtectRouter>
                     }
                 />
+                <Route
+                    path="/main/PublishToTopic"
+                    element={
+                        <ProtectRouter>
+                            <PublishToTopic/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/PublishToMotto"
+                    element={
+                        <ProtectRouter>
+                            <PublishToMotto/>
+                        </ProtectRouter>
+                    }
+                />
             </Route>
 
             <Route path="/guest" element={<GuestLayout/>}>
@@ -361,6 +372,7 @@ const Routers = () => {
                 {/*  <Route path="/guest/register" element={<Register />} />*/}
             </Route>
             <Route path="/publicMail/:logId" element={<PublicNoteByMail/>}></Route>
+            <Route path="/PublicArticle/:articleId" element={<PublicArticle/>}></Route>
         </Routes>
     );
 };

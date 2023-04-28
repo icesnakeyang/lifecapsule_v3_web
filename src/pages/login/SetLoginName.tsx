@@ -40,7 +40,7 @@ const SetLoginName = () => {
         setSaving(true)
         apiSetLoginNamePassword(params).then((res: any) => {
             if (res.code === 0) {
-                message.success(t('myProfile.tipSetLoginNameSuccess'))
+                message.success(t('MyProfile.tipSetLoginNameSuccess'))
                 dispatch(saveLoginName(loginName))
                 navigate(-1)
             } else {
@@ -57,10 +57,10 @@ const SetLoginName = () => {
         <div style={{background: themeColor.background}}>
             <Card headStyle={{color: themeColor.textLight, fontSize: 20}}
                   style={{background: themeColor.blockDark, color: 'red'}}
-                  title={t('myProfile.titleLoginName')}>
+                  title={t('MyProfile.titleLoginName')}>
                 <Form>
                     <Form.Item>
-                        <div style={{color: themeColor.textLight}}>{t('myProfile.loginName')}</div>
+                        <div style={{color: themeColor.textLight}}>{t('MyProfile.loginName')}</div>
                         <Input
                             placeholder={t('login.loginNameHolder')}
                             onChange={(e: any) => {
@@ -68,13 +68,13 @@ const SetLoginName = () => {
                             }}/>
                     </Form.Item>
                     <Form.Item>
-                        <div style={{color: themeColor.textLight}}>{t('myProfile.password')}</div>
+                        <div style={{color: themeColor.textLight}}>{t('MyProfile.password')}</div>
                         <Input type='password' placeholder={t('login.passwordHolder')} onChange={(e: any) => {
                             setPassword(e.target.value)
                         }}/>
                     </Form.Item>
                     <Form.Item>
-                        <div style={{color: themeColor.textLight}}>{t('myProfile.password2')}</div>
+                        <div style={{color: themeColor.textLight}}>{t('MyProfile.password2')}</div>
                         <Input type='password' placeholder={t('login.password2Holder')} onChange={(e: any) => {
                             setPassword2(e.target.value)
                         }}/>

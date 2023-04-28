@@ -2,7 +2,7 @@ import {useEffect} from "react";
 import {apiListUserNoteTag} from "../../api/Api";
 import {useDispatch, useSelector} from "react-redux";
 import {saveEditTags, saveMyAllNoteTags} from "../../store/tagSlice";
-import MyAllTagRow from "../note/MyAllTagRow";
+import MyAllTagRow from "../MyNotes/MyAllTagRow";
 import {useTranslation} from "react-i18next";
 
 const MyNoteTags1 = () => {

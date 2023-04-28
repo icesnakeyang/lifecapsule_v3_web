@@ -12,7 +12,9 @@ export const noteSendSlice = createSlice({
         receivePageSize: 10,
         sendNoteList: [],
         sendPageIndex: 1,
+        sendQuePageIndex: 1,
         sendPageSize: 10,
+        sendQuePageSize: 10,
         sendNoteContent: '',
         sendNoteTitle: '',
         sendToName: '',
@@ -59,11 +61,17 @@ export const noteSendSlice = createSlice({
         saveSendToEmail: (state: any, action: any) => {
             state.sendToEmail = action.payload
         },
-        saveSendNoteContent:(state:any, action:any)=>{
-            state.sendNoteContent=action.payload
+        saveSendNoteContent: (state: any, action: any) => {
+            state.sendNoteContent = action.payload
         },
-        saveSendNoteTitle:(state:any, action:any)=>{
-            state.sendNoteTitle=action.payload
+        saveSendNoteTitle: (state: any, action: any) => {
+            state.sendNoteTitle = action.payload
+        },
+        saveSendQuePageIndex: (state: any, action: any) => {
+            state.sendQuePageIndex = action.payload
+        },
+        saveSendQuePageSize: (state: any, action: any) => {
+            state.sendQuePageSize = action.payload
         }
     },
 });
@@ -83,7 +91,9 @@ export const {
     saveSendToName,
     saveSendToEmail,
     saveSendNoteContent,
-    saveSendNoteTitle
+    saveSendNoteTitle,
+    saveSendQuePageIndex,
+    saveSendQuePageSize
 } = noteSendSlice.actions;
 
 export default noteSendSlice.reducer;

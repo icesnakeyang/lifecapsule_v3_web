@@ -310,6 +310,10 @@ export const apiGetMyPublicNote = (params: any) => {
     return Post(`${host}/web/webpublicweb/getMyPublicNote`, params);
 };
 
+export const apiUpdateMyPublicNote = (params: any) => {
+    return Post(`${host}/web/webpublicweb/updateMyPublicNote`, params);
+};
+
 export const apiSaveMyProject = (params: any) => {
     return Post(`${host}/web/project/saveMyProject`, params);
 };
@@ -320,4 +324,28 @@ export const apiListMyProject = (params: any) => {
 
 export const apiGetProject = (params: any) => {
     return Post(`${host}/web/project/getProject`, params);
+};
+
+export const apiGetMyTriggerDetail = (params: any) => {
+    return Post(`${host}/web/trigger/getMyTriggerDetail`, params);
+};
+
+export const apiCreateTriggerDatetime = (params: any) => {
+    return Post(`${host}/web/trigger/createTriggerDatetime`, params);
+};
+
+export const apiCreateTriggerPrimary = (params: any) => {
+    return Post(`${host}/web/trigger/createTriggerPrimary`, params);
+};
+
+export const apiWebPublishNoteToTopic = (params: any) => {
+    return Post(`${host}/web/topic/webPublishNoteToTopic`, params);
+};
+
+export const apiPublishMotto = (params: any) => {
+    return Post(`${host}/web/motto/publishMotto`, params);
+};
+
+export const apiGetArticle = (articleId: String) => {
+    return Get(`${host}/web/webpublicweb/getArticle/${articleId}`);
 };

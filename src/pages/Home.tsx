@@ -217,17 +217,17 @@ const Home = () => {
                     height: 450
                 }}>
                     <div>
-                        <img src='/ban5.jpg' width='100%' height='450px'/>
+                        <img src='/ban10.jpg' width='100%' height='450px'/>
                     </div>
                     <div>
-                        <img src='/aser-min.jpg' width='100%' height='450px'/>
+                        <img src='/ban11.jpg' width='100%' height='450px'/>
                     </div>
                     <div>
-                        <img src='/ban3.webp' width='100%' height='450px'/>
+                        <img src='/ban12.png' width='100%' height='450px'/>
                     </div>
-                    <div>
-                        <img src='/ban4.webp' width='100%' height='450px'/>
-                    </div>
+                    {/*<div>*/}
+                    {/*    <img src='/ban4.webp' width='100%' height='450px'/>*/}
+                    {/*</div>*/}
                 </Carousel>
             </div>
 
@@ -245,7 +245,7 @@ const Home = () => {
                 </Button>
             </div>
 
-            {/*private note, Encrypt Share, deep social*/}
+            {/*private MyNotes, Encrypt Share, deep social*/}
             <Row style={{marginTop: 20, padding: 20}}>
                 <Col style={{
                     justifyContent: 'center',
@@ -268,7 +268,8 @@ const Home = () => {
                             {t("webSite.home.privateNote")}
                         </div>
                         <div style={{marginTop: 0}}>
-                            <img src='/notebook.jpeg' width='100%'/>
+                            {/*<img src='/notebook.jpeg' width='100%'/>*/}
+                            <img src='/notebook1.jpeg' width='100%'/>
                         </div>
                         <div>
                             <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
@@ -302,7 +303,7 @@ const Home = () => {
                             {t("webSite.home.encryptedSharing")}
                         </div>
                         <div style={{marginTop: 0}}>
-                            <img src='/ban6.jpg' width='100%'/>
+                            <img src='/letter1.jpeg' width='100%'/>
                         </div>
                         <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
                             {t("webSite.home.encryptedSharing1")}
@@ -333,7 +334,7 @@ const Home = () => {
                             {t("webSite.home.deepMindSocial")}
                         </div>
                         <div style={{marginTop: 0}}>
-                            <img src='/pic3.jpeg' width='100%'/>
+                            <img src='/talk1.jpeg' width='100%'/>
                         </div>
                         <div style={{color: '#fff', fontSize: 14, marginTop: 20, lineHeight: 2}}>
                             {t("webSite.home.deepMindSocial1")}
@@ -502,7 +503,7 @@ const Home = () => {
                         </Col>
                         <Col xs={24} sm={12} md={12} lg={12} xl={12} xxl={12}>
                             <div style={{height: 400}}>
-                                <img src='/pic6.png' width='100%' height='100%' style={{objectFit: 'fill'}}/>
+                                <img src='/pic9.png' width='100%' height='100%' style={{objectFit: 'fill'}}/>
                             </div>
                         </Col>
                     </Row>

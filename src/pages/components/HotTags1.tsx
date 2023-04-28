@@ -1,4 +1,4 @@
-import HotTagRow from "../note/HotTagRow";
+import HotTagRow from "../MyNotes/HotTagRow";
 import {saveEditTags, saveHotTags} from "../../store/tagSlice";
 import {apiListHotNoteTags} from "../../api/Api";
 import {useEffect} from "react";

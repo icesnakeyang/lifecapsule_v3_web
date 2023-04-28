@@ -11,7 +11,8 @@ import {
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import MyProfilePage from "../myProfile/MyProfilePage";
+import MyProfilePage from "../MyProfile/MyProfilePage";
+import TriggerList from "../MyTrigger/TriggerList";
 
 const MainSider = () => {
     const {t} = useTranslation();
@@ -47,7 +48,7 @@ const MainSider = () => {
             navigate("/main/MyReceiveNote");
         }
         if (e.key === "menuMySendNote") {
-            navigate("/main/MyTriggerListPage");
+            navigate("/main/NoteSendList");
         }
         if (e.key === "menuMyPublicNote") {
             navigate("/main/PublicNoteList");

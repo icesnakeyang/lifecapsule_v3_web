@@ -83,7 +83,7 @@ const SelectRecipient = () => {
         apiSaveMyContact(params)
             .then((res: any) => {
                 if (res.code === 0) {
-                    message.success(t("contact.tipContactSaveSuccess"));
+                    message.success(t("Contact.tipContactSaveSuccess"));
                     loadAllData();
                     setModalEditRecipient(false);
                 } else {
@@ -140,7 +140,7 @@ const SelectRecipient = () => {
                             }}
                         >
                             <div style={{color: themeColor.textLight}}>
-                                {t("contact.tipAddContact1")}
+                                {t("Contact.tipAddContact1")}
                             </div>
                             <div>
                                 <Button
@@ -150,7 +150,7 @@ const SelectRecipient = () => {
                                         setModalEditRecipient(true);
                                     }}
                                 >
-                                    {t("contact.btNewContact")}
+                                    {t("Contact.btNewContact")}
                                 </Button>
                             </div>
                         </div>
@@ -177,14 +177,14 @@ const SelectRecipient = () => {
                 <Form style={{marginTop: 20, background: themeColor.blockDark}}>
                     <Form.Item>
                         <div style={{color: themeColor.textLight}}>
-                            {t("contact.contactName")}
+                            {t("Contact.contactName")}
                         </div>
                         <Input
                             style={{
                                 background: themeColor.blockDark,
                                 color: themeColor.textLight,
                             }}
-                            placeholder={t("contact.contactNameHolder")}
+                            placeholder={t("Contact.contactNameHolder")}
                             onChange={(e) => {
                                 setContactName(e.target.value);
                                 setEditing(true);
@@ -194,14 +194,14 @@ const SelectRecipient = () => {
                     </Form.Item>
                     <Form.Item>
                         <div style={{color: themeColor.textLight}}>
-                            {t("contact.contactPhone")}
+                            {t("Contact.contactPhone")}
                         </div>
                         <Input
                             style={{
                                 background: themeColor.blockDark,
                                 color: themeColor.textLight,
                             }}
-                            placeholder={t("contact.phoneHolder")}
+                            placeholder={t("Contact.phoneHolder")}
                             onChange={(e) => {
                                 setPhone(e.target.value);
                                 setEditing(true);
@@ -211,14 +211,14 @@ const SelectRecipient = () => {
                     </Form.Item>
                     <Form.Item>
                         <div style={{color: themeColor.textLight}}>
-                            {t("contact.contactEmail")}
+                            {t("Contact.contactEmail")}
                         </div>
                         <Input
                             style={{
                                 background: themeColor.blockDark,
                                 color: themeColor.textLight,
                             }}
-                            placeholder={t("contact.emailHolder")}
+                            placeholder={t("Contact.emailHolder")}
                             onChange={(e) => {
                                 setEmail(e.target.value);
                                 setEditing(true);
@@ -228,7 +228,7 @@ const SelectRecipient = () => {
                     </Form.Item>
                     <Form.Item>
                         <div style={{color: themeColor.textLight}}>
-                            {t("contact.contactRemark")}
+                            {t("Contact.contactRemark")}
                         </div>
                         <Input.TextArea
                             style={{

@@ -10,7 +10,7 @@ import {
   UpOutlined,
 } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
-import { loadRefresh, saveLoadData } from "../../../store/commonSlice";
+import { loadRefresh } from "../../../store/commonSlice";
 import {
   apiDecreaseQuadTaskPriority,
   apiIncreaseQuadTaskPriority,
