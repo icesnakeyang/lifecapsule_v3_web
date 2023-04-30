@@ -1,4 +1,4 @@
-import {Button, Card, Form, Input, message, Modal} from "antd";
+import {Breadcrumb, Button, Card, Form, Input, message, Modal} from "antd";
 import {
     apiBindEmail,
     apiGetUserByToken,
@@ -106,81 +106,97 @@ const MyProfilePage = () => {
     };
     return (
         <div style={{}}>
+            <Breadcrumb items={[
+                {
+                    title: t("common.home"),
+                    href: "/main/dashboard"
+                },
+                {
+                    title: t('nav.myProfile')
+                }
+            ]}
+            />
+
             <Card
                 title={t("MyProfile.nickname")}
                 style={{
                     background: themeColor.blockDark,
                     color: themeColor.textLight,
+                    marginTop: 20
                 }}
+                size='small'
                 headStyle={{color: themeColor.textLight}}
             >
-                <div>{nickname}</div>
-                <div style={{marginTop: 10}}>
-                    <Button
-                        type="primary"
-                        size="small"
-                        onClick={() => {
-                            setModalNickname(true);
-                        }}
-                    >
-                        {t("MyProfile.btNickname")}
-                    </Button>
+                <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div>{nickname}</div>
+                    <div style={{marginLeft: 10}}>
+                        <Button
+                            type="primary"
+                            size="small"
+                            onClick={() => {
+                                setModalNickname(true);
+                            }}
+                        >
+                            {t("MyProfile.btNickname")}
+                        </Button>
+                    </div>
                 </div>
             </Card>
             <Card
                 title={t("MyProfile.email")}
                 style={{background: themeColor.blockDark, marginTop: 20}}
                 headStyle={{color: themeColor.textLight}}
+                size='small'
             >
                 {userEmail ? (
                     <div style={{color: themeColor.textLight}}>
-                        {t("MyProfile.email")}：{userEmail}
+                        {userEmail}
                     </div>
                 ) : (
                     <div style={{color: themeColor.textLight}}>
                         <div>{t("MyProfile.tipNoEmail")}</div>
-                        <div style={{marginTop: 10}}>
-                            <Button
-                                type={"primary"}
-                                onClick={() => {
-                                    setModalEmail(true);
-                                }}
-                                size="small"
-                            >
-                                {t("MyProfile.bindEmail")}
-                            </Button>
-                        </div>
                     </div>
                 )}
+                <div style={{marginTop: 10}}>
+                    <Button
+                        type={"primary"}
+                        onClick={() => {
+                            navigate('/main/BindEmail')
+                        }}
+                        size="small"
+                    >
+                        {t("MyProfile.bindEmail")}
+                    </Button>
+                </div>
             </Card>
 
             <Card title={t('MyProfile.titleLoginName')}
                   style={{background: themeColor.blockDark, marginTop: 20}}
                   headStyle={{color: themeColor.textLight}}
+                  size='small'
             >
                 {loginName ?
                     <div style={{display: 'flex', color: themeColor.textLight}}>
-                        <div>{t('MyProfile.loginName')}:</div>
-                        <div style={{marginLeft: 10}}>{loginName}</div>
+                        <div style={{}}>{loginName}</div>
                     </div>
                     :
                     <div>
                         <div style={{color: themeColor.textLight}}>
                             {t('MyProfile.tipNoLoginName')}
                         </div>
-                        <div style={{marginTop: 10}}>
-                            <Button type='primary' onClick={() => {
-                                navigate('/main/SetLoginName')
-                            }}>{t('MyProfile.btSetLoginName')}</Button>
-                        </div>
                     </div>
                 }
+                <div style={{marginTop: 10}}>
+                    <Button size='small' type='primary' onClick={() => {
+                        navigate('/main/SetLoginName')
+                    }}>{t('MyProfile.btSetLoginName')}</Button>
+                </div>
 
             </Card>
 
             <Modal
                 title={t("MyProfile.bindEmail")}
-                visible={modalEmail}
+                open={modalEmail}
                 closable={true}
                 maskClosable={false}
                 onOk={() => {
@@ -193,31 +209,11 @@ const MyProfilePage = () => {
                 }}
             >
                 <div>{t('common.constructing')}</div>
-                {/*<Form>*/}
-                {/*    <Form.Item>*/}
-                {/*        <div>{t("MyProfile.tip1")}</div>*/}
-                {/*        <Input*/}
-                {/*            value={emailEdit}*/}
-                {/*            onChange={(e) => {*/}
-                {/*                setEmailEdit(e.target.value);*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*    </Form.Item>*/}
-                {/*    <Form.Item>*/}
-                {/*        <div>code</div>*/}
-                {/*        <Input*/}
-                {/*            value={emailCode}*/}
-                {/*            onChange={(e) => {*/}
-                {/*                setEmailCode(e.target.value);*/}
-                {/*            }}*/}
-                {/*        />*/}
-                {/*    </Form.Item>*/}
-                {/*</Form>*/}
             </Modal>
 
             <Modal
                 title={t("MyProfile.modalNicknameTitle")}
-                visible={modalNickname}
+                open={modalNickname}
                 onCancel={() => setModalNickname(false)}
                 onOk={() => {
                     onSaveNickname();

@@ -3,7 +3,7 @@ import {Button, Card, Form, Input, message, Tabs} from "antd";
 import {useTranslation} from "react-i18next";
 import {useEffect, useState} from "react";
 import {apiSendVerifyCodeToEmail, apiSignByEmail, apiSignInByNothing} from "../../api/Api";
-import {saveUserData, saveUserEmail, saveUserToken} from "../../store/userDataSlice";
+import {saveUserData, saveUserToken} from "../../store/userDataSlice";
 import {useNavigate} from "react-router-dom";
 import LoginnameLogin from "./LoginNameLogin";
 
@@ -13,7 +13,6 @@ const LoginPage = () => {
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor)
     const {t} = useTranslation()
     const [email, setEmail] = useState('')
-    // const [codeStatus, setCodeStatus] = useState('')
     const [codeStatus, setCodeStatus] = useState('CAN_SEND')
     const [codeTime, setCodeTime] = useState(60);
     const [canInputCode, setCanInputCode] = useState(false);

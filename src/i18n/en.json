@@ -36,7 +36,8 @@
     "myReceiveNote": "My receive note",
     "mySendNote": "My Send out note",
     "mySendNoteDetail": "Send note detail",
-    "myPublicNote": "My public note"
+    "myPublicNote": "My public note",
+    "bindEmail": "Bind email"
   },
   "login": {
     "tabEmail": "Email",
@@ -326,6 +327,48 @@
     "triggerType": "Trigger type",
     "REPLY_SEND_LOG": "Reply"
   },
+  "Contact": {
+    "contactList": "My contacts",
+    "btNewContact": "Add new contact",
+    "contactNameHolder": "Contact name",
+    "phoneHolder": "Contact phone",
+    "emailHolder": "Contact email",
+    "remarkHolder": "Remark for the contact",
+    "btSave": "Save contact",
+    "tipContactSaveSuccess": "Save contact success",
+    "contactEdit": "Edit contact",
+    "tipModalDelete1": "Are you sure to delete this contact?",
+    "tipDeleteSuccess": "Delete success",
+    "totalContact": "Total contacts",
+    "contactName": "Contact name",
+    "contactPhone": "Contact phone",
+    "contactEmail": "Contact email",
+    "contactRemark": "Contact remark",
+    "tipAddContact1": "You don't have contact person, please add one now"
+  },
+  "MyProfile": {
+    "bindEmail": "Bind email",
+    "tip1": "Bind an email, if this email already exist, switch to this email account",
+    "tipNoEmail": "You have not bind your email, for your data safety, please bind one.",
+    "tipNoEmail2": "Please input email",
+    "tipNoEmail3": "The email format is not correct",
+    "tipNoEmailCode": "Please input email verify code",
+    "tipBindEmailSuccess": "Bound email successful",
+    "email": "Email",
+    "nickname": "Nickname",
+    "btNickname": "Change nickname",
+    "modalNicknameTitle": "Edit nickname",
+    "tipSaveNicknameSuccess": "Save nickname success",
+    "titleLoginName": "Set login name and password",
+    "tipTitleLoginName": "You can sign in account by login name and password",
+    "loginName": "Login name",
+    "tipNoLoginName": "You have not set your login name and password yet.",
+    "btSetLoginName": "Set login name",
+    "tipSetLoginNameSuccess": "Set login name and password success",
+    "password": "Password",
+    "password2": "Confirm password",
+    "btBindEmail": "Bind email"
+  },
   "note": {
     "noteList": "Note list",
     "noteEdit": "Note edit",
@@ -370,25 +413,6 @@
         "tipPublishSuccess": "Publish note success"
       }
     }
-  },
-  "contact": {
-    "contactList": "My contacts",
-    "btNewContact": "Add new contact",
-    "contactNameHolder": "Contact name",
-    "phoneHolder": "Contact phone",
-    "emailHolder": "Contact email",
-    "remarkHolder": "Remark for the contact",
-    "btSave": "Save contact",
-    "tipContactSaveSuccess": "Save contact success",
-    "contactEdit": "Edit contact",
-    "tipModalDelete1": "Are you sure to delete this contact?",
-    "tipDeleteSuccess": "Delete success",
-    "totalContact": "Total contacts",
-    "contactName": "Contact name",
-    "contactPhone": "Contact phone",
-    "contactEmail": "Contact email",
-    "contactRemark": "Contact remark",
-    "tipAddContact1": "You don't have contact person, please add one now"
   },
   "recipient": {
     "addRecipient": "Add recipient",
@@ -467,24 +491,6 @@
     "minutes": "Minutes",
     "seconds": "Seconds",
     "tipSnoozeSuccess": "Reset primary timer success"
-  },
-  "myProfile": {
-    "bindEmail": "Bind email",
-    "tip1": "Bind an email, if this email already exist, switch to this email account",
-    "tipNoEmail": "You have not bind your email, for your data safety, please bind one.",
-    "email": "Email",
-    "nickname": "Nickname",
-    "btNickname": "Change nickname",
-    "modalNicknameTitle": "Edit nickname",
-    "tipSaveNicknameSuccess": "Save nickname success",
-    "titleLoginName": "Set login name and password",
-    "tipTitleLoginName": "You can sign in account by login name and password",
-    "loginName": "Login name",
-    "tipNoLoginName": "You have not set your login name and password yet.",
-    "btSetLoginName": "Set login name",
-    "tipSetLoginNameSuccess": "Set login name and password success",
-    "password": "Password",
-    "password2": "Confirm password"
   },
   "webSite": {
     "home": {
@@ -569,6 +575,8 @@
     "10047": "No such user, please sign in again",
     "10050": "This email has been set to recipient already",
     "10053": "Email have not been registered",
+    "10064": "It has been less than 1 minute since the last verification code was sent, so it cannot be sent again",
+    "10065": "This email has been bound already",
     "10075": "The login name has been registered by others",
     "10076": "Login name or password error",
     "10080": "This note has been overdue yet",

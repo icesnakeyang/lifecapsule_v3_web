@@ -44,9 +44,9 @@ import PublishToTopic from "../pages/MyNotes/Send/PublishToTopic";
 import PublishToMotto from "../pages/MyNotes/Send/PublishToMotto";
 import PublishToPublicWeb from "../pages/MyNotes/Send/PublishToPublicWeb";
 import PublicArticle from "../pages/publicUserBox/PublicArticle";
-import TriggerList from "../pages/MyTrigger/TriggerList";
 import MySendNote from "../pages/MySendNote/MySendNote";
 import MySendNoteDetail from "../pages/MySendNote/MySendNoteDetail";
+import BindEmail from "../pages/MyProfile/BindEmail";
 
 const ProtectRouter = ({children}: any) => {
     const token = useSelector((state: any) => state.userDataSlice.token);
@@ -361,6 +361,14 @@ const Routers = () => {
                     element={
                         <ProtectRouter>
                             <PublishToMotto/>
+                        </ProtectRouter>
+                    }
+                />
+                <Route
+                    path="/main/BindEmail"
+                    element={
+                        <ProtectRouter>
+                            <BindEmail/>
                         </ProtectRouter>
                     }
                 />

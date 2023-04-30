@@ -36,7 +36,8 @@
     "myReceiveNote": "我收到的笔记",
     "mySendNote": "我发送的笔记",
     "mySendNoteDetail": "发送笔记详情",
-    "myPublicNote": "我的公开笔记"
+    "myPublicNote": "我的公开笔记",
+    "bindEmail": "绑定Email"
   },
   "login": {
     "tabEmail": "Email",
@@ -99,6 +100,7 @@
       "title": "标题",
       "createTime": "创建时间",
       "tipNoteDelete": "你确定要删除该笔记吗？删除后将不可恢复！",
+      "tipNoteSaveSuccess": "保存笔记成功",
       "tipNoteDeleteSuccess": "删除笔记成功"
     },
     "SendPage": {
@@ -325,6 +327,47 @@
     "triggerType": "发送类型",
     "REPLY_SEND_LOG": "回复信息"
   },
+  "Contact": {
+    "contactList": "我的联系人",
+    "btNewContact": "添加联系人",
+    "contactNameHolder": "联系人姓名",
+    "phoneHolder": "联系人电话",
+    "emailHolder": "联系人Email",
+    "remarkHolder": "联系人说明",
+    "btSave": "保存联系人",
+    "tipContactSaveSuccess": "保存联系人成功",
+    "contactEdit": "编辑联系人",
+    "tipModalDelete1": "你确定要删除该联系人吗？",
+    "tipDeleteSuccess": "删除成功",
+    "totalContact": "联系人总数",
+    "contactName": "联系人姓名",
+    "contactPhone": "联系电话",
+    "contactEmail": "联系人Email",
+    "contactRemark": "联系人备注",
+    "tipAddContact1": "你还没有设置联系人，请先设置联系人"
+  },
+  "MyProfile": {
+    "bindEmail": "绑定email",
+    "tip1": "绑定一个email，如果email已存在，就直接切换到该email账户",
+    "tipNoEmail": "您还没有绑定email，为了您的数据安全，请绑定email。",
+    "tipNoEmail2": "请填写email",
+    "tipNoEmail3": "Email格式不正确",
+    "tipNoEmailCode": "请输入校验码",
+    "tipBindEmailSuccess": "绑定Email成功",
+    "email": "Email",
+    "nickname": "昵称",
+    "btNickname": "修改昵称",
+    "modalNicknameTitle": "编辑昵称",
+    "tipSaveNicknameSuccess": "保存昵称成功",
+    "titleLoginName": "设置登录用户名和密码",
+    "tipTitleLoginName": "设置后可通过用户名密码登录",
+    "loginName": "登录名",
+    "tipNoLoginName": "你还没有设置你的登录名和密码，设置后你可以使用登录名和密码登录。",
+    "btSetLoginName": "设置登录名",
+    "password": "密码",
+    "password2": "确认密码",
+    "btBindEmail": "绑定Email"
+  },
   "note": {
     "noteList": "我的笔记",
     "noteEdit": "编辑笔记",
@@ -345,7 +388,7 @@
     "categoryNameHolder": "请输入分类名称",
     "description": "说明",
     "descriptionHolder": "请对该分类进行描述",
-    "tipCateogryDeleteSuccess": "删除分类成功",
+    "tipCategoryDeleteSuccess": "删除分类成功",
     "tipCategoryAddSuccess": "保存分类成功",
     "tipNoteSaveSuccess": "保存笔记成功",
     "totalNotes": "笔记总数",
@@ -355,25 +398,6 @@
     "addTag": "添加标签",
     "editTag": "编辑标签",
     "searchHolder": "搜索标题关键字"
-  },
-  "contact": {
-    "contactList": "我的联系人",
-    "btNewContact": "添加联系人",
-    "contactNameHolder": "联系人姓名",
-    "phoneHolder": "联系人电话",
-    "emailHolder": "联系人Email",
-    "remarkHolder": "联系人说明",
-    "btSave": "保存联系人",
-    "tipContactSaveSuccess": "保存联系人成功",
-    "contactEdit": "编辑联系人",
-    "tipModalDelete1": "你确定要删除该联系人吗？",
-    "tipDeleteSuccess": "删除成功",
-    "totalContact": "联系人总数",
-    "contactName": "联系人姓名",
-    "contactPhone": "联系电话",
-    "contactEmail": "联系人Email",
-    "contactRemark": "联系人备注",
-    "tipAddContact1": "你还没有设置联系人，请先设置联系人"
   },
   "recipient": {
     "addRecipient": "添加接收人",
@@ -453,23 +477,6 @@
     "seconds": "秒",
     "tipSnoozeSuccess": "重置主倒计时成功"
   },
-  "myProfile": {
-    "bindEmail": "绑定email",
-    "tip1": "绑定一个email，如果email已存在，就直接切换到该email账户",
-    "tipNoEmail": "您还没有绑定email，为了您的数据安全，请绑定email。",
-    "email": "Email",
-    "nickname": "昵称",
-    "btNickname": "修改昵称",
-    "modalNicknameTitle": "编辑昵称",
-    "tipSaveNicknameSuccess": "保存昵称成功",
-    "titleLoginName": "设置登录用户名和密码",
-    "tipTitleLoginName": "设置后可通过用户名密码登录",
-    "loginName": "登录名",
-    "tipNoLoginName": "你还没有设置你的登录名和密码，设置后你可以使用登录名和密码登录。",
-    "btSetLoginName": "设置登录名",
-    "password": "密码",
-    "password2": "确认密码"
-  },
   "webSite": {
     "home": {
       "privateNote": "私密日记",
@@ -534,6 +541,8 @@
     "10047": "没有查询到用户信息",
     "10050": "该Email已经添加到接收人了",
     "10053": "该Email还没有注册",
+    "10064": "离上次发送验证码不到1分钟，不能再次发送",
+    "10065": "该Email已经被绑定了",
     "10075": "登录名已被其他用户注册了",
     "10076": "登录名或密码错误",
     "10083": "必须设置发送时间"

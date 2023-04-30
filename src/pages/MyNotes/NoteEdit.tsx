@@ -1,8 +1,7 @@
 import {useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
 import {
     apiDeleteMyNote,
-    apiGetMyNote, apiListHotNoteTags, apiListUserNoteTag,
+    apiGetMyNote,
     apiRequestRsaPublicKey,
     apiSaveMyNote, apiSaveMyNoteTags,
 } from "../../api/Api";
@@ -18,35 +17,27 @@ import {useDispatch, useSelector} from "react-redux";
 import {saveTagList} from "../../store/noteDataSlice";
 import {
     Breadcrumb,
-    Button, Divider,
+    Button,
     Form,
     Input,
     message,
-    Modal,
-    Radio, Space,
-    Spin,
-    Tooltip,
+    Modal, Switch
 } from "antd";
 import {useNavigate} from "react-router-dom";
 import {useTranslation} from "react-i18next";
-import {SendOutlined, DeleteOutlined, AimOutlined, CopyOutlined} from "@ant-design/icons";
+import {SendOutlined, DeleteOutlined, InfoCircleOutlined} from "@ant-design/icons";
 import CryptoJS from "crypto-js";
 import {loadRefresh, saveEditing} from "../../store/commonSlice";
 import moment from "moment";
-import HotTagRow from "./HotTagRow";
 import NoteEditTagRow from "./NoteEditTagRow";
-import NoteEditTagRowEdit from "./NoteEditTagRowEdit";
 import {saveEditTags} from "../../store/tagSlice";
 import {saveSendNote} from "../../store/noteSendSlice";
-import MyAllTagRow from "./MyAllTagRow";
-import MyNoteTags1 from "../components/MyNoteTags1";
-import HotTags1 from "../components/HotTags1";
 import TagEditModal from "./tag/TagEditModal";
 
 const NoteEdit = () => {
     const noteId = useSelector((state: any) => state.noteDataSlice.noteId)
     const [title, setTitle] = useState("");
-    const [encrypt, setEncrypt] = useState(1);
+    const [encrypt, setEncrypt] = useState(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {t} = useTranslation();
@@ -59,11 +50,9 @@ const NoteEdit = () => {
     const [createTime, setCreateTime] = useState(null);
     const themeColor = useSelector((state: any) => state.themeSlice.themeColor);
     const [modalTag, setModalTag] = useState(false)
-    const [tagEdit, setTagEdit] = useState('')
-    const tagList = useSelector((state: any) => state.noteDataSlice.tagList)
-    const [hotTags, setHotTags] = useState([])
+    const [tagEdit] = useState('')
     const editTags = useSelector((state: any) => state.tagSlice.editTags)
-    const [myNoteTags, setMyNoteTags] = useState([])
+    const [showTipEncrypt, setShowTipEncrypt] = useState(false)
 
     useEffect(() => {
         loadAllData();
@@ -104,10 +93,10 @@ const NoteEdit = () => {
                             let strKey = note.userEncodeKey;
                             strKey = Decrypt2(strKey, keyAES_1);
                             let content = Decrypt(note.content, strKey, strKey);
-                            setEncrypt(1);
+                            setEncrypt(true);
                             setContent(content);
                         } else {
-                            setEncrypt(0);
+                            setEncrypt(false);
                             setContent(note.content);
                         }
 
@@ -131,7 +120,7 @@ const NoteEdit = () => {
             keyToken: "",
         };
         setSaving(true);
-        if (encrypt === 1) {
+        if (encrypt) {
             /**
              * 1加密，0不加密
              */
@@ -153,7 +142,7 @@ const NoteEdit = () => {
                         apiSaveMyNote(params)
                             .then((res: any) => {
                                 if (res.code === 0) {
-                                    message.success(t("MyNotes.tipNoteSaveSuccess"));
+                                    message.success(t("MyNotes.NoteEdit.tipNoteSaveSuccess"));
                                     // this.$router.back()
                                     setSaving(false);
                                     setEditing(false);
@@ -183,7 +172,7 @@ const NoteEdit = () => {
             apiSaveMyNote(params)
                 .then((res: any) => {
                     if (res.code === 0) {
-                        message.success(t("MyNotes.tipNoteSaveSuccess"));
+                        message.success(t("MyNotes.NoteEdit.tipNoteSaveSuccess"));
                     } else {
                         message.error(t("syserr." + res.code));
                     }
@@ -350,6 +339,33 @@ const NoteEdit = () => {
                                 {t("MyNotes.NoteEdit.createTime")}：{moment(createTime).format("LLL")}
                             </div>
                         </Form.Item>
+
+                        <Form.Item>
+                            <div style={{display: 'flex', alignItems: 'center'}}>
+                                <div>{t('MyNotes.NoteNew.encrypt')}：</div>
+                                <Switch checked={encrypt} onChange={checked => setEncrypt(checked)}/>
+                                <div style={{marginLeft: 10}}>
+                                    {encrypt ? <span>{t('MyNotes.NoteNew.encrypt')}</span> :
+                                        <span>{t('MyNotes.NoteNew.noEncrypt')}</span>}
+                                </div>
+                                <InfoCircleOutlined style={{color: themeColor.textHolder, marginLeft: 10, cursor: 'pointer'}}
+                                                    onClick={() => {
+                                                        console.log('30岁了')
+                                                        setShowTipEncrypt(!showTipEncrypt)
+                                                    }}/>
+                            </div>
+                            <div style={{
+                                color: themeColor.textHolder,
+                                marginTop: 10,
+                                display: 'flex',
+                                alignItems: 'flex-start'
+                            }}>
+                                {showTipEncrypt ?
+                                    <div style={{marginLeft: 10, marginTop: 3}}>  {t('MyNotes.NoteNew.tipEncrypt')}</div>
+                                    : null}
+                            </div>
+                        </Form.Item>
+
                         <Form.Item>
                             <div style={{color: themeColor.textLight}}>
                                 {t("MyNotes.content")}
