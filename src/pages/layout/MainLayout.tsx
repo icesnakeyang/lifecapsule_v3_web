@@ -3,7 +3,6 @@ import {Outlet} from "react-router-dom";
 import FooterBar from "./FooterBar";
 import {useTranslation} from "react-i18next";
 import {useState} from "react";
-import {WalletOutlined} from "@ant-design/icons";
 import {useNavigate} from "react-router-dom";
 import MainSider from "./MainSider";
 import MainHeader from "./MainHeader";
@@ -53,7 +52,7 @@ const MainLayout = () => {
                         }}
                     >
                         <a href='/'>
-                            <img src='/logo5.png' width="48px"/>
+                            <img src='/test1-2.png' width='48px' style={{margin:0}}/>
                         </a>
                         {collapsed ? (
                             null

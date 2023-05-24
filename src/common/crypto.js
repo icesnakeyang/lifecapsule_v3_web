@@ -60,6 +60,9 @@ export function Decrypt2(word, keyStr) {
 }
 
 export function Decrypt(cipherText, keyStr, ivStr) {
+  // cipherText = "d2e29937e4e08324715c64b6e9bdc1f130de10a8286e16ca463ab872661222c1"
+  // keyStr = "vkaKxacU428R6qH+c58vD4L5045JvO/MLiCZHTvCaMo="
+  // ivStr = "vkaKxacU428R6qH+c58vD4L5045JvO/MLiCZHTvCaMo="
   let cipherTextHexStr = CryptoJS.enc.Hex.parse(cipherText);
   let cipherTextBase64Str = CryptoJS.enc.Base64.stringify(cipherTextHexStr);
   let key = CryptoJS.enc.Utf8.parse(keyStr);
@@ -70,5 +73,6 @@ export function Decrypt(cipherText, keyStr, ivStr) {
     padding: CryptoJS.pad.Pkcs7,
   });
   let decryptedStr = decrypt.toString(CryptoJS.enc.Utf8);
+  // console.log("decryptedStr",decryptedStr)
   return decryptedStr;
 }

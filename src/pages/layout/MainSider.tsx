@@ -1,18 +1,14 @@
 import {Menu} from "antd";
 import {
-    AppstoreOutlined,
     CheckSquareOutlined,
-    DashboardOutlined,
-    ReadOutlined,
-    SettingOutlined,
+    DashboardOutlined, MailOutlined,
+    ReadOutlined, SolutionOutlined,
     TeamOutlined, ThunderboltOutlined,
     UserOutlined,
 } from "@ant-design/icons";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
-import MyProfilePage from "../MyProfile/MyProfilePage";
-import TriggerList from "../MyTrigger/TriggerList";
 
 const MainSider = () => {
     const {t} = useTranslation();
@@ -102,17 +98,17 @@ const MainSider = () => {
                 },
                 {
                     key: "menuMyReceiveNote",
-                    icon: <UserOutlined/>,
+                    icon: <MailOutlined />,
                     label: t("nav.myReceiveNote"),
                 },
                 {
                     key: "menuMySendNote",
-                    icon: <UserOutlined/>,
+                    icon: <MailOutlined />,
                     label: t("nav.mySendNote"),
                 },
                 {
                     key: "menuMyPublicNote",
-                    icon: <UserOutlined/>,
+                    icon: <SolutionOutlined />,
                     label: t("nav.myPublicNote"),
                 },
             ]}

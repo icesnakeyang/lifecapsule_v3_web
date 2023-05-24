@@ -281,7 +281,9 @@
     "btCopy": "Copy",
     "title": "Title",
     "content": "Content",
-    "tipSuccess": "Update article success"
+    "tipSuccess": "Update article success",
+    "tip1": "What is public note",
+    "tip2": "You can post your notes publicly on the internet for all to read"
   },
   "AntiProcrastination": {
     "antiDelayTile": "Title",

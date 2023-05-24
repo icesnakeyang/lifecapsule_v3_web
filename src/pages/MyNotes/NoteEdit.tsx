@@ -91,8 +91,12 @@ const NoteEdit = () => {
                         setTitle(note.title);
                         if (note.encrypt === 1) {
                             let strKey = note.userEncodeKey;
+                            console.log("userEncodeKey1",note.userEncodeKey)
                             strKey = Decrypt2(strKey, keyAES_1);
+                            console.log("userEncodeKey2",strKey)
+                            console.log("content", note.content)
                             let content = Decrypt(note.content, strKey, strKey);
+                            console.log("content", content)
                             setEncrypt(true);
                             setContent(content);
                         } else {
@@ -129,9 +133,14 @@ const NoteEdit = () => {
              * 加密保存
              */
             const uuid = GenerateKey();
+            console.log("uuid:"+uuid)
             const keyAES = CryptoJS.SHA256(uuid);
+            console.log("keyAES",keyAES)
             const keyAESBase64 = CryptoJS.enc.Base64.stringify(keyAES);
+            console.log("keyAESBase64", keyAESBase64)
+            console.log("content",content)
             params.content = Encrypt(content, keyAESBase64, keyAESBase64);
+            console.log("encrypt content", params.content)
             params.encryptKey = keyAESBase64;
             apiRequestRsaPublicKey()
                 .then((res: any) => {

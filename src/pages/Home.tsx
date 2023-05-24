@@ -182,7 +182,7 @@ const Home = () => {
                         {/*logo*/}
                         <div style={{display: 'flex', alignItems: 'center'}}>
                             <div style={{}}>
-                                <img src="/logo5.png" width='42px'/>
+                                <img src="/logo2.png" width='42px'/>
                             </div>
                             <div style={{marginLeft: 20, fontSize: 20, fontWeight: 'bold', color: '#fff'}}>
                                 {t('common.appTitle')}
